@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cq.myinsurance.dao.WarrantyMapper">
+  <resultMap id="BaseResultMap" type="com.cq.myinsurance.pojo.Warranty">
+    <id column="warranty_id" jdbcType="INTEGER" property="warrantyId" />
+    <result column="policyholder_id" jdbcType="INTEGER" property="policyholderId" />
+    <result column="recognizee_id" jdbcType="INTEGER" property="recognizeeId" />
+    <result column="insurance_begin_date" jdbcType="TIMESTAMP" property="insuranceBeginDate" />
+    <result column="insurance_end_date" jdbcType="TIMESTAMP" property="insuranceEndDate" />
+    <result column="policy_money" jdbcType="INTEGER" property="policyMoney" />
+    <result column="premium_money" jdbcType="INTEGER" property="premiumMoney" />
+    <result column="payment_time" jdbcType="TIMESTAMP" property="paymentTime" />
+    <result column="sign_time" jdbcType="TIMESTAMP" property="signTime" />
+    <result column="car_number" jdbcType="VARCHAR" property="carNumber" />
+    <result column="factory_number" jdbcType="VARCHAR" property="factoryNumber" />
+    <result column="engine_number" jdbcType="VARCHAR" property="engineNumber" />
+    <result column="frame_number" jdbcType="VARCHAR" property="frameNumber" />
+    <result column="dirveing_license" jdbcType="VARCHAR" property="dirveingLicense" />
+    <result column="car_owner_name" jdbcType="VARCHAR" property="carOwnerName" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    warranty_id, policyholder_id, recognizee_id, insurance_begin_date, insurance_end_date, 
+    policy_money, premium_money, payment_time, sign_time, car_number, factory_number, 
+    engine_number, frame_number, dirveing_license, car_owner_name, createtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from warranty_info
+    where warranty_id = #{warrantyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from warranty_info
+    where warranty_id = #{warrantyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cq.myinsurance.pojo.Warranty">
+    insert into warranty_info (warranty_id, policyholder_id, recognizee_id, 
+      insurance_begin_date, insurance_end_date, 
+      policy_money, premium_money, payment_time, 
+      sign_time, car_number, factory_number, 
+      engine_number, frame_number, dirveing_license, 
+      car_owner_name, createtime)
+    values (#{warrantyId,jdbcType=INTEGER}, #{policyholderId,jdbcType=INTEGER}, #{recognizeeId,jdbcType=INTEGER}, 
+      #{insuranceBeginDate,jdbcType=TIMESTAMP}, #{insuranceEndDate,jdbcType=TIMESTAMP}, 
+      #{policyMoney,jdbcType=INTEGER}, #{premiumMoney,jdbcType=INTEGER}, #{paymentTime,jdbcType=TIMESTAMP}, 
+      #{signTime,jdbcType=TIMESTAMP}, #{carNumber,jdbcType=VARCHAR}, #{factoryNumber,jdbcType=VARCHAR}, 
+      #{engineNumber,jdbcType=VARCHAR}, #{frameNumber,jdbcType=VARCHAR}, #{dirveingLicense,jdbcType=VARCHAR}, 
+      #{carOwnerName,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cq.myinsurance.pojo.Warranty">
+    insert into warranty_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="warrantyId != null">
+        warranty_id,
+      </if>
+      <if test="policyholderId != null">
+        policyholder_id,
+      </if>
+      <if test="recognizeeId != null">
+        recognizee_id,
+      </if>
+      <if test="insuranceBeginDate != null">
+        insurance_begin_date,
+      </if>
+      <if test="insuranceEndDate != null">
+        insurance_end_date,
+      </if>
+      <if test="policyMoney != null">
+        policy_money,
+      </if>
+      <if test="premiumMoney != null">
+        premium_money,
+      </if>
+      <if test="paymentTime != null">
+        payment_time,
+      </if>
+      <if test="signTime != null">
+        sign_time,
+      </if>
+      <if test="carNumber != null">
+        car_number,
+      </if>
+      <if test="factoryNumber != null">
+        factory_number,
+      </if>
+      <if test="engineNumber != null">
+        engine_number,
+      </if>
+      <if test="frameNumber != null">
+        frame_number,
+      </if>
+      <if test="dirveingLicense != null">
+        dirveing_license,
+      </if>
+      <if test="carOwnerName != null">
+        car_owner_name,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="warrantyId != null">
+        #{warrantyId,jdbcType=INTEGER},
+      </if>
+      <if test="policyholderId != null">
+        #{policyholderId,jdbcType=INTEGER},
+      </if>
+      <if test="recognizeeId != null">
+        #{recognizeeId,jdbcType=INTEGER},
+      </if>
+      <if test="insuranceBeginDate != null">
+        #{insuranceBeginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="insuranceEndDate != null">
+        #{insuranceEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="policyMoney != null">
+        #{policyMoney,jdbcType=INTEGER},
+      </if>
+      <if test="premiumMoney != null">
+        #{premiumMoney,jdbcType=INTEGER},
+      </if>
+      <if test="paymentTime != null">
+        #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signTime != null">
+        #{signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="carNumber != null">
+        #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryNumber != null">
+        #{factoryNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="engineNumber != null">
+        #{engineNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="frameNumber != null">
+        #{frameNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="dirveingLicense != null">
+        #{dirveingLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="carOwnerName != null">
+        #{carOwnerName,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cq.myinsurance.pojo.Warranty">
+    update warranty_info
+    <set>
+      <if test="policyholderId != null">
+        policyholder_id = #{policyholderId,jdbcType=INTEGER},
+      </if>
+      <if test="recognizeeId != null">
+        recognizee_id = #{recognizeeId,jdbcType=INTEGER},
+      </if>
+      <if test="insuranceBeginDate != null">
+        insurance_begin_date = #{insuranceBeginDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="insuranceEndDate != null">
+        insurance_end_date = #{insuranceEndDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="policyMoney != null">
+        policy_money = #{policyMoney,jdbcType=INTEGER},
+      </if>
+      <if test="premiumMoney != null">
+        premium_money = #{premiumMoney,jdbcType=INTEGER},
+      </if>
+      <if test="paymentTime != null">
+        payment_time = #{paymentTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="signTime != null">
+        sign_time = #{signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="carNumber != null">
+        car_number = #{carNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryNumber != null">
+        factory_number = #{factoryNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="engineNumber != null">
+        engine_number = #{engineNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="frameNumber != null">
+        frame_number = #{frameNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="dirveingLicense != null">
+        dirveing_license = #{dirveingLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="carOwnerName != null">
+        car_owner_name = #{carOwnerName,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where warranty_id = #{warrantyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cq.myinsurance.pojo.Warranty">
+    update warranty_info
+    set policyholder_id = #{policyholderId,jdbcType=INTEGER},
+      recognizee_id = #{recognizeeId,jdbcType=INTEGER},
+      insurance_begin_date = #{insuranceBeginDate,jdbcType=TIMESTAMP},
+      insurance_end_date = #{insuranceEndDate,jdbcType=TIMESTAMP},
+      policy_money = #{policyMoney,jdbcType=INTEGER},
+      premium_money = #{premiumMoney,jdbcType=INTEGER},
+      payment_time = #{paymentTime,jdbcType=TIMESTAMP},
+      sign_time = #{signTime,jdbcType=TIMESTAMP},
+      car_number = #{carNumber,jdbcType=VARCHAR},
+      factory_number = #{factoryNumber,jdbcType=VARCHAR},
+      engine_number = #{engineNumber,jdbcType=VARCHAR},
+      frame_number = #{frameNumber,jdbcType=VARCHAR},
+      dirveing_license = #{dirveingLicense,jdbcType=VARCHAR},
+      car_owner_name = #{carOwnerName,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where warranty_id = #{warrantyId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cq.myinsurance.dao.RightMapper">
+  <resultMap id="BaseResultMap" type="com.cq.myinsurance.pojo.Right">
+    <id column="right_id" jdbcType="INTEGER" property="rightId" />
+    <result column="right_name" jdbcType="VARCHAR" property="rightName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    right_id, right_name
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from right_info
+    where right_id = #{rightId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from right_info
+    where right_id = #{rightId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cq.myinsurance.pojo.Right">
+    insert into right_info (right_id, right_name)
+    values (#{rightId,jdbcType=INTEGER}, #{rightName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cq.myinsurance.pojo.Right">
+    insert into right_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rightId != null">
+        right_id,
+      </if>
+      <if test="rightName != null">
+        right_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rightId != null">
+        #{rightId,jdbcType=INTEGER},
+      </if>
+      <if test="rightName != null">
+        #{rightName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cq.myinsurance.pojo.Right">
+    update right_info
+    <set>
+      <if test="rightName != null">
+        right_name = #{rightName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where right_id = #{rightId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cq.myinsurance.pojo.Right">
+    update right_info
+    set right_name = #{rightName,jdbcType=VARCHAR}
+    where right_id = #{rightId,jdbcType=INTEGER}
+  </update>
+</mapper>

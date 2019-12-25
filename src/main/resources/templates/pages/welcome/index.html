@@ -1,0 +1,350 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<!-- Bootstrap -->
+    <link th:href="@{vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link th:href="@{vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+    <!-- NProgress -->
+
+    <link th:href="@{vendors/nprogress/nprogress.css}" rel="stylesheet">
+    <!-- iCheck -->
+    <link th:href="@{vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
+	
+    <!-- bootstrap-progressbar -->
+    <link th:href="@{vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css}" rel="stylesheet">
+    <!-- JQVMap 没用-->
+    <link th:href="@{vendors/jqvmap/dist/jqvmap.min.css}" rel="stylesheet"/>
+    <!-- bootstrap-daterangepicker 没用 -->
+    <link th:href="@{vendors/bootstrap-daterangepicker/daterangepicker.css}" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link th:href="@{build/css/custom.min.css}" rel="stylesheet">
+    <style type="text/css">
+    .child_menu li{
+    	background:#374A5E ;
+    }
+    	
+    	</style>
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>车险理赔系统</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_pic">
+                <img src="images/img.jpg" alt="..." class="img-circle profile_img ">
+              </div>
+              <div class="profile_info">
+                <span>欢迎,</span>
+                <h2>${user.user_name}</h2>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>导航</h3>
+                <ul class="nav side-menu">
+                 <shiro:hasPermission name="保单管理">
+                	 <li><a><i class="fa fa-edit"></i> 保单管理 <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="../insurance_manage/Insurance_querying.html" target="aa">保单查询</a></li>
+                      <li><a href="../insurance_manage/User_insure.html" target="aa">添加保单</a></li>
+                     <li><a href="../DispatchManagement_Zhy/Policy-holder.html" target="aa">投保人查询</a></li>
+                    </ul>
+                  </li>
+             	</shiro:hasPermission>
+             	   <shiro:hasPermission name="接案管理">
+                  <li><a><i class="fa fa-home"></i> 接案管理 <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                     <li><a href="../report_wb/report_query.html" target="aa">用户报案</a></li>
+                     <li><a href="../report_wb/report_myquery.html" target="aa">我处理的案件</a></li>
+                     <li><a href="../report_wb/report_allquery.html" target="aa">所有案件信息</a></li>
+                     <li><a href="../DispatchManagement_Zhy/Dispatch.html" target="aa">调度管理</a></li>
+                    
+                    </ul>
+                  </li>
+                  </shiro:hasPermission>
+                   <shiro:hasPermission name="勘察管理">
+                  <li><a><i class="fa fa-home"></i> 勘察管理 <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="../prospect_lyt/prospect.html" target="aa">未查勘案件</a></li>
+											<!--
+                                            	作者：offline
+                                            	时间：2017-11-23
+                                            	描述：
+                                            -->
+                      <li><a href="../prospect_lyt/prospected.html" target="aa">已查勘案件</a></li>
+                       <shiro:hasPermission name="公司管理">
+                       <li><a href="../prospect_lyt/prospectAll.html" target="aa">所有已查勘案件</a></li>
+                      </shiro:hasPermission>
+                    </ul>
+                  </li>
+                  </shiro:hasPermission>
+                  
+                  <shiro:hasPermission name="损失管理">
+                  <li><a><i class="fa fa-home"></i> 定损核损 <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                     <shiro:hasPermission name="定损管理">
+                    <li><a href="../DispatchManagement_Zhy/Dispatch.jsp" target="aa">调度管理</a></li>
+                    <li><a href="../prospect_lyt/loss_carinfo.jsp" target="aa">车损管理</a></li>
+					<li><a href="../prospect_lyt/loss_resinfo.jsp" target="aa">物损管理</a></li>
+					<li><a href="../prospect_lyt/loss_peopleinfo.jsp" target="aa">人伤管理</a></li>
+					<li><a href="../prospect_lyt/loss_info.jsp" target="aa">我的定损案件</a></li>
+             		</shiro:hasPermission>			
+											<!--<li><a href="../prospect_lyt/loss_assessment.jsp" target="aa">未通过核损信息</a></li>
+											-->
+					 <shiro:hasPermission name="核损管理">
+                     <li><a href="../DispatchManagement_Zhy/Dispatch.jsp" target="aa">调度管理</a></li>
+					<li><a href="../lzw/hesun_info.jsp" target="aa">核损审核</a></li>
+                    </shiro:hasPermission>
+                    </ul>
+                  </li>
+               </shiro:hasPermission>
+                 
+                
+                  
+                  <li><a><i class="fa fa-home"></i> 理算核赔 <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                    	 <shiro:hasPermission name="理算管理">
+                         <li><a href="../DispatchManagement_Zhy/Dispatch.jsp" target="aa">调度管理</a></li>
+                    	 <li><a href="../adjustment_lyl/adjustment.jsp" target="aa">理算处理</a></li>
+                    	 </shiro:hasPermission>
+                    	  <shiro:hasPermission name="核赔管理">
+                          <li><a href="../DispatchManagement_Zhy/Dispatch.jsp" target="aa">调度管理</a></li>
+                    	 <li><a href="../Nuclear_cq/Nuclear.jsp" target="aa">核赔处理</a></li>
+                    	 </shiro:hasPermission>
+                    	  <shiro:hasPermission name="理赔管理">
+                          <li><a href="../DispatchManagement_Zhy/Dispatch.jsp" target="aa">调度管理</a></li>
+                    	 <li><a href="../settle_lh/settle.jsp" target="aa">理赔处理</a></li>
+                    	 </shiro:hasPermission>
+                    	 <li><a href="../welcome/case_query.jsp" target="aa">结案查询</a></li>
+                    
+                    </ul>
+                  </li>
+                 
+              
+                 <shiro:hasPermission name="公司管理">
+                  <li><a><i class="fa fa-desktop"></i> 员工管理 <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="employees_query.jsp" target="aa">员工查询</a></li>  
+                      <li><a href="employees_add.jsp" target="aa">添加员工</a></li> 
+                      <li><a href="../section_dwl/section.jsp" target="aa">部门管理</a></li> 
+                      </ul>
+                  </li>
+                  </shiro:hasPermission>
+                
+                  
+                  <li><a><i class="fa fa-desktop"></i> 系统设置 <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                     <shiro:hasPermission name="公司管理">
+                      <li><a href="../prospect_lyt/quanxian.jsp" target="aa">角色权限</a></li>
+                      <li><a href="../prospect_lyt/jurisdiction.jsp" target="aa">权限管理</a></li>
+                     </shiro:hasPermission>
+                    	<li><a href="updatepwd.jsp" target="aa">修改密码</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              
+            </div>
+            <!-- /sidebar menu -->
+
+            <!-- /menu footer buttons -->
+             <div class="sidebar-footer hidden-small">
+              <a data-toggle="tooltip" href="../settle_lh/message.jsp" target="aa" data-placement="top" title="个人信息">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+              </a>
+              <a data-toggle="tooltip" data-placement="top" title="Lock">
+                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              </a>
+              <!-- href="http://localhost:8080/users/loginOut.do" -->
+              <a data-toggle="tooltip" data-placement="top" href="login.jsp"  title="退出登录" id="login_out">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+              </a>
+            </div>
+            <!-- /menu footer buttons -->
+          </div>
+        </div>
+
+        <!-- top navigation -->
+        <div class="top_nav">
+          <div class="nav_menu">
+            <nav>
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <img src="images/img.jpg" alt="">信息管理
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="javascript:;"> 会议信息</a></li>
+                    <li>
+                      <a href="javascript:;">
+                        <span class="badge bg-red pull-right">50%</span>
+                        <span>信息</span>
+                      </a>
+                    </li>
+                    <li><a href="javascript:;">帮助</a></li>
+                    <li><a href="login.jsp"><i class="fa fa-sign-out pull-right"></i> 退出登录 </a></li>
+                  </ul>
+                </li>
+
+                <li role="presentation" class="dropdown">
+                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-envelope-o"></i>
+                    <span class="badge bg-green">6</span>
+                  </a>
+                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <a>
+                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                        <span>
+                          <span>John Smith</span>
+                          <span class="time">3 mins ago</span>
+                        </span>
+                        <span class="message">
+                          Film festivals used to be do-or-die moments for movie makers. They were where...
+                        </span>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="text-center">
+                        <a>
+                          <strong>See All Alerts</strong>
+                          <i class="fa fa-angle-right"></i>
+                        </a>
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+        
+        
+        
+        <!-- 右边内容 
+        			所有东西全写在下边这个div里
+        -->
+        <!-- page content -->
+        <div class="right_col" role="main">
+					<iframe name="aa" th:src="@{welcome.html}" frameborder="0" width="100%" height="700px">
+			  	
+			  	</iframe>	
+        </div>
+        <!-- /page content -->
+        
+        <!-- footer content -->
+        
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script th:src="@{vendors/jquery/dist/jquery.min.js}"></script>
+    <!-- Bootstrap -->
+    <script th:src="@{vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+    <!-- FastClick -->
+    <script th:src="@{vendors/fastclick/lib/fastclick.js}"></script>
+    <!-- NProgress -->
+    <script th:src="@{vendors/nprogress/nprogress.js}"></script>
+    <!-- Chart.js} -->
+    <script th:src="@{vendors/Chart.js/dist/Chart.min.js}"></script>
+    <!-- gauge.js} -->
+    <script th:src="@{vendors/gauge.js/dist/gauge.min.js}"></script>
+    <!-- bootstrap-progressbar -->
+    <script th:src="@{vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
+    <!-- iCheck -->
+    <script th:src="@{vendors/iCheck/icheck.min.js}"></script>
+    <!-- Skycons -->
+    <script th:src="@{vendors/skycons/skycons.js}"></script>
+    <!-- Flot -->
+    <script th:src="@{vendors/Flot/jquery.flot.js}"></script>
+    <script th:src="@{vendors/Flot/jquery.flot.pie.js}"></script>
+    <script th:src="@{vendors/Flot/jquery.flot.time.js}"></script>
+    <script th:src="@{vendors/Flot/jquery.flot.stack.js}"></script>
+    <script th:src="@{vendors/Flot/jquery.flot.resize.js}"></script>
+   <!-- DateJS -->
+    <script th:src="@{vendors/DateJS/build/date.js}"></script>
+    <!-- JQVMap -->
+    <script th:src="@{vendors/jqvmap/dist/jquery.vmap.js}"></script>
+    <script th:src="@{vendors/jqvmap/dist/maps/jquery.vmap.world.js}"></script>
+    <script th:src="@{vendors/jqvmap/examples/js/jquery.vmap.sampledata.js}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script th:src="@{vendors/moment/min/moment.min.js}"></script>
+    <script th:src="@{vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script th:src="@{build/js/custom.min.js}"></script>
+    <!--
+ 	<script src="../../js/jquery-1.8.3.js}"></script>
+ 	
+ 	 -->
+ 	 
+
+		
+  </body>
+</html>

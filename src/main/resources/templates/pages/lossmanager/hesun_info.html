@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<!-- Bootstrap -->
+    <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../../../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+	
+    <!-- bootstrap-progressbar -->
+    <link href="../../../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="../../../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <!-- bootstrap-daterangepicker -->
+    <link href="../../../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="../../../build/css/custom.min.css" rel="stylesheet">
+    <style type="text/css">
+    				#prospect_table th{text-align: center;}
+    	</style>
+  </head>
+
+  <body style="background: #F7F7F7;">
+        
+        <!-- 右边内容 
+        			所有东西全写在下边这个div里
+        -->
+        <!-- page content -->
+        	<div id="top">
+        		<div class="col-md-1">
+        		</div>
+        		<div id="menu1" class="col-md-7">
+                                         报案编号：<input type="text" id="reported_number"/>
+            </div>
+            <div class="col-md-4" id="add_employees">
+        					<input type="button" class="btn btn-primary btn-small" name="resetbut" id="reset_but" value="重置条件"/>
+									
+									<button type="button" class="btn btn-primary btn-small" id="queryhesun">
+											查询
+									</button>
+						</div>
+					</div>
+				
+        <!-- /page content -->
+        			<!--
+                    	作者：offline
+                    	时间：2017-11-19
+                    	描述：列表开始
+                    -->
+           <div class="table" id="count">
+						<table class="table table-bordered" align="center" style="width: 100%" id="prospect_table">
+							<tr>
+								<th>报案编号</th>
+								<th>报案人</th>
+								<th>车牌号</th>
+								<th>联系电话</th>
+								<th>报案时间</th>
+								<th>出事地点 </th>
+								<th>出险原因</th>
+								<th>事故类型</th>
+								<th>案件状态</th>
+								<th>操作</th>
+							</tr>
+						</table>
+			<ul class="pagination">
+					  <li><a href="#" id="jian">&laquo;</a></li>
+					  <li><a href="#" id="">当前页</a></li>
+					  <li><a href="#" id="firstpage"></a></li>
+					  <li><a href="#" id="">总页数</a></li>
+					  <li><a href="#" id="lastpage"></a></li>
+					  <li><a href="#" id="jia">&raquo;</a></li>
+			</ul>
+					</div>
+			</div>
+    
+
+    <!-- jQuery -->
+    <script src="../../../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../../../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../../../vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="../../../vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="../../../vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="../../../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="../../../vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="../../../vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="../../../vendors/Flot/jquery.flot.js"></script>
+    <script src="../../../vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="../../../vendors/Flot/jquery.flot.time.js"></script>
+    <script src="../../../vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="../../../vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="../../../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="../../../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="../../../vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="../../../vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="../../../vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="../../../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="../../../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="../../../vendors/moment/min/moment.min.js"></script>
+    <script src="../../../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../../../build/js/custom.min.js"></script>
+    <script src="../../js/prospect/prospect.js"></script>
+    <script src="../../../src/js/jquery-1.8.3.js"></script>
+	<script src="../../../src/js/compensate/compensateQuery.js"></script>
+  </body>
+</html>

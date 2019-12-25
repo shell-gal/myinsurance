@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cq.myinsurance.dao.ObjectlossMapper">
+  <resultMap id="BaseResultMap" type="com.cq.myinsurance.pojo.Objectloss">
+    <id column="objectloss_id" jdbcType="INTEGER" property="objectlossId" />
+    <result column="loss_id" jdbcType="INTEGER" property="lossId" />
+    <result column="objectloss_name" jdbcType="VARCHAR" property="objectlossName" />
+    <result column="objectloss_number" jdbcType="INTEGER" property="objectlossNumber" />
+    <result column="objectloss_price" jdbcType="INTEGER" property="objectlossPrice" />
+    <result column="objectloss_depart" jdbcType="VARCHAR" property="objectlossDepart" />
+    <result column="objectloss_img" jdbcType="VARCHAR" property="objectlossImg" />
+    <result column="case_id" jdbcType="INTEGER" property="caseId" />
+    <result column="sum_price" jdbcType="INTEGER" property="sumPrice" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    objectloss_id, loss_id, objectloss_name, objectloss_number, objectloss_price, objectloss_depart, 
+    objectloss_img, case_id, sum_price, createtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from objectloss_info
+    where objectloss_id = #{objectlossId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from objectloss_info
+    where objectloss_id = #{objectlossId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cq.myinsurance.pojo.Objectloss">
+    insert into objectloss_info (objectloss_id, loss_id, objectloss_name, 
+      objectloss_number, objectloss_price, objectloss_depart, 
+      objectloss_img, case_id, sum_price, 
+      createtime)
+    values (#{objectlossId,jdbcType=INTEGER}, #{lossId,jdbcType=INTEGER}, #{objectlossName,jdbcType=VARCHAR}, 
+      #{objectlossNumber,jdbcType=INTEGER}, #{objectlossPrice,jdbcType=INTEGER}, #{objectlossDepart,jdbcType=VARCHAR}, 
+      #{objectlossImg,jdbcType=VARCHAR}, #{caseId,jdbcType=INTEGER}, #{sumPrice,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cq.myinsurance.pojo.Objectloss">
+    insert into objectloss_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="objectlossId != null">
+        objectloss_id,
+      </if>
+      <if test="lossId != null">
+        loss_id,
+      </if>
+      <if test="objectlossName != null">
+        objectloss_name,
+      </if>
+      <if test="objectlossNumber != null">
+        objectloss_number,
+      </if>
+      <if test="objectlossPrice != null">
+        objectloss_price,
+      </if>
+      <if test="objectlossDepart != null">
+        objectloss_depart,
+      </if>
+      <if test="objectlossImg != null">
+        objectloss_img,
+      </if>
+      <if test="caseId != null">
+        case_id,
+      </if>
+      <if test="sumPrice != null">
+        sum_price,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="objectlossId != null">
+        #{objectlossId,jdbcType=INTEGER},
+      </if>
+      <if test="lossId != null">
+        #{lossId,jdbcType=INTEGER},
+      </if>
+      <if test="objectlossName != null">
+        #{objectlossName,jdbcType=VARCHAR},
+      </if>
+      <if test="objectlossNumber != null">
+        #{objectlossNumber,jdbcType=INTEGER},
+      </if>
+      <if test="objectlossPrice != null">
+        #{objectlossPrice,jdbcType=INTEGER},
+      </if>
+      <if test="objectlossDepart != null">
+        #{objectlossDepart,jdbcType=VARCHAR},
+      </if>
+      <if test="objectlossImg != null">
+        #{objectlossImg,jdbcType=VARCHAR},
+      </if>
+      <if test="caseId != null">
+        #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="sumPrice != null">
+        #{sumPrice,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cq.myinsurance.pojo.Objectloss">
+    update objectloss_info
+    <set>
+      <if test="lossId != null">
+        loss_id = #{lossId,jdbcType=INTEGER},
+      </if>
+      <if test="objectlossName != null">
+        objectloss_name = #{objectlossName,jdbcType=VARCHAR},
+      </if>
+      <if test="objectlossNumber != null">
+        objectloss_number = #{objectlossNumber,jdbcType=INTEGER},
+      </if>
+      <if test="objectlossPrice != null">
+        objectloss_price = #{objectlossPrice,jdbcType=INTEGER},
+      </if>
+      <if test="objectlossDepart != null">
+        objectloss_depart = #{objectlossDepart,jdbcType=VARCHAR},
+      </if>
+      <if test="objectlossImg != null">
+        objectloss_img = #{objectlossImg,jdbcType=VARCHAR},
+      </if>
+      <if test="caseId != null">
+        case_id = #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="sumPrice != null">
+        sum_price = #{sumPrice,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where objectloss_id = #{objectlossId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cq.myinsurance.pojo.Objectloss">
+    update objectloss_info
+    set loss_id = #{lossId,jdbcType=INTEGER},
+      objectloss_name = #{objectlossName,jdbcType=VARCHAR},
+      objectloss_number = #{objectlossNumber,jdbcType=INTEGER},
+      objectloss_price = #{objectlossPrice,jdbcType=INTEGER},
+      objectloss_depart = #{objectlossDepart,jdbcType=VARCHAR},
+      objectloss_img = #{objectlossImg,jdbcType=VARCHAR},
+      case_id = #{caseId,jdbcType=INTEGER},
+      sum_price = #{sumPrice,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where objectloss_id = #{objectlossId,jdbcType=INTEGER}
+  </update>
+</mapper>

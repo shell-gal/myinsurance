@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<!-- Bootstrap -->
+    <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../../../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+	
+    <!-- bootstrap-progressbar -->
+    <link href="../../../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="../../../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <!-- bootstrap-daterangepicker -->
+    <link href="../../../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="../../../build/css/custom.min.css" rel="stylesheet">
+    <style type="text/css">
+    		#matter input{width:140px; margin: 10px 50px 0px 0px;}	
+    		select{width: 174px;height: 25px;}
+    		.right_col table{width: 100%;}
+    		.right_col #pro_bg tr td{padding:3px 0px 3px 6px;}
+    	</style>
+  </head>
+
+  <body style="background: #F7F7F7;">
+        <!-- /top navigation -->
+        <!-- 右边内容 
+        			所有东西全写在下边这个div里
+        -->
+        <!-- page content -->
+       
+        	<form>
+        	<div id="add_pros">
+        		修改查勘任务
+        	</div>
+        	<div class="pand">
+        		查勘任务
+        	</div>
+        	<input type="hidden" value="<%=request.getParameter("upnumber") %>" id="parmeId">
+        	<table class="table table-bordered" id="addProspect_table">
+        		<tr class="count">
+        			<td>案件编号<input type="hidden" id="prospect"></td>
+        			<td>报案人</td>
+        			<td>联系电话</td>
+        			<td>出险时间</td>
+        			<td>出险详细地点</td>
+        			<td>出险原因</td>
+        			<td>报案处理</td>
+        		</tr>
+        	</table>
+        	<div class="pand">
+        		查勘报告
+        	</div>
+        	<table id="pro_bg" class="table table-bordered">
+        		<tr class="count">
+        			<td>查勘地点：<input type="text" id="prospect_address"/></td>
+        			<td>事故类型：<select id="accident_type">
+        							<option>单方事故</option>
+        							<option>双方事故</option>
+        							<option>多方事故</option>
+        						 </select></td>
+        			<td>勘察时间：<input type="date" id="prospect_time"/></td>
+        		</tr>
+
+     
+        		<tr style="margin-top: 10px;">
+        			<td colspan="3">出险经过：<textarea class="form-control" rows="2" id="prospect_pass"></textarea></td>
+        		</tr>
+        		<tr>
+        			<td colspan="3">损失情况：<textarea class="form-control" rows="2" id="loss_info"></textarea></td>
+        		</tr>
+        		<tr>
+        			<td colspan="3">
+        				<div class="col-md-6">
+        				责任判断：
+        				<input type="radio" name="duty" value="全部责任"/>全部责任
+        				<input type="radio" name="duty" value="主要责任"/>主要责任
+        				<input type="radio" name="duty" value="同等责任"/>同等责任
+        				<input type="radio" name="duty" value="次要责任"/>次要责任
+        				<input type="radio" name="duty" value="无责任" />无责任
+        				</div>
+        		
+        			</td>
+        		</tr>
+        		<tr> 
+        			<td colspan="3" >出险司机信息</td>
+        		</tr>
+
+        		<tr>
+        			<td colspan="3">
+        				<div class="col-md-3">司机姓名<input type="text" id="driver_name"/></div>
+        				<div class="col-md-3">联系电话<input type="text" id="driver_tel"/></div>
+        				<div class="col-md-3">驾驶证<input type="text" id="driving_licence"/></div>
+        				<div class="col-md-3">行驶证<input type="text" id="driving_license"/></div>
+        			</td>
+        		</tr>
+        		<tr style="text-align: center;">  
+        			<td colspan="3">
+        				<input type="button" value="修改" id="ProspectInfo"/>
+        				<input type="reset" value="重置"/>
+        			</td>
+        		</tr>
+        	</table>
+				</from>
+        <!-- footer content -->
+       
+        <!-- /footer content -->
+
+
+    <!-- jQuery -->
+    <script src="../../../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../../../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../../../vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="../../../vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="../../../vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="../../../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="../../../vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="../../../vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="../../../vendors/Flot/jquery.flot.js"></script>
+    <script src="../../../vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="../../../vendors/Flot/jquery.flot.time.js"></script>
+    <script src="../../../vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="../../../vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="../../../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="../../../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="../../../vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="../../../vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="../../../vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="../../../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="../../../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="../../../vendors/moment/min/moment.min.js"></script>
+    <script src="../../../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../../../build/js/custom.min.js"></script>
+    <script src="../../js/employees.js"></script>
+    <script src="../../../src/js/jquery-1.8.3.js"></script>
+    <script src="../../../src/js/reconnaissance/upd_Prospect.js"></script>
+  </body>
+</html>

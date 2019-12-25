@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cq.myinsurance.dao.ProspectMapper">
+  <resultMap id="BaseResultMap" type="com.cq.myinsurance.pojo.Prospect">
+    <id column="prospect_id" jdbcType="INTEGER" property="prospectId" />
+    <result column="case_id" jdbcType="INTEGER" property="caseId" />
+    <result column="img_id" jdbcType="INTEGER" property="imgId" />
+    <result column="prospect_address" jdbcType="VARCHAR" property="prospectAddress" />
+    <result column="accident_type" jdbcType="VARCHAR" property="accidentType" />
+    <result column="prospect_date" jdbcType="TIMESTAMP" property="prospectDate" />
+    <result column="danger_pass" jdbcType="VARCHAR" property="dangerPass" />
+    <result column="loss_info" jdbcType="VARCHAR" property="lossInfo" />
+    <result column="duty" jdbcType="VARCHAR" property="duty" />
+    <result column="police_duty" jdbcType="VARCHAR" property="policeDuty" />
+    <result column="driver_name" jdbcType="VARCHAR" property="driverName" />
+    <result column="driver_phone" jdbcType="VARCHAR" property="driverPhone" />
+    <result column="driver_license" jdbcType="VARCHAR" property="driverLicense" />
+    <result column="driveing_license" jdbcType="VARCHAR" property="driveingLicense" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    prospect_id, case_id, img_id, prospect_address, accident_type, prospect_date, danger_pass, 
+    loss_info, duty, police_duty, driver_name, driver_phone, driver_license, driveing_license, 
+    createtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from prospect_info
+    where prospect_id = #{prospectId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from prospect_info
+    where prospect_id = #{prospectId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cq.myinsurance.pojo.Prospect">
+    insert into prospect_info (prospect_id, case_id, img_id, 
+      prospect_address, accident_type, prospect_date, 
+      danger_pass, loss_info, duty, 
+      police_duty, driver_name, driver_phone, 
+      driver_license, driveing_license, createtime
+      )
+    values (#{prospectId,jdbcType=INTEGER}, #{caseId,jdbcType=INTEGER}, #{imgId,jdbcType=INTEGER}, 
+      #{prospectAddress,jdbcType=VARCHAR}, #{accidentType,jdbcType=VARCHAR}, #{prospectDate,jdbcType=TIMESTAMP}, 
+      #{dangerPass,jdbcType=VARCHAR}, #{lossInfo,jdbcType=VARCHAR}, #{duty,jdbcType=VARCHAR}, 
+      #{policeDuty,jdbcType=VARCHAR}, #{driverName,jdbcType=VARCHAR}, #{driverPhone,jdbcType=VARCHAR}, 
+      #{driverLicense,jdbcType=VARCHAR}, #{driveingLicense,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.cq.myinsurance.pojo.Prospect">
+    insert into prospect_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="prospectId != null">
+        prospect_id,
+      </if>
+      <if test="caseId != null">
+        case_id,
+      </if>
+      <if test="imgId != null">
+        img_id,
+      </if>
+      <if test="prospectAddress != null">
+        prospect_address,
+      </if>
+      <if test="accidentType != null">
+        accident_type,
+      </if>
+      <if test="prospectDate != null">
+        prospect_date,
+      </if>
+      <if test="dangerPass != null">
+        danger_pass,
+      </if>
+      <if test="lossInfo != null">
+        loss_info,
+      </if>
+      <if test="duty != null">
+        duty,
+      </if>
+      <if test="policeDuty != null">
+        police_duty,
+      </if>
+      <if test="driverName != null">
+        driver_name,
+      </if>
+      <if test="driverPhone != null">
+        driver_phone,
+      </if>
+      <if test="driverLicense != null">
+        driver_license,
+      </if>
+      <if test="driveingLicense != null">
+        driveing_license,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="prospectId != null">
+        #{prospectId,jdbcType=INTEGER},
+      </if>
+      <if test="caseId != null">
+        #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="imgId != null">
+        #{imgId,jdbcType=INTEGER},
+      </if>
+      <if test="prospectAddress != null">
+        #{prospectAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentType != null">
+        #{accidentType,jdbcType=VARCHAR},
+      </if>
+      <if test="prospectDate != null">
+        #{prospectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dangerPass != null">
+        #{dangerPass,jdbcType=VARCHAR},
+      </if>
+      <if test="lossInfo != null">
+        #{lossInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="duty != null">
+        #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="policeDuty != null">
+        #{policeDuty,jdbcType=VARCHAR},
+      </if>
+      <if test="driverName != null">
+        #{driverName,jdbcType=VARCHAR},
+      </if>
+      <if test="driverPhone != null">
+        #{driverPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="driverLicense != null">
+        #{driverLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="driveingLicense != null">
+        #{driveingLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cq.myinsurance.pojo.Prospect">
+    update prospect_info
+    <set>
+      <if test="caseId != null">
+        case_id = #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="imgId != null">
+        img_id = #{imgId,jdbcType=INTEGER},
+      </if>
+      <if test="prospectAddress != null">
+        prospect_address = #{prospectAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="accidentType != null">
+        accident_type = #{accidentType,jdbcType=VARCHAR},
+      </if>
+      <if test="prospectDate != null">
+        prospect_date = #{prospectDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dangerPass != null">
+        danger_pass = #{dangerPass,jdbcType=VARCHAR},
+      </if>
+      <if test="lossInfo != null">
+        loss_info = #{lossInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="duty != null">
+        duty = #{duty,jdbcType=VARCHAR},
+      </if>
+      <if test="policeDuty != null">
+        police_duty = #{policeDuty,jdbcType=VARCHAR},
+      </if>
+      <if test="driverName != null">
+        driver_name = #{driverName,jdbcType=VARCHAR},
+      </if>
+      <if test="driverPhone != null">
+        driver_phone = #{driverPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="driverLicense != null">
+        driver_license = #{driverLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="driveingLicense != null">
+        driveing_license = #{driveingLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where prospect_id = #{prospectId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cq.myinsurance.pojo.Prospect">
+    update prospect_info
+    set case_id = #{caseId,jdbcType=INTEGER},
+      img_id = #{imgId,jdbcType=INTEGER},
+      prospect_address = #{prospectAddress,jdbcType=VARCHAR},
+      accident_type = #{accidentType,jdbcType=VARCHAR},
+      prospect_date = #{prospectDate,jdbcType=TIMESTAMP},
+      danger_pass = #{dangerPass,jdbcType=VARCHAR},
+      loss_info = #{lossInfo,jdbcType=VARCHAR},
+      duty = #{duty,jdbcType=VARCHAR},
+      police_duty = #{policeDuty,jdbcType=VARCHAR},
+      driver_name = #{driverName,jdbcType=VARCHAR},
+      driver_phone = #{driverPhone,jdbcType=VARCHAR},
+      driver_license = #{driverLicense,jdbcType=VARCHAR},
+      driveing_license = #{driveingLicense,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where prospect_id = #{prospectId,jdbcType=INTEGER}
+  </update>
+</mapper>

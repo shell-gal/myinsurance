@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>保单查询</title>
+	</head>
+
+	<!-- Bootstrap -->
+	<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+	<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+	<link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+	
+	<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+	
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	
+
+	<script src="../../js/autolnsurance/Insurance_querying.js"></script>
+	<style>
+		#height {
+			height: 30px;
+		}
+		
+		#biaoti{
+			 font-size:17px;
+		}
+		#buuttonwh{
+		
+			font-size:10px;
+		}
+	</style>
+	<script type="text/javascript"></script>
+
+	<body>
+		<div style="width: 100%;">
+			
+			<div>
+				<ul class="nav nav-tabs" style="width: 100%">
+					<li role="presentation" class="active">
+						<a href="#">保单 查询</a>
+					</li>
+					<li>
+						<div class="navbar-form navbar-left" role="search">
+							<div class="form-group">
+								<input id="height" name="warranty_number" type="text" class="form-control" placeholder="保单号">
+							</div>
+							<div class="form-group">
+								<input id="height" name="policyholders_name" type="text" class="form-control" placeholder="投保人">
+							</div>
+							<div class="form-group">
+								<input id="height" name="recognizee_name" type="text" class="form-control" placeholder="被保人">
+							</div>
+							<button id="height" type="submit" class="btn btn-default" onclick="insurancequery()">查询保单</button>
+						</div>
+					</li>
+				</ul>
+			</div>
+			
+			<div style="height: 350px;">
+				<table class="table table-hover" id="append" style="width: 100%;text-align: center;">
+						<tr id="biaoti" style="background-color:#F2F2F2;font-family: '黑体'" style="height: 40px;">
+							<td><h5>保单编号</h5></td>
+							<td><h5>投保人姓名</h5></td>
+							<td><h5>被保人姓名</h5></td>
+							<td><h5>被保人身份证</h5></td>
+							<td><h5>车牌号</h5></td>
+							<td><h5>保险起期</h5></td>
+							<td><h5>保险止期</h5></td>
+							<td><span class="label label-default">操作</span></td>
+						</tr>
+				</table>
+			</div>
+			
+			<div style="margin-left: 500px;">
+				<nav aria-label="Page navigation">
+		  			<ul class="pagination">
+		    			<li>
+			        			<span aria-hidden="true" id="shangyiye">上一页</span>
+		    			</li>
+					    <li><a href="#">当前页</a></li>
+					    <li><a id="pagenum"></a></li>
+					    <li>
+					     	   <span aria-hidden="true" id="xiayiye">下一页</span>
+				   		</li>
+				  </ul>
+				</nav>
+			</div>
+			
+			
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			        <h4 class="modal-title" id="myModalLabel" style="font-family: '黑体';">续保</h4>
+			      </div>
+				      <div class="modal-body">
+				       	<div class="input-group">
+				  			<input type="date" class="form-control" name="baodanzhiqi"  aria-describedby="basic-addon2" style="width: 300px;height: 30px;">
+						</div>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" onclick="insurancedate()" class="btn btn-default" data-dismiss="modal">确定</button>
+				      </div>
+			    </div>
+			  </div>
+			</div>
+			
+		</div>
+		
+		<!-- 续保获取保单编号 -->
+		<input name="baodanid" type="hidden" />
+	</body>
+</html>

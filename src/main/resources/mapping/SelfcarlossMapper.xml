@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cq.myinsurance.dao.SelfcarlossMapper">
+  <resultMap id="BaseResultMap" type="com.cq.myinsurance.pojo.Selfcarloss">
+    <id column="self_carloss_id" jdbcType="INTEGER" property="selfCarlossId" />
+    <result column="loss_id" jdbcType="INTEGER" property="lossId" />
+    <result column="carloss_name" jdbcType="VARCHAR" property="carlossName" />
+    <result column="carloss_number" jdbcType="INTEGER" property="carlossNumber" />
+    <result column="carloss_price" jdbcType="INTEGER" property="carlossPrice" />
+    <result column="carloss_fix" jdbcType="VARCHAR" property="carlossFix" />
+    <result column="carloss_img" jdbcType="VARCHAR" property="carlossImg" />
+    <result column="sum_price" jdbcType="INTEGER" property="sumPrice" />
+    <result column="case_id" jdbcType="INTEGER" property="caseId" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    self_carloss_id, loss_id, carloss_name, carloss_number, carloss_price, carloss_fix, 
+    carloss_img, sum_price, case_id, createtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from self_carloss_info
+    where self_carloss_id = #{selfCarlossId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from self_carloss_info
+    where self_carloss_id = #{selfCarlossId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cq.myinsurance.pojo.Selfcarloss">
+    insert into self_carloss_info (self_carloss_id, loss_id, carloss_name, 
+      carloss_number, carloss_price, carloss_fix, 
+      carloss_img, sum_price, case_id, 
+      createtime)
+    values (#{selfCarlossId,jdbcType=INTEGER}, #{lossId,jdbcType=INTEGER}, #{carlossName,jdbcType=VARCHAR}, 
+      #{carlossNumber,jdbcType=INTEGER}, #{carlossPrice,jdbcType=INTEGER}, #{carlossFix,jdbcType=VARCHAR}, 
+      #{carlossImg,jdbcType=VARCHAR}, #{sumPrice,jdbcType=INTEGER}, #{caseId,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cq.myinsurance.pojo.Selfcarloss">
+    insert into self_carloss_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="selfCarlossId != null">
+        self_carloss_id,
+      </if>
+      <if test="lossId != null">
+        loss_id,
+      </if>
+      <if test="carlossName != null">
+        carloss_name,
+      </if>
+      <if test="carlossNumber != null">
+        carloss_number,
+      </if>
+      <if test="carlossPrice != null">
+        carloss_price,
+      </if>
+      <if test="carlossFix != null">
+        carloss_fix,
+      </if>
+      <if test="carlossImg != null">
+        carloss_img,
+      </if>
+      <if test="sumPrice != null">
+        sum_price,
+      </if>
+      <if test="caseId != null">
+        case_id,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="selfCarlossId != null">
+        #{selfCarlossId,jdbcType=INTEGER},
+      </if>
+      <if test="lossId != null">
+        #{lossId,jdbcType=INTEGER},
+      </if>
+      <if test="carlossName != null">
+        #{carlossName,jdbcType=VARCHAR},
+      </if>
+      <if test="carlossNumber != null">
+        #{carlossNumber,jdbcType=INTEGER},
+      </if>
+      <if test="carlossPrice != null">
+        #{carlossPrice,jdbcType=INTEGER},
+      </if>
+      <if test="carlossFix != null">
+        #{carlossFix,jdbcType=VARCHAR},
+      </if>
+      <if test="carlossImg != null">
+        #{carlossImg,jdbcType=VARCHAR},
+      </if>
+      <if test="sumPrice != null">
+        #{sumPrice,jdbcType=INTEGER},
+      </if>
+      <if test="caseId != null">
+        #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cq.myinsurance.pojo.Selfcarloss">
+    update self_carloss_info
+    <set>
+      <if test="lossId != null">
+        loss_id = #{lossId,jdbcType=INTEGER},
+      </if>
+      <if test="carlossName != null">
+        carloss_name = #{carlossName,jdbcType=VARCHAR},
+      </if>
+      <if test="carlossNumber != null">
+        carloss_number = #{carlossNumber,jdbcType=INTEGER},
+      </if>
+      <if test="carlossPrice != null">
+        carloss_price = #{carlossPrice,jdbcType=INTEGER},
+      </if>
+      <if test="carlossFix != null">
+        carloss_fix = #{carlossFix,jdbcType=VARCHAR},
+      </if>
+      <if test="carlossImg != null">
+        carloss_img = #{carlossImg,jdbcType=VARCHAR},
+      </if>
+      <if test="sumPrice != null">
+        sum_price = #{sumPrice,jdbcType=INTEGER},
+      </if>
+      <if test="caseId != null">
+        case_id = #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where self_carloss_id = #{selfCarlossId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cq.myinsurance.pojo.Selfcarloss">
+    update self_carloss_info
+    set loss_id = #{lossId,jdbcType=INTEGER},
+      carloss_name = #{carlossName,jdbcType=VARCHAR},
+      carloss_number = #{carlossNumber,jdbcType=INTEGER},
+      carloss_price = #{carlossPrice,jdbcType=INTEGER},
+      carloss_fix = #{carlossFix,jdbcType=VARCHAR},
+      carloss_img = #{carlossImg,jdbcType=VARCHAR},
+      sum_price = #{sumPrice,jdbcType=INTEGER},
+      case_id = #{caseId,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where self_carloss_id = #{selfCarlossId,jdbcType=INTEGER}
+  </update>
+</mapper>

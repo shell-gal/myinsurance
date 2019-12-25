@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cq.myinsurance.dao.SettlementMapper">
+  <resultMap id="BaseResultMap" type="com.cq.myinsurance.pojo.Settlement">
+    <id column="settlement_id" jdbcType="INTEGER" property="settlementId" />
+    <result column="other_carloss_money" jdbcType="INTEGER" property="otherCarlossMoney" />
+    <result column="self_carloss_money" jdbcType="INTEGER" property="selfCarlossMoney" />
+    <result column="objectloss_money" jdbcType="INTEGER" property="objectlossMoney" />
+    <result column="peopleloss_money" jdbcType="INTEGER" property="peoplelossMoney" />
+    <result column="settlement_money" jdbcType="INTEGER" property="settlementMoney" />
+    <result column="recognizee_name" jdbcType="VARCHAR" property="recognizeeName" />
+    <result column="recognizee_account" jdbcType="VARCHAR" property="recognizeeAccount" />
+    <result column="case_id" jdbcType="INTEGER" property="caseId" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    settlement_id, other_carloss_money, self_carloss_money, objectloss_money, peopleloss_money, 
+    settlement_money, recognizee_name, recognizee_account, case_id, createtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from settlement_info
+    where settlement_id = #{settlementId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from settlement_info
+    where settlement_id = #{settlementId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cq.myinsurance.pojo.Settlement">
+    insert into settlement_info (settlement_id, other_carloss_money, 
+      self_carloss_money, objectloss_money, peopleloss_money, 
+      settlement_money, recognizee_name, recognizee_account, 
+      case_id, createtime)
+    values (#{settlementId,jdbcType=INTEGER}, #{otherCarlossMoney,jdbcType=INTEGER}, 
+      #{selfCarlossMoney,jdbcType=INTEGER}, #{objectlossMoney,jdbcType=INTEGER}, #{peoplelossMoney,jdbcType=INTEGER}, 
+      #{settlementMoney,jdbcType=INTEGER}, #{recognizeeName,jdbcType=VARCHAR}, #{recognizeeAccount,jdbcType=VARCHAR}, 
+      #{caseId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cq.myinsurance.pojo.Settlement">
+    insert into settlement_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="settlementId != null">
+        settlement_id,
+      </if>
+      <if test="otherCarlossMoney != null">
+        other_carloss_money,
+      </if>
+      <if test="selfCarlossMoney != null">
+        self_carloss_money,
+      </if>
+      <if test="objectlossMoney != null">
+        objectloss_money,
+      </if>
+      <if test="peoplelossMoney != null">
+        peopleloss_money,
+      </if>
+      <if test="settlementMoney != null">
+        settlement_money,
+      </if>
+      <if test="recognizeeName != null">
+        recognizee_name,
+      </if>
+      <if test="recognizeeAccount != null">
+        recognizee_account,
+      </if>
+      <if test="caseId != null">
+        case_id,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="settlementId != null">
+        #{settlementId,jdbcType=INTEGER},
+      </if>
+      <if test="otherCarlossMoney != null">
+        #{otherCarlossMoney,jdbcType=INTEGER},
+      </if>
+      <if test="selfCarlossMoney != null">
+        #{selfCarlossMoney,jdbcType=INTEGER},
+      </if>
+      <if test="objectlossMoney != null">
+        #{objectlossMoney,jdbcType=INTEGER},
+      </if>
+      <if test="peoplelossMoney != null">
+        #{peoplelossMoney,jdbcType=INTEGER},
+      </if>
+      <if test="settlementMoney != null">
+        #{settlementMoney,jdbcType=INTEGER},
+      </if>
+      <if test="recognizeeName != null">
+        #{recognizeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="recognizeeAccount != null">
+        #{recognizeeAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="caseId != null">
+        #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cq.myinsurance.pojo.Settlement">
+    update settlement_info
+    <set>
+      <if test="otherCarlossMoney != null">
+        other_carloss_money = #{otherCarlossMoney,jdbcType=INTEGER},
+      </if>
+      <if test="selfCarlossMoney != null">
+        self_carloss_money = #{selfCarlossMoney,jdbcType=INTEGER},
+      </if>
+      <if test="objectlossMoney != null">
+        objectloss_money = #{objectlossMoney,jdbcType=INTEGER},
+      </if>
+      <if test="peoplelossMoney != null">
+        peopleloss_money = #{peoplelossMoney,jdbcType=INTEGER},
+      </if>
+      <if test="settlementMoney != null">
+        settlement_money = #{settlementMoney,jdbcType=INTEGER},
+      </if>
+      <if test="recognizeeName != null">
+        recognizee_name = #{recognizeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="recognizeeAccount != null">
+        recognizee_account = #{recognizeeAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="caseId != null">
+        case_id = #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where settlement_id = #{settlementId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cq.myinsurance.pojo.Settlement">
+    update settlement_info
+    set other_carloss_money = #{otherCarlossMoney,jdbcType=INTEGER},
+      self_carloss_money = #{selfCarlossMoney,jdbcType=INTEGER},
+      objectloss_money = #{objectlossMoney,jdbcType=INTEGER},
+      peopleloss_money = #{peoplelossMoney,jdbcType=INTEGER},
+      settlement_money = #{settlementMoney,jdbcType=INTEGER},
+      recognizee_name = #{recognizeeName,jdbcType=VARCHAR},
+      recognizee_account = #{recognizeeAccount,jdbcType=VARCHAR},
+      case_id = #{caseId,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where settlement_id = #{settlementId,jdbcType=INTEGER}
+  </update>
+</mapper>

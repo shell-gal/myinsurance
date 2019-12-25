@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<!-- Bootstrap -->
+    <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+   
+    <!-- iCheck -->
+   
+	
+    <!-- bootstrap-progressbar 
+    <link href="../../../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap 
+    <link href="../../../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <!-- bootstrap-daterangepicker 
+    <link href="../../../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style 
+    <link href="../../../build/css/custom.min.css" rel="stylesheet">
+    -->
+
+    
+    <style type="text/css">
+			form{
+				margin-left: 30%;
+			}
+			
+			table{
+				margin-top: 20px;
+			}
+    </style>
+  </head>
+
+  <body style="background: #F7F7F7;">
+    
+				
+				<!--
+                	作者：offline
+                	时间：2017-10-24
+                	描述：内容开始
+                -->
+       		<form class="form-inline" role="form">
+  					<div class="form-group">
+    					<p class="form-control-static">投保人姓名</p>
+  					</div>
+  					
+  					<div class="form-group">
+   						 <input type="text" class="form-control" id="policyholders_name"  placeholder="输入姓名...">
+ 					</div>
+ 					
+ 					<div class="form-group">
+    					<p class="form-control-static">身份证号码</p>
+  					</div>
+  					
+  					<div class="form-group">
+   						 <input type="text" class="form-control" id="credentials_number" placeholder="请输入16位身份证...">
+ 					</div>
+ 								 <span  class="btn btn-default"  onclick=" tiaojian()"><span  class="glyphicon glyphicon-search"></span></span>
+ 								 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 								 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#upd-UserInfo">
+									 <a href="AddInsuranceInfo.jsp" style="color: white;" target="aa" >新增</a>
+								</button>
+						</form>
+       	
+				<div>
+						<table class="table table-bordered"  id="table">
+					 		<tr class="">
+					 			<td class="active">编号</td>
+					 			<td class="active">投保人姓名</td>
+					 			<td class="active">联系方式</td>
+					 			<td class="active">身份证号</td>
+					 			<td class="active">性别</td>
+					 			<td class="active">地址</td>
+					 			<td class="active">操作</td>
+					 		</tr>	
+						</table>
+						</div>
+						
+						
+						
+						<div id="">
+							<ul class="pagination">
+			<li><a href="#" id="jian">&laquo;</a></li>
+			<li><a href="#" id="">当前页</a></li>
+			<li><a href="#" id="firstpage"></a></li>
+			<li><a href="#" id="">总页数</a></li>
+			<li><a href="#" id="lastpage"></a></li>
+			<li><a href="#" id="jia">&raquo;</a></li>
+		</ul>
+						</div>
+					</div>
+                   
+  						
+   <!-- jQuery -->
+    <script  src="../../../vendors/jquery/dist/jquery.min.js"></script>
+	     <script src="../../js/autolnsurance/policyHolders_Query.js"></script>
+  </body>
+</html>

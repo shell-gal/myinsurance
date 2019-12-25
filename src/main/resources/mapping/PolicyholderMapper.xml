@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cq.myinsurance.dao.PolicyholderMapper">
+  <resultMap id="BaseResultMap" type="com.cq.myinsurance.pojo.Policyholder">
+    <id column="policyholder_id" jdbcType="INTEGER" property="policyholderId" />
+    <result column="policyholder_name" jdbcType="VARCHAR" property="policyholderName" />
+    <result column="policyholder_address_province" jdbcType="VARCHAR" property="policyholderAddressProvince" />
+    <result column="policyholder_address_city" jdbcType="VARCHAR" property="policyholderAddressCity" />
+    <result column="policyholder_phone" jdbcType="VARCHAR" property="policyholderPhone" />
+    <result column="policyholder_sex" jdbcType="VARCHAR" property="policyholderSex" />
+    <result column="policyholder_cardid" jdbcType="VARCHAR" property="policyholderCardid" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    policyholder_id, policyholder_name, policyholder_address_province, policyholder_address_city, 
+    policyholder_phone, policyholder_sex, policyholder_cardid, createtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from policyholder_info
+    where policyholder_id = #{policyholderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from policyholder_info
+    where policyholder_id = #{policyholderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cq.myinsurance.pojo.Policyholder">
+    insert into policyholder_info (policyholder_id, policyholder_name, 
+      policyholder_address_province, policyholder_address_city, 
+      policyholder_phone, policyholder_sex, policyholder_cardid, 
+      createtime)
+    values (#{policyholderId,jdbcType=INTEGER}, #{policyholderName,jdbcType=VARCHAR}, 
+      #{policyholderAddressProvince,jdbcType=VARCHAR}, #{policyholderAddressCity,jdbcType=VARCHAR}, 
+      #{policyholderPhone,jdbcType=VARCHAR}, #{policyholderSex,jdbcType=VARCHAR}, #{policyholderCardid,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cq.myinsurance.pojo.Policyholder">
+    insert into policyholder_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="policyholderId != null">
+        policyholder_id,
+      </if>
+      <if test="policyholderName != null">
+        policyholder_name,
+      </if>
+      <if test="policyholderAddressProvince != null">
+        policyholder_address_province,
+      </if>
+      <if test="policyholderAddressCity != null">
+        policyholder_address_city,
+      </if>
+      <if test="policyholderPhone != null">
+        policyholder_phone,
+      </if>
+      <if test="policyholderSex != null">
+        policyholder_sex,
+      </if>
+      <if test="policyholderCardid != null">
+        policyholder_cardid,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="policyholderId != null">
+        #{policyholderId,jdbcType=INTEGER},
+      </if>
+      <if test="policyholderName != null">
+        #{policyholderName,jdbcType=VARCHAR},
+      </if>
+      <if test="policyholderAddressProvince != null">
+        #{policyholderAddressProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="policyholderAddressCity != null">
+        #{policyholderAddressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="policyholderPhone != null">
+        #{policyholderPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="policyholderSex != null">
+        #{policyholderSex,jdbcType=VARCHAR},
+      </if>
+      <if test="policyholderCardid != null">
+        #{policyholderCardid,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cq.myinsurance.pojo.Policyholder">
+    update policyholder_info
+    <set>
+      <if test="policyholderName != null">
+        policyholder_name = #{policyholderName,jdbcType=VARCHAR},
+      </if>
+      <if test="policyholderAddressProvince != null">
+        policyholder_address_province = #{policyholderAddressProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="policyholderAddressCity != null">
+        policyholder_address_city = #{policyholderAddressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="policyholderPhone != null">
+        policyholder_phone = #{policyholderPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="policyholderSex != null">
+        policyholder_sex = #{policyholderSex,jdbcType=VARCHAR},
+      </if>
+      <if test="policyholderCardid != null">
+        policyholder_cardid = #{policyholderCardid,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where policyholder_id = #{policyholderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cq.myinsurance.pojo.Policyholder">
+    update policyholder_info
+    set policyholder_name = #{policyholderName,jdbcType=VARCHAR},
+      policyholder_address_province = #{policyholderAddressProvince,jdbcType=VARCHAR},
+      policyholder_address_city = #{policyholderAddressCity,jdbcType=VARCHAR},
+      policyholder_phone = #{policyholderPhone,jdbcType=VARCHAR},
+      policyholder_sex = #{policyholderSex,jdbcType=VARCHAR},
+      policyholder_cardid = #{policyholderCardid,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where policyholder_id = #{policyholderId,jdbcType=INTEGER}
+  </update>
+</mapper>

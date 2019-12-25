@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<!-- Bootstrap -->
+<link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<!-- Font Awesome -->
+<link href="../../../vendors/font-awesome/css/font-awesome.min.css"
+	rel="stylesheet">
+<!-- NProgress -->
+
+<!-- iCheck -->
+
+<!-- bootstrap-progressbar 
+    <link href="../../../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap 
+    <link href="../../../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <!-- bootstrap-daterangepicker 
+    <link href="../../../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style 
+    <link href="../../../build/css/custom.min.css" rel="stylesheet">
+    -->
+<style type="text/css">
+</style>
+</head>
+
+<body style="background: #F7F7F7;">
+
+	<!--
+                	作者：offline
+                	时间：2017-10-24
+                	描述：内容开始
+                -->
+
+	<div class="right_col" role="main">
+		<div align="center">
+			<td><input type="hidden" id="a" /> <input type="text"
+				id="right_id" />
+				<button type="button" id="findOfId" class="btn btn-primary"
+					data-toggle="button" aria-pressed="false" autocomplete="off">
+					搜索</button>
+
+					<shiro:hasRole name="总经理">
+				<button class="btn btn-primary" data-toggle="modal"
+					data-target="#myModal" style="margin-left: 20px;">添加权限</button>
+					</shiro:hasRole>
+					</td>
+
+			<table border="1" id="table"
+				style="border-collapse: collapse; width: 700px;"
+				class="table table-bordered" valign="middle">
+				<tr>
+					<td>权限编号</td>
+					<td>权限名</td>
+					<td class="col-md-2">操作</td>
+				</tr>
+
+
+			</table>
+			<ul class="pagination">
+				<li><a href="#" id="jian">&laquo;</a></li>
+				<li><a href="#" id="">当前页</a></li>
+				<li><a href="#" id="firstpage"></a></li>
+				<li><a href="#" id="">总页数</a></li>
+				<li><a href="#" id="lastpage"></a></li>
+				<li><a href="#" id="jia">&raquo;</a></li>
+			</ul>
+		</div>
+	</div>
+
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">添加权限</h4>
+				</div>
+				<div class="modal-body">
+					权限名：<input type="text" id="add_rightname" />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" id="add_close"
+						data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary" id="add">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--
+                	作者：offline
+                	时间：2017-10-24
+                	描述：内容结束
+                -->
+
+	<div class="modal fade myModal_upd" id="myModal_upd" tabindex="-1"
+		role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">修改权限</h4>
+				</div>
+				<div class="modal-body">
+					权限名：<input type="text" id="quanxian_name" />
+				</div>
+				<div class="modal-footer">
+					<button type="button" id="modal_close" class="btn btn-default"
+						data-dismiss="modal">取消</button>
+					<button type="button" id="upd_" class="btn btn-primary">保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- jQuery -->
+	<script src="../../../vendors/jquery/dist/jquery.min.js"></script>
+	<!-- Bootstrap -->
+	<script src="../../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- FastClick -->
+	<script src="../../../vendors/fastclick/lib/fastclick.js"></script>
+	<!-- NProgress -->
+	<script src="../../../vendors/nprogress/nprogress.js"></script>
+	<!-- Chart.js -->
+	<script src="../../../vendors/Chart.js/dist/Chart.min.js"></script>
+	<!-- gauge.js -->
+	<script src="../../../vendors/gauge.js/dist/gauge.min.js"></script>
+	<!-- bootstrap-progressbar -->
+	<script
+		src="../../../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+	<!-- iCheck -->
+	<script src="../../../vendors/iCheck/icheck.min.js"></script>
+	<!-- Skycons -->
+	<script src="../../../vendors/skycons/skycons.js"></script>
+	<!-- Flot -->
+	<script src="../../../vendors/Flot/jquery.flot.js"></script>
+	<script src="../../../vendors/Flot/jquery.flot.pie.js"></script>
+	<script src="../../../vendors/Flot/jquery.flot.time.js"></script>
+	<script src="../../../vendors/Flot/jquery.flot.stack.js"></script>
+	<script src="../../../vendors/Flot/jquery.flot.resize.js"></script>
+	<!-- Flot plugins -->
+	<script
+		src="../../../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+	<script src="../../../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+	<script src="../../../vendors/flot.curvedlines/curvedLines.js"></script>
+	<!-- DateJS -->
+	<script src="../../../vendors/DateJS/build/date.js"></script>
+	<!-- JQVMap -->
+	<script src="../../../vendors/jqvmap/dist/jquery.vmap.js"></script>
+	<script src="../../../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+	<script
+		src="../../../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+	<!-- bootstrap-daterangepicker -->
+	<script src="../../../vendors/moment/min/moment.min.js"></script>
+	<script
+		src="../../../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+	<!-- Custom Theme Scripts -->
+	<script src="../../../build/js/custom.min.js"></script>
+	<script src="../../../src/js/jquery-1.8.3.js"></script>
+	<script src="../../../src/js/system/jurisdiction.js"></script>
+
+</body>
+</html>

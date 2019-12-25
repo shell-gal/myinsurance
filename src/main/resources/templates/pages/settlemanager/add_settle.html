@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<!-- Bootstrap -->
+    <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../../../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+	
+    <!-- bootstrap-progressbar -->
+    <link href="../../../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="../../../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <!-- bootstrap-daterangepicker -->
+    <link href="../../../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="../../../build/css/custom.min.css" rel="stylesheet">
+    <style type="text/css">
+    		#matter input{width:140px; margin: 10px 50px 0px 0px;}	
+    		select{width: 174px;height: 25px;}
+    		.right_col table{width: 100%;}
+    		.right_col #pro_bg tr td{padding:3px 0px 3px 6px;}
+    	</style>
+    	<script type="text/javascript" src="../../js/compensate/jquery-1.11.1.js"></script>
+    	<script type="text/javascript" src="../../js/compensate/settlement.js"></script>
+    	
+  </head>
+
+  <body style="background: #F7F7F7;">
+        <!-- /top navigation -->
+        <!-- 右边内容 
+        			所有东西全写在下边这个div里
+        -->
+        <!-- page content -->
+         
+        	
+        	
+        	<table class="table table-bordered" id="append">
+        		<tr class="count">
+        			  <th>案件编号</th>
+        		
+								<th>对方车损</th>
+								<th>我方车损</th>
+								<th>物损</th>
+								<th>人伤</th>
+								<th>总计</th>
+								<th>被保人</th>
+								<th>对方账户</th>
+								
+        		</tr>
+        		
+        	</table>
+        	
+        	<table id="pro_bg" class="table table-bordered">
+            <tr style="text-align: center;">  
+        			<td colspan="3">
+        				
+        				<!-- Button trigger modal -->
+    <button type="button" data-toggle="modal" data-target="#myModal">
+                                                          赔付
+    </button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">理赔完成</h4>
+      </div>
+    	<div>
+    					<h2>赔款就将在24小时到账！</h2>
+    	</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+        <button type="button" onclick="update()" class="btn btn-primary" data-dismiss="modal">确定</button>
+      </div>
+    </div>
+  </div>
+</div>
+        				<a href="settle.jsp"><input type="button" value="返回"/></a>
+        			</td>
+        		</tr>
+        	</table>
+        	
+		<!-- 	报案编号 -->
+       <input type="hidden" id="reported_number" value="${param.reported_number}"/>
+        <!-- footer content -->
+       
+        <!-- /footer content -->
+
+
+    <!-- jQuery -->
+    <script src="../../../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../../../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../../../vendors/nprogress/nprogress.js"></script>
+    <!-- Chart.js -->
+    <script src="../../../vendors/Chart.js/dist/Chart.min.js"></script>
+    <!-- gauge.js -->
+    <script src="../../../vendors/gauge.js/dist/gauge.min.js"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="../../../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- iCheck -->
+    <script src="../../../vendors/iCheck/icheck.min.js"></script>
+    <!-- Skycons -->
+    <script src="../../../vendors/skycons/skycons.js"></script>
+    <!-- Flot -->
+    <script src="../../../vendors/Flot/jquery.flot.js"></script>
+    <script src="../../../vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="../../../vendors/Flot/jquery.flot.time.js"></script>
+    <script src="../../../vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="../../../vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="../../../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="../../../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="../../../vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="../../../vendors/DateJS/build/date.js"></script>
+    <!-- JQVMap -->
+    <script src="../../../vendors/jqvmap/dist/jquery.vmap.js"></script>
+    <script src="../../../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+    <script src="../../../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="../../../vendors/moment/min/moment.min.js"></script>
+    <script src="../../../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../../../build/js/custom.min.js"></script>
+  </body>
+</html>

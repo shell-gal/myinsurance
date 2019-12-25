@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cq.myinsurance.dao.RecognizeeMapper">
+  <resultMap id="BaseResultMap" type="com.cq.myinsurance.pojo.Recognizee">
+    <id column="recognizee_id" jdbcType="INTEGER" property="recognizeeId" />
+    <result column="recognizee_name" jdbcType="VARCHAR" property="recognizeeName" />
+    <result column="recognizee_phone" jdbcType="VARCHAR" property="recognizeePhone" />
+    <result column="recognizee_sex" jdbcType="VARCHAR" property="recognizeeSex" />
+    <result column="recognizee_email" jdbcType="VARCHAR" property="recognizeeEmail" />
+    <result column="recognizee_cardid" jdbcType="VARCHAR" property="recognizeeCardid" />
+    <result column="recognizee_account" jdbcType="VARCHAR" property="recognizeeAccount" />
+    <result column="recognizee_address_province" jdbcType="VARCHAR" property="recognizeeAddressProvince" />
+    <result column="recognizee_address_city" jdbcType="VARCHAR" property="recognizeeAddressCity" />
+    <result column="recognizee_driverlicense" jdbcType="VARCHAR" property="recognizeeDriverlicense" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    recognizee_id, recognizee_name, recognizee_phone, recognizee_sex, recognizee_email, 
+    recognizee_cardid, recognizee_account, recognizee_address_province, recognizee_address_city, 
+    recognizee_driverlicense, createtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from recognizee_info
+    where recognizee_id = #{recognizeeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from recognizee_info
+    where recognizee_id = #{recognizeeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cq.myinsurance.pojo.Recognizee">
+    insert into recognizee_info (recognizee_id, recognizee_name, recognizee_phone, 
+      recognizee_sex, recognizee_email, recognizee_cardid, 
+      recognizee_account, recognizee_address_province, 
+      recognizee_address_city, recognizee_driverlicense, 
+      createtime)
+    values (#{recognizeeId,jdbcType=INTEGER}, #{recognizeeName,jdbcType=VARCHAR}, #{recognizeePhone,jdbcType=VARCHAR}, 
+      #{recognizeeSex,jdbcType=VARCHAR}, #{recognizeeEmail,jdbcType=VARCHAR}, #{recognizeeCardid,jdbcType=VARCHAR}, 
+      #{recognizeeAccount,jdbcType=VARCHAR}, #{recognizeeAddressProvince,jdbcType=VARCHAR}, 
+      #{recognizeeAddressCity,jdbcType=VARCHAR}, #{recognizeeDriverlicense,jdbcType=VARCHAR}, 
+      #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cq.myinsurance.pojo.Recognizee">
+    insert into recognizee_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="recognizeeId != null">
+        recognizee_id,
+      </if>
+      <if test="recognizeeName != null">
+        recognizee_name,
+      </if>
+      <if test="recognizeePhone != null">
+        recognizee_phone,
+      </if>
+      <if test="recognizeeSex != null">
+        recognizee_sex,
+      </if>
+      <if test="recognizeeEmail != null">
+        recognizee_email,
+      </if>
+      <if test="recognizeeCardid != null">
+        recognizee_cardid,
+      </if>
+      <if test="recognizeeAccount != null">
+        recognizee_account,
+      </if>
+      <if test="recognizeeAddressProvince != null">
+        recognizee_address_province,
+      </if>
+      <if test="recognizeeAddressCity != null">
+        recognizee_address_city,
+      </if>
+      <if test="recognizeeDriverlicense != null">
+        recognizee_driverlicense,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="recognizeeId != null">
+        #{recognizeeId,jdbcType=INTEGER},
+      </if>
+      <if test="recognizeeName != null">
+        #{recognizeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="recognizeePhone != null">
+        #{recognizeePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="recognizeeSex != null">
+        #{recognizeeSex,jdbcType=VARCHAR},
+      </if>
+      <if test="recognizeeEmail != null">
+        #{recognizeeEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="recognizeeCardid != null">
+        #{recognizeeCardid,jdbcType=VARCHAR},
+      </if>
+      <if test="recognizeeAccount != null">
+        #{recognizeeAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="recognizeeAddressProvince != null">
+        #{recognizeeAddressProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="recognizeeAddressCity != null">
+        #{recognizeeAddressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="recognizeeDriverlicense != null">
+        #{recognizeeDriverlicense,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cq.myinsurance.pojo.Recognizee">
+    update recognizee_info
+    <set>
+      <if test="recognizeeName != null">
+        recognizee_name = #{recognizeeName,jdbcType=VARCHAR},
+      </if>
+      <if test="recognizeePhone != null">
+        recognizee_phone = #{recognizeePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="recognizeeSex != null">
+        recognizee_sex = #{recognizeeSex,jdbcType=VARCHAR},
+      </if>
+      <if test="recognizeeEmail != null">
+        recognizee_email = #{recognizeeEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="recognizeeCardid != null">
+        recognizee_cardid = #{recognizeeCardid,jdbcType=VARCHAR},
+      </if>
+      <if test="recognizeeAccount != null">
+        recognizee_account = #{recognizeeAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="recognizeeAddressProvince != null">
+        recognizee_address_province = #{recognizeeAddressProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="recognizeeAddressCity != null">
+        recognizee_address_city = #{recognizeeAddressCity,jdbcType=VARCHAR},
+      </if>
+      <if test="recognizeeDriverlicense != null">
+        recognizee_driverlicense = #{recognizeeDriverlicense,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where recognizee_id = #{recognizeeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cq.myinsurance.pojo.Recognizee">
+    update recognizee_info
+    set recognizee_name = #{recognizeeName,jdbcType=VARCHAR},
+      recognizee_phone = #{recognizeePhone,jdbcType=VARCHAR},
+      recognizee_sex = #{recognizeeSex,jdbcType=VARCHAR},
+      recognizee_email = #{recognizeeEmail,jdbcType=VARCHAR},
+      recognizee_cardid = #{recognizeeCardid,jdbcType=VARCHAR},
+      recognizee_account = #{recognizeeAccount,jdbcType=VARCHAR},
+      recognizee_address_province = #{recognizeeAddressProvince,jdbcType=VARCHAR},
+      recognizee_address_city = #{recognizeeAddressCity,jdbcType=VARCHAR},
+      recognizee_driverlicense = #{recognizeeDriverlicense,jdbcType=VARCHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where recognizee_id = #{recognizeeId,jdbcType=INTEGER}
+  </update>
+</mapper>

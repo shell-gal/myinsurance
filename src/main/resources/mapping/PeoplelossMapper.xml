@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cq.myinsurance.dao.PeoplelossMapper">
+  <resultMap id="BaseResultMap" type="com.cq.myinsurance.pojo.Peopleloss">
+    <id column="peopleloss_id" jdbcType="INTEGER" property="peoplelossId" />
+    <result column="loss_id" jdbcType="INTEGER" property="lossId" />
+    <result column="medical_pro" jdbcType="VARCHAR" property="medicalPro" />
+    <result column="medical_address" jdbcType="VARCHAR" property="medicalAddress" />
+    <result column="medical_price" jdbcType="INTEGER" property="medicalPrice" />
+    <result column="sum_price" jdbcType="INTEGER" property="sumPrice" />
+    <result column="case_id" jdbcType="INTEGER" property="caseId" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    peopleloss_id, loss_id, medical_pro, medical_address, medical_price, sum_price, case_id, 
+    createtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from peopleloss_info
+    where peopleloss_id = #{peoplelossId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from peopleloss_info
+    where peopleloss_id = #{peoplelossId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.cq.myinsurance.pojo.Peopleloss">
+    insert into peopleloss_info (peopleloss_id, loss_id, medical_pro, 
+      medical_address, medical_price, sum_price, 
+      case_id, createtime)
+    values (#{peoplelossId,jdbcType=INTEGER}, #{lossId,jdbcType=INTEGER}, #{medicalPro,jdbcType=VARCHAR}, 
+      #{medicalAddress,jdbcType=VARCHAR}, #{medicalPrice,jdbcType=INTEGER}, #{sumPrice,jdbcType=INTEGER}, 
+      #{caseId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.cq.myinsurance.pojo.Peopleloss">
+    insert into peopleloss_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="peoplelossId != null">
+        peopleloss_id,
+      </if>
+      <if test="lossId != null">
+        loss_id,
+      </if>
+      <if test="medicalPro != null">
+        medical_pro,
+      </if>
+      <if test="medicalAddress != null">
+        medical_address,
+      </if>
+      <if test="medicalPrice != null">
+        medical_price,
+      </if>
+      <if test="sumPrice != null">
+        sum_price,
+      </if>
+      <if test="caseId != null">
+        case_id,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="peoplelossId != null">
+        #{peoplelossId,jdbcType=INTEGER},
+      </if>
+      <if test="lossId != null">
+        #{lossId,jdbcType=INTEGER},
+      </if>
+      <if test="medicalPro != null">
+        #{medicalPro,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalAddress != null">
+        #{medicalAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalPrice != null">
+        #{medicalPrice,jdbcType=INTEGER},
+      </if>
+      <if test="sumPrice != null">
+        #{sumPrice,jdbcType=INTEGER},
+      </if>
+      <if test="caseId != null">
+        #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.cq.myinsurance.pojo.Peopleloss">
+    update peopleloss_info
+    <set>
+      <if test="lossId != null">
+        loss_id = #{lossId,jdbcType=INTEGER},
+      </if>
+      <if test="medicalPro != null">
+        medical_pro = #{medicalPro,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalAddress != null">
+        medical_address = #{medicalAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="medicalPrice != null">
+        medical_price = #{medicalPrice,jdbcType=INTEGER},
+      </if>
+      <if test="sumPrice != null">
+        sum_price = #{sumPrice,jdbcType=INTEGER},
+      </if>
+      <if test="caseId != null">
+        case_id = #{caseId,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where peopleloss_id = #{peoplelossId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.cq.myinsurance.pojo.Peopleloss">
+    update peopleloss_info
+    set loss_id = #{lossId,jdbcType=INTEGER},
+      medical_pro = #{medicalPro,jdbcType=VARCHAR},
+      medical_address = #{medicalAddress,jdbcType=VARCHAR},
+      medical_price = #{medicalPrice,jdbcType=INTEGER},
+      sum_price = #{sumPrice,jdbcType=INTEGER},
+      case_id = #{caseId,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where peopleloss_id = #{peoplelossId,jdbcType=INTEGER}
+  </update>
+</mapper>

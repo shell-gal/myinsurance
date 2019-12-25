@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+ <!-- Bootstrap -->
+   <link th:href="@{vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link th:href="@{vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+    <!-- NProgress -->
+    <link th:href="@{vendors/nprogress/nprogress.css}" rel="stylesheet">
+    <!-- iCheck -->
+    <link th:href="@{vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
+	
+    <!-- bootstrap-progressbar -->
+    <link th:href="@{vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css}" rel="stylesheet">
+    <!-- JQVMap -->
+    <link th:href="@{vendors/jqvmap/dist/jqvmap.min.css}" rel="stylesheet"/>
+    <!-- bootstrap-daterangepicker -->
+    <link th:href="@{vendors/bootstrap-daterangepicker/daterangepicker.css}" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link th:href="@{build/css/custom.min.css}" rel="stylesheet">
+    <style type="text/css">
+    	
+    #form-user{
+    		margin:0px auto;
+    	}
+    	th{text-align: center;}
+    	body{
+    		
+    	}
+    	</style>
+  </head>
+
+  <body style="background: #F7F7F7;">
+  
+					 <div class="col-md-4">
+					 		<div class="dropdown">
+							  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+							    <span id="find_title" />请选择查询条件</span>
+							    <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+							    <li><a href="#" onclick="employees_find(1);">员工姓名</a></li>
+							    <li><a href="#" onclick="employees_find(2)">员工编号</a></li>
+							    <li><a href="#" onclick="employees_find(3)">员工部门</a></li>
+							  </ul>
+							</div>
+					 </div>
+				
+				
+				
+					<!--
+                    	作者：offline
+                    	时间：2017-10-24
+                    	描述：搜索用户信息
+                    -->
+	        <div class="col-md-4 input_find" id="user_name">
+		           <div class="input-group">
+		               <input type="text" name="q" class="form-control find_name1" placeholder="请输入员工姓名....."/>
+		               <span class="input-group-btn" onclick="find(1)">
+		                   <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+		               </span>
+		           </div>
+				</div>
+				
+				<div class="col-md-4 input_find" id="user_id">
+		           <div class="input-group">
+		               <input type="text" name="q" class="form-control find_name2" placeholder="请输入员工编号....."/>
+		               <span class="input-group-btn" onclick="find(2)">
+		                   <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+		               </span>
+		           </div>
+				</div>
+				
+				<div class="col-md-4 input_find" id="user_department">
+		           <div class="input-group">
+		               <input type="text" name="q" class="form-control find_name3" placeholder="请输入员工部门....."/>
+		               <span class="input-group-btn" onclick="find(3)">
+		                   <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+		               </span>
+		           </div>
+				</div>
+			
+			
+				<div class="col-md-4" id="add_employees">
+        	
+				</div>
+	
+
+<div class="col-md-12" style="height:500px;margin-top: 10px;">
+	
+        	<div id="table">
+        				<div class="table">
+						<table class="table table-bordered" id="tab_info">
+					 		<tr>
+					 			<th class="active">编号</th>
+					 			<th class="active">姓名</th>
+					 			<th class="active">性别</th>
+					 			<th class="active">部门</th>
+					 			<th class="active">地址</th>
+					 			<th class="active">联系方式</th>
+					 			<th class="active">Email</th>
+					 			<th class="active">操作</th>
+					 		</tr>	
+					 		
+									
+							
+						</table>
+						</div>
+						<div id="">
+							<ul class="pagination">
+					  <li><a href="#" id="jian">&laquo;</a></li>
+					  <li><a href="#" id="">当前页</a></li>
+					  <li><a href="#" id="firstpage"></a></li>
+					  <li><a href="#" id="">总页数</a></li>
+					  <li><a href="#" id="lastpage"></a></li>
+					  <li><a href="#" id="jia">&raquo;</a></li>
+					</ul>
+						</div>
+					</div>
+					
+	
+			</div>
+				
+</div>
+    <!-- jQuery -->
+    <script th:src="@{vendors/jquery/dist/jquery.min.js}"></script>
+    <!-- Bootstrap -->
+    <script th:src="@{vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+    <!-- FastClick -->
+    <script th:src="@{vendors/fastclick/lib/fastclick.js}"></script>
+    <!-- NProgress -->
+    <script th:src="@{vendors/nprogress/nprogress.js}"></script>
+    <!-- Chart.js} -->
+    <script th:src="@{vendors/Chart.js/dist/Chart.min.js}"></script>
+    <!-- gauge.js} -->
+    <script th:src="@{vendors/gauge.js/dist/gauge.min.js}"></script>
+    <!-- bootstrap-progressbar -->
+    <script th:src="@{vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
+    <!-- iCheck -->
+    <script th:src="@{vendors/iCheck/icheck.min.js}"></script>
+    <!-- Skycons -->
+    <script th:src="@{vendors/skycons/skycons.js}"></script>
+    <!-- Flot -->
+    <script th:src="@{vendors/Flot/jquery.flot.js}"></script>
+    <script th:src="@{vendors/Flot/jquery.flot.pie.js}"></script>
+    <script th:src="@{vendors/Flot/jquery.flot.time.js}"></script>
+    <script th:src="@{vendors/Flot/jquery.flot.stack.js}"></script>
+    <script th:src="@{vendors/Flot/jquery.flot.resize.js}"></script>
+    <!-- Flot plugins -->
+    <script th:src="@{vendors/flot.orderbars/js/jquery.flot.orderBars.js}"></script>
+    <script th:src="@{vendors/flot-spline/js/jquery.flot.spline.min.js}"></script>
+    <script th:src="@{vendors/flot.curvedlines/curvedLines.js}"></script>
+    <!-- DateJS -->
+    <script th:src="@{vendors/DateJS/build/date.js}"></script>
+    <!-- JQVMap -->
+    <script th:src="@{vendors/jqvmap/dist/jquery.vmap.js}"></script>
+    <script th:src="@{vendors/jqvmap/dist/maps/jquery.vmap.world.js}"></script>
+    <script th:src="@{vendors/jqvmap/examples/js/jquery.vmap.sampledata.js}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script th:src="@{vendors/moment/min/moment.min.js}"></script>
+    <script th:src="@{vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script th:src="@{build/js/custom.min.js}"></script>
+     <script type="text/javascript" th:src="@{js/jquery-1.8.3.js}" ></script>
+	 <script type="text/javascript" th:src="@{js/employee/employees_query.js}"></script>
+  </body>
+</html>
