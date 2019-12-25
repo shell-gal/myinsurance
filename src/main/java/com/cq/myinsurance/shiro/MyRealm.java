@@ -23,7 +23,6 @@ public class MyRealm extends AuthorizingRealm {
     UserService userService;
 
      public  static User loginuser;
-
 //执行授权逻辑
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
