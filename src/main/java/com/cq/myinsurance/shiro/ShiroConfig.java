@@ -1,5 +1,6 @@
 package com.cq.myinsurance.shiro;
 
+
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;

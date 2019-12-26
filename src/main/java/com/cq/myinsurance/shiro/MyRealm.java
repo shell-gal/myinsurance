@@ -22,7 +22,7 @@ public class MyRealm extends AuthorizingRealm {
     @Resource(type = UserService.class)
     UserService userService;
 
-     public  static User loginuser;
+     public static User loginuser;
 //执行授权逻辑
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
@@ -30,7 +30,6 @@ public class MyRealm extends AuthorizingRealm {
         Subject subject = SecurityUtils.getSubject();
         User user= (User) subject.getPrincipal();
         System.out.println(user.getUserId());
-        loginuser=user;
         List<String> roles = userService.loadRoleByid(user.getUserId());
         List<String> rights = userService.loadRightByid(user.getUserId());
         System.out.println(roles);
@@ -51,6 +50,7 @@ public class MyRealm extends AuthorizingRealm {
         if (user==null){
             return null;
         }
+        loginuser=user;
         return new SimpleAuthenticationInfo(user,user.getAccountPwd(),"");
     }
 }

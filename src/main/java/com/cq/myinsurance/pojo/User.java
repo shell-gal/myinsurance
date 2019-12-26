@@ -30,6 +30,7 @@ public class User {
 
     private String depart;
 
+    private String address;
 
     private Date createtime;
 
@@ -143,5 +144,34 @@ public class User {
 
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", userSex='" + userSex + '\'' +
+                ", birthday=" + birthday +
+                ", userPhone='" + userPhone + '\'' +
+                ", userEmail='" + userEmail + '\'' +
+                ", userCardid='" + userCardid + '\'' +
+                ", employeeDate=" + employeeDate +
+                ", education='" + education + '\'' +
+                ", userStatus=" + userStatus +
+                ", accountNumber='" + accountNumber + '\'' +
+                ", accountPwd='" + accountPwd + '\'' +
+                ", depart='" + depart + '\'' +
+                ", address='" + address + '\'' +
+                ", createtime=" + createtime +
+                '}';
     }
 }

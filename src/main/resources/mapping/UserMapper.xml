@@ -21,9 +21,30 @@
 
   <sql id="Base_Column_List">
     user_id, user_name, user_sex, birthday, user_phone, user_email, user_cardid, employee_date, 
-    education, user_status, account_number, account_pwd, depart, createtime
+    education, user_status, account_number, account_pwd, depart, address,createtime
   </sql>
 
+  <sql id="Base_List">
+     user_id, user_name, user_sex,user_phone, user_email,depart,address
+  </sql>
+
+  <!--查询所有员工-->
+  <select id="selectall" parameterType="com.cq.myinsurance.pojo.vo.UserLoad"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_List" />
+    from user_info
+   <where>
+     <if test="userName!=null">
+       user_name=#{userName,jdbcType=VARCHAR}
+     </if>
+     <if test="userId!=null">
+       user_id=#{userId,jdbcType=INTEGER}
+     </if>
+     <if test="depart!=null">
+       depart=#{depart,jdbcType=VARCHAR}
+     </if>
+   </where>
+  </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -31,6 +52,7 @@
     from user_info
     where user_id = #{userId,jdbcType=INTEGER}
   </select>
+
   <!--登录-->
   <select id="selectByusernameandpwd" parameterType="java.lang.String" resultMap="BaseResultMap">
     select

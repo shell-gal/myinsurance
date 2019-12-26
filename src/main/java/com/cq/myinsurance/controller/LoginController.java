@@ -32,6 +32,7 @@ public class LoginController {
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
             subject.login(token);
+            System.out.println(MyRealm.loginuser);
             model.addAttribute("user", MyRealm.loginuser);
             return "pages/welcome/index";
         } catch (UnknownAccountException e) {

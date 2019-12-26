@@ -3,6 +3,7 @@ package com.cq.myinsurance.dao;
 import com.cq.myinsurance.pojo.Right;
 import com.cq.myinsurance.pojo.Role;
 import com.cq.myinsurance.pojo.User;
+import com.cq.myinsurance.pojo.vo.UserLoad;
 
 import java.util.HashSet;
 import java.util.List;
@@ -16,6 +17,8 @@ public interface UserMapper {
     int insertSelective(User record);
 
     User selectByPrimaryKey(Integer userId);
+
+    List<User> selectall(UserLoad userLoad);
 
     int updateByPrimaryKeySelective(User record);
 
