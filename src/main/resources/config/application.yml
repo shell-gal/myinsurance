@@ -7,9 +7,9 @@ spring:
             max-request-size: 200MB
     datasource:
         name: source
-        url: jdbc:mysql://localhost:3306/myinsurance?useUnicode=true&allowPublicKeyRetrieval=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
-        username: root
-        password: password
+        url: jdbc:mysql://127.0.0.1:3306/myinsurance?useUnicode=true&allowPublicKeyRetrieval=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
+        username: zking
+        password: 123456
         # 使用druid数据源
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.cj.jdbc.Driver

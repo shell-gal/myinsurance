@@ -9,9 +9,8 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.jws.soap.SOAPBinding;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import javax.servlet.http.HttpSession;
+import java.util.*;
 
 @Service
 public class UserServiceImpls implements UserService {
@@ -29,6 +28,39 @@ public class UserServiceImpls implements UserService {
             return user;
         }
       return null;
+    }
+
+//根据用户名和密码查询用户
+    @Override
+    public User finduser(String accountNumber, String accountPwd) {
+        Map<String,Object> map=new HashMap<>();
+        if (accountNumber!=null&&accountPwd!=null){
+            map.put("accountNumber",accountNumber);
+            map.put("accountPwd",accountPwd);
+        }
+        User user = userMapper.finduser(map);
+        if (user!=null){
+            return user;
+        }
+        return null;
+    }
+
+//    修改密码
+    @Override
+    public boolean updatepwd(String pwd, String accountPwd, HttpSession session) {
+        if (pwd!=null&&accountPwd!=null){
+            User currentuser = (User) session.getAttribute("currentuser");
+            User finduser = finduser(currentuser.getAccountNumber(), pwd);
+            if(finduser!=null) {
+                User user=new User();
+                user.setUserId(finduser.getUserId());
+                user.setAccountPwd(accountPwd);
+                int i = userMapper.updateuserByPrimaryKeySelective(user);
+                if (i>0)
+                    return true;
+            }
+        }
+        return false;
     }
 
     @Override

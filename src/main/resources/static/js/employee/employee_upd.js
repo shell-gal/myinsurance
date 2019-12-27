@@ -1,8 +1,8 @@
 $(function(){
 	//加载员工信息方法
-	loadEmployee();
+	// loadEmployee();
 	//加载角色信息方法
-	roles();
+	// roles();
 	//修改员工信息方法
 	updEmployee();
 });
@@ -71,32 +71,31 @@ function roles(){
 //修改员工信息
 function updEmployee(){
 	$("#updEmployees").click(function(){
+		var data={
+				//获取员工信息传至后台
+				"userId":$("#user_number").val(),
+				"userName":$("#user_name").val(),
+				"userCardid":$("#user_idcard").val(),
+				"employeeDate":$("#work_date").val(),
+				"userSex":$("#sex").val(),
+				"education":$("#education").val(),
+				"birthday":$("#birthday").val(),
+				"depart":$("#dapartment").val(),
+				"roleId":$("#rolename").val(),
+				"userPhone":$("#tel").val(),
+				"address":$("#province").val()+$("#city").val(),
+				"userEmail":$("#email").val(),
+			}
 		$.ajax({
-	  				url:"http://localhost:8080/employee/updEmployee.do",
-	  				type:"get",
-	  				data:{
-	  					//获取员工信息传至后台
-	  					"user_number":$("#user_number").val(),
-	  					"user_name":$("#user_name").val(),
-	  					"user_idcard":$("#user_idcard").val(),
-	  					"work_date":$("#work_date").val(),
-	  					"sex":$("#sex").val(),
-	  					"education":$("#education").val(),
-	  					"birthday":$("#birthday").val(),
-	  					"dapartment":$("#dapartment").val(),
-	  					"rolename":$("#rolename").val(),
-	  					"tel":$("#tel").val(),
-	  				    "address_shen":$("#province").val(),
-	  				    "address_shi":$("#city").val(),
-						"email":$("#email").val(),
-						"rolename":$("#rolename").val(),
-	  				},
+	  				url:"http://localhost:8080/myinsurance/pages/welcome/updateEmployee",
+	  				type:"post",
+	  				data:JSON.stringify(data),
 	  				contentType:"application/json;charset=utf-8",
 	  				dataType:"json",
 	  				success:function(data){
 	  					//判断是否成功并输出提示信息
-	  					if(data.result){
-	  						alert(data.message);
+	  					if(data.resultstatus==200){
+	  						alert(data.message+",请刷新");
 	  					}else{
 	  						alert("修改失败！");
 	  					}

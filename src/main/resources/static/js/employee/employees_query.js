@@ -42,11 +42,11 @@ $(function(){
 	// })
 });
 
-//删除员工信息
+//删除员工
 function del_employeesInfo(data){
 	if(confirm("是否删除员工信息？")){
 		$.ajax({
-	  				url:"http://localhost:8080/employee/delEmployee.do",
+	  				url:"http://localhost:8080/myinsurance/pages/welcome/delete",
 	  				type:"get",
 	  				data:{"id":data},//员工编号
 	  				contentType:"application/json;charset=utf-8",
@@ -55,7 +55,7 @@ function del_employeesInfo(data){
 	  					//弹出提示信息
 	  					alert(data.message);
 	  					//重新加载数据
-	  					load(page,flag,param);
+						onload(page,null,null);
 	  				},
 	  				error:function(){
 	  					alert("System error!!!!!");
@@ -79,13 +79,15 @@ function onload(indexpage,flag,param) {
 					 +"<th>"+d['userId']+"</th>"
 					 +"<th>"+d['userName']+"</th>"
 					 +"<th>"+d['userSex']+"</th>"
+					 +"<th>"+renderTime(d['birthday'])+"</th>"
+					 +"<th>"+d['education']+"</th>"
 					 +"<th>"+d['depart']+"</th>"
 
 					 +"<th>"+d['address']+"</th>"
 
 					 +"<th>"+d['userPhone']+"</th>"
 					 +"<th>"+d['userEmail']+"</th>"
-
+					 +"<th>"+renderTime(d['employeeDate'])+"</th>"
 					 +"<th>"
 					 +	"<a href='employees_upd.jsp?userId="+d['userId']+"' target='aa'>"
 					 +	"	<button type='button' class='btn btn-sm btn-primary'>修改</button>"
@@ -99,14 +101,26 @@ function onload(indexpage,flag,param) {
 			 $(".tr").remove();
 			 //将拼接的字符串拼接至表格
 			 $("#tab_info").append(html);
-			 //将当前页显示至页面
-			 $("#firstpage").html(pageNum);
-			 //将总页数显示至页面
-			 $("#lastpage").html(pages);
-			 //将当前页显示至页面
-			 $("#firstpage").html(pageNum);
-			 //将总页数显示至页面
-			 $("#lastpage").html(pages);
+
+               var pag=`
+                  <li><a  href="javascript:void(0)" onclick="onload(1,null,null)" id="firstpage">首页</a></li>
+						<li><a href="javascript:void(0)" onclick="onload(`+pageInfo.prePage+`,null,null)" id="jian">&laquo;</a></li>
+					    <li><a href="#" id="currentpage" >pageInfo.pageNum</a></li>
+					    <li><a href="javascript:void(0)" onclick="onload(`+pageInfo.nextPage+`,null,null)" id="jia">&raquo;</a></li>
+						<li><a href="javascript:void(0)" onclick="onload(`+pageInfo.pages+`,null,null)" id="lastpage">尾页</a></li>
+						<li><a href="#" id="endpage" >pageInfo.pages</a></li>
+               `;
+
+                $(".pagination").html(pag);
+
+
+
+			 // //将总页数显示至页面
+			 // $("#jian").html(pageInfo.pages);
+			 // //将当前页显示至页面
+			 // $("#firstpage").html(pageNum);
+			 // //将总页数显示至页面
+			 // $("#lastpage").html(pages);
 		 },
 		 error:function(){
 			 alert("System error!!!!!");
@@ -115,6 +129,11 @@ function onload(indexpage,flag,param) {
 }
 
 
+function renderTime(date){
+var oldtime=new Date(date).getTime();
+ var time=new Date(oldtime).format("yyyy-MM-dd");
+ return time;
+}
 
 //下拉框选中事件
 function employees_find(flag){

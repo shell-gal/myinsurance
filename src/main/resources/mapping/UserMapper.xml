@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.cq.myinsurance.pojo.User">
     <id column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
     <result column="user_sex" jdbcType="VARCHAR" property="userSex" />
     <result column="birthday" jdbcType="DATE" property="birthday" />
     <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
@@ -25,7 +26,7 @@
   </sql>
 
   <sql id="Base_List">
-     user_id, user_name, user_sex,user_phone, user_email,depart,address
+     user_id, user_name, user_sex,user_phone, user_email,depart,address,birthday,employee_date,education
   </sql>
 
   <!--查询所有员工-->
@@ -61,24 +62,34 @@
     where account_number = #{account_number,jdbcType=VARCHAR}
   </select>
 
+  <!--根据用户账户名和密码查询用户-->
+  <select id="finduser" resultType="com.cq.myinsurance.pojo.User">
+    select
+    <include refid="Base_Column_List" />
+    from user_info
+    where account_number = #{accountNumber,jdbcType=VARCHAR}
+    and account_pwd== #{accountPwd,jdbcType=VARCHAR}
+  </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user_info
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.cq.myinsurance.pojo.User">
-    insert into user_info (user_id, user_name, user_sex, 
+    insert into user_info (user_id, user_name, user_sex, address,
       birthday, user_phone, user_email, 
       user_cardid, employee_date, education, 
       user_status, account_number, account_pwd, 
       depart, createtime)
-    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userSex,jdbcType=VARCHAR}, 
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userSex,jdbcType=VARCHAR},  #{address,jdbcType=VARCHAR},
       #{birthday,jdbcType=DATE}, #{userPhone,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
       #{userCardid,jdbcType=VARCHAR}, #{employeeDate,jdbcType=DATE}, #{education,jdbcType=VARCHAR}, 
       #{userStatus,jdbcType=INTEGER}, #{accountNumber,jdbcType=VARCHAR}, #{accountPwd,jdbcType=VARCHAR}, 
       #{depart,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.cq.myinsurance.pojo.User">
+
+  <insert useGeneratedKeys="true" keyProperty="userId" id="insertSelective" parameterType="com.cq.myinsurance.pojo.User">
     insert into user_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -119,6 +130,9 @@
       </if>
       <if test="depart != null">
         depart,
+      </if>
+      <if test="address != null">
+        address,
       </if>
       <if test="createtime != null">
         createtime,
@@ -164,16 +178,24 @@
       <if test="depart != null">
         #{depart,jdbcType=VARCHAR},
       </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
       <if test="createtime != null">
         #{createtime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cq.myinsurance.pojo.User">
+
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.cq.myinsurance.pojo.vo.UserRole">
     update user_info
     <set>
       <if test="userName != null">
         user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
       </if>
       <if test="userSex != null">
         user_sex = #{userSex,jdbcType=VARCHAR},
@@ -196,28 +218,35 @@
       <if test="education != null">
         education = #{education,jdbcType=VARCHAR},
       </if>
-      <if test="userStatus != null">
-        user_status = #{userStatus,jdbcType=INTEGER},
-      </if>
-      <if test="accountNumber != null">
-        account_number = #{accountNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="accountPwd != null">
-        account_pwd = #{accountPwd,jdbcType=VARCHAR},
-      </if>
+
       <if test="depart != null">
         depart = #{depart,jdbcType=VARCHAR},
-      </if>
-      <if test="createtime != null">
-        createtime = #{createtime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+
+
+  <update id="updateuserByPrimaryKeySelective" parameterType="com.cq.myinsurance.pojo.User">
+    update user_info
+    <set>
+      <if test="userStatus != null">
+        user_status = #{userStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="accountPwd!=null">
+        account_pwd=#{accountPwd,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+
+
   <update id="updateByPrimaryKey" parameterType="com.cq.myinsurance.pojo.User">
     update user_info
     set user_name = #{userName,jdbcType=VARCHAR},
       user_sex = #{userSex,jdbcType=VARCHAR},
+       address = #{address,jdbcType=VARCHAR},
       birthday = #{birthday,jdbcType=DATE},
       user_phone = #{userPhone,jdbcType=VARCHAR},
       user_email = #{userEmail,jdbcType=VARCHAR},

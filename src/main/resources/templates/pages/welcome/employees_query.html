@@ -93,10 +93,13 @@
 					 			<th class="active">编号</th>
 					 			<th class="active">姓名</th>
 					 			<th class="active">性别</th>
+								<th class="active">生日</th>
+								<th class="active">学历</th>
 					 			<th class="active">部门</th>
 					 			<th class="active">地址</th>
 					 			<th class="active">联系方式</th>
 					 			<th class="active">Email</th>
+								<th class="active">入职日期</th>
 					 			<th class="active">操作</th>
 					 		</tr>
 
@@ -104,28 +107,30 @@
 								<th th:text="${user.userId}"></th>
 								<th th:text="${user.userName}"></th>
 								<th th:text="${user.userSex}"></th>
+								<th th:text="${#dates.format(user.birthday,'yyyy-MM-dd')}"></th>
+								<th th:text="${user.education}"></th>
 								<th th:text="${user.depart}"></th>
 								<th th:text="${user.address}"></th>
 								<th th:text="${user.userPhone}"></th>
 								<th th:text="${user.userEmail}"></th>
+								<th th:text="${#dates.format(user.employeeDate,'yyyy-MM-dd')}"></th>
 								<th>
-
-							   <a href="" target='aa'>
+							   <a th:href=" 'http://localhost:8080/myinsurance/pages/welcome/loadone?userid='+${user.userId}" target='aa'>
 								<button type='button' class='btn btn-sm btn-primary'>修改</button>
 								</a>&nbsp;&nbsp;&nbsp;
-								<button type='button' class='btn btn-sm btn-danger' onclick="">离职	</button>
+								<button type='button' class='btn btn-sm btn-danger' th:onclick="'del_employeesInfo('+${user.userId}+')'">离职	</button>
 								</th>
 							</tr>
 						</table>
 						</div>
 						<div id="">
 							<ul class="pagination">
-					  <li><a href="#" id="jian">&laquo;</a></li>
-					  <li><a href="#" id="">当前页</a></li>
-					  <li><a href="#" id="firstpage"></a></li>
-					  <li><a href="#" id="">总页数</a></li>
-					  <li><a href="#" id="lastpage"></a></li>
-					  <li><a href="#" id="jia">&raquo;</a></li>
+						<li><a  href="pages/welcome/loademployee?indexpage=1" id="firstpage">首页</a></li>
+						<li><a th:href="'pages/welcome/loademployee?indexpage='+${pageInfo.prePage}" id="jian">&laquo;</a></li>
+					    <li><a href="#" id="currentpage" th:text="${pageInfo.pageNum}" ></a></li>
+					    <li><a th:href="'pages/welcome/loademployee?indexpage='+${pageInfo.nextPage}" id="jia">&raquo;</a></li>
+						<li><a th:href="'pages/welcome/loademployee?indexpage='+${pageInfo.pages}" id="lastpage">尾页</a></li>
+						<li><a href="#" id="endpage" th:text="${pageInfo.pages}"></a></li>
 					</ul>
 						</div>
 					</div>

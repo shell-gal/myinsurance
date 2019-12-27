@@ -1,6 +1,6 @@
 $(function(){
 	//加载角色信息
-	roles();
+	// roles();
 	//添加员工信息
 	_addEmployee();
 });
@@ -10,31 +10,28 @@ $(function(){
 function _addEmployee(){
 	//按钮点击事件
 	$("#addEmployees").click(function(){
+		var data={
+				"userName":$("#user_name").val(),
+				"userCardid":$("#user_idcard").val(),
+				"employeeDate":$("#work_date").val(),
+				"userSex":$("#sex").val(),
+				"education":$("#education").val(),
+				"birthday":$("#birthday").val(),
+				"depart":$("#dapartment").val(),
+				"roleId":$("#rolename").val(),
+				"userPhone":$("#tel").val(),
+				"address":$("#province").val()+$("#city").val(),
+				"userEmail":$("#email").val(),
+			};
 		$.ajax({
-	  				url:"http://localhost:8080/insurance/addEmployee.do",
-	  				type:"get",
-	  				data:{
-	  					"user_name":$("#user_name").val(),
-	  					"user_idcard":$("#user_idcard").val(),
-	  					"work_date":$("#work_date").val(),
-	  					"sex":$("#sex").val(),
-	  					"education":$("#education").val(),
-	  					"birthday":$("#birthday").val(),
-	  					"dapartment":$("#dapartment").val(),
-	  					"rolename":$("#rolename").val(),
-	  					"tel":$("#tel").val(),
-	  				    "address_shen":$("#province").val(),
-	  				    "address_shi":$("#city").val(),
-						"email":$("#email").val(),
-						"rolename":$("#rolename").val(),
-						"account_number":$("#email").val(),
-						"password":"123456"
-	  				},
+	  				url:"http://localhost:8080/myinsurance/pages/welcome/addemployee",
+	  				type:"post",
+	  				data:JSON.stringify(data),
 	  				contentType:"application/json;charset=utf-8",
 	  				dataType:"json",
 	  				success:function(data){
 	  					//弹出信息
-	  					if(data.result){
+	  					if(data.resultstatus==200){
 	  						alert(data.message);
 	  					}else{
 	  						alert(data.message);
