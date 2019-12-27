@@ -1,5 +1,7 @@
 package com.cq.myinsurance.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Case {
@@ -42,6 +44,32 @@ public class Case {
     private Integer lipeiId;
 
     private Date createtime;
+
+    @Override
+    public String toString() {
+        return "Case{" +
+                "caseId=" + caseId +
+                ", reporterName='" + reporterName + '\'' +
+                ", reporterPhone='" + reporterPhone + '\'' +
+                ", dangerCause='" + dangerCause + '\'' +
+                ", dangerAddressProvince='" + dangerAddressProvince + '\'' +
+                ", dangerAddressCity='" + dangerAddressCity + '\'' +
+                ", detailAddress='" + detailAddress + '\'' +
+                ", roadDirection='" + roadDirection + '\'' +
+                ", dangerDate=" + dangerDate +
+                ", dangerType='" + dangerType + '\'' +
+                ", caseStatus='" + caseStatus + '\'' +
+                ", warrantyId=" + warrantyId +
+                ", jieanId=" + jieanId +
+                ", kancaId=" + kancaId +
+                ", dingsunId=" + dingsunId +
+                ", hesunId=" + hesunId +
+                ", lisuanId=" + lisuanId +
+                ", hepeiId=" + hepeiId +
+                ", lipeiId=" + lipeiId +
+                ", createtime=" + createtime +
+                '}';
+    }
 
     public Integer getCaseId() {
         return caseId;

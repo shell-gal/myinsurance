@@ -34,6 +34,12 @@
     from case_info
     where case_id = #{caseId,jdbcType=INTEGER}
   </select>
+  <select id="selectByStatus" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from case_info
+    where case_status = #{status,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from case_info
     where case_id = #{caseId,jdbcType=INTEGER}
