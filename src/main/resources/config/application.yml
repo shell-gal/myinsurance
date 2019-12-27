@@ -51,6 +51,12 @@ mybatis:
     mapperLocations: classpath:mapping/*.xml
     typeAliasesPackage: com.cq.myinsurance.pojo
 
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
 #logging:
 #    level:
 #        com.iforce.zingrow.dao.IUserDao: INFO

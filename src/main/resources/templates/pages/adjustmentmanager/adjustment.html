@@ -59,7 +59,6 @@ xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 						<table class="table table-bordered" align="center" style="width: 100%" id="prospect_table">
 							<tr>
 								<th>报案编号</th>
-								
 								<th>报案人</th>
 								<th>车牌号</th>
 								<th>联系电话</th>
@@ -67,35 +66,32 @@ xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 								<th>出事地点 </th>
 								<th>出险原因</th>
 								<th>事故类型</th>
-								
 								<th>案件状态</th>
 								<th>操作</th>
 							</tr>
-                            <th:block th:each="case : ${casePage}">
                                 <tr class='remove'>
-                                    <td th:text="${case.caseId}">14164801012</td>
-                                    <td th:text="${case.reporterName}">张三</td>
-                                    <td th:text="${case.carNumber}">湘F 88888</td>
-                                    <td th:text="${case.reporterPhone}">1569740000</td>
-                                    <td th:text="${case.dangerDate}">2019-12-27</td>
-                                    <td th:text="${case.dangerAddress}">湖南省长沙市岳麓区</td>
-                                    <td th:text="${case.dangerCause}">鬼知道</td>
-                                    <td th:text="${case.dangerType}">不懂</td>
-                                    <td th:text="${case.caseStatus}">...</td>
-                                    <td>
-                                        <a href="lisuan_info.jsp?reported_number=1" target='aa'>理算详情</a>
-                                    </td>
-                                </tr>
-                            </th:block>
+                                <td >14164801012</td>
+                                <td >张三</td>
+                                <td >湘F 88888</td>
+                                <td >1569740000</td>
+                                <td >2019-12-27</td>
+                                <td >湖南省长沙市岳麓区</td>
+                                <td >鬼知道</td>
+                                <td >不懂</td>
+                                <td >...</td>
+                                <td>
+                                    <a href="lisuan_info.jsp?reported_number=1" target='aa'>理算详情</a>
+                                </td>
+                            </tr>
                         </table>
 					
 				 <ul class="pagination">
-			           <li><a href="#" id="jian">&laquo;</a></li>
-			           <li><a href="#" id="currentpage">当前页</a></li>
-	            	   <li><a href="#" id="firstpage"></a></li>
-			           <li><a href="#" id="countpage">总页数</a></li>
-			           <li><a href="#" id="lastpage"></a></li>
-			           <li><a href="#" id="jia">&raquo;</a></li>
+                     <li><a href="#" id="jian">&laquo;</a></li>
+                     <li><a href="#" >当前页</a></li>
+                     <li><a href="#" id="firstpage" ></a></li>
+                     <li><a href="#" >总页数</a></li>
+                     <li><a href="#" id="lastpage" ></a></li>
+                     <li><a href="#" id="jia">&raquo;</a></li>
 		         </ul>
 			</div>
     
@@ -143,47 +139,6 @@ xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
     <script th:src="@{/js/prospect.js}"></script>
     <script th:src="@{/js/jquery-1.8.3.js}"></script>
 
-    <script type="javascript" >
-        //查询核赔页面及查询
-        var page=1;
-        var pageNum=1;
-        var pages=1;
-        $(function(){
-            init();
-            $("#select_but").click(function(){
-                init();
-            });
-            $("#reset_but").click(function(){
-                $("#peospectID").val("");
-                init();
-            });
-
-
-            $("#jia").click(function(){
-                pageNum = Number(pageNum)+1;
-                if(pageNum > pages){
-                    alert("没有下一页");
-                    pageNum=pages;
-                } else {
-                    page = Number(page)+1;
-                    query();
-                }
-
-            })
-
-            $("#jian").click(function(){
-                pageNum=Number(pageNum)-1;
-                if(pageNum<1){
-                    alert("没有上一页");
-                    pageNum=1;
-                }else{
-                    page = Number(page)-1;
-                    query();
-                }
-
-            })
-        })
-    </script>
-<!--	<script th:src="@{/js/compensate/adjustment.js}"></script>-->
+	<script th:src="@{/js/compensate/adjustment.js}"></script>
   </body>
 </html>

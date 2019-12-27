@@ -1,19 +1,14 @@
 package com.cq.myinsurance.controller.adjustmentmanage;
 
-import com.cq.myinsurance.pojo.Case;
 import com.cq.myinsurance.pojo.vo.CaseVo;
 import com.cq.myinsurance.service.AdjustmentService;
-import com.cq.myinsurance.utils.BeanUtil;
-import com.cq.myinsurance.utils.enums.CaseStatus;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageInfo;
+import netscape.javascript.JSObject;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * @Message:
@@ -33,13 +28,25 @@ public class AdjustmentController {
      * @return
      */
     @GetMapping("adjustment")
-    public String adjustment(HttpServletRequest request){
-
-        PageInfo<CaseVo> casePage = adjustmentService.getCasePage(1,10);
-
-        request.setAttribute("casePage",casePage.getList());
-
+    public String adjustment(){
         return "/pages/adjustmentmanager/adjustment";
+    }
+
+    @PostMapping("adjustment")
+    @ResponseBody
+    public PageInfo<CaseVo> adjustment(HttpServletRequest request){
+        String pageNumStr = request.getParameter("pageNum");
+        String search = request.getParameter("search");
+        Integer pageNum = 1;
+
+        System.out.println("pageNumStr--"+pageNumStr+"---search--"+search);
+        if (pageNumStr != null && !pageNumStr.trim().isEmpty()){
+            pageNum = Integer.valueOf(pageNumStr.trim());
+        }
+
+        PageInfo<CaseVo> casePage = adjustmentService.getCasePage(pageNum,10 ,search);
+
+        return casePage;
     }
 
     /**
@@ -70,5 +77,4 @@ public class AdjustmentController {
         System.out.println("----caseQuery--------");
         return "/pages/welcome/case_query";
     }
-
 }
