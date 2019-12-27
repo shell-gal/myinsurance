@@ -3,6 +3,7 @@ package com.cq.myinsurance.controller;
 import com.cq.myinsurance.service.UserService;
 import com.cq.myinsurance.shiro.MyRealm;
 import com.cq.myinsurance.utils.Result;
+import com.cq.myinsurance.utils.enums.UserStatus;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -39,7 +40,7 @@ public class LoginController {
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
             subject.login(token);
-            session.setAttribute("currentuser",MyRealm.loginuser);
+            session.setAttribute(UserStatus.CURRENT_USER,MyRealm.loginuser);
             model.addAttribute("user", MyRealm.loginuser);
             return "pages/welcome/index";
         } catch (UnknownAccountException e) {
