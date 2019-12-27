@@ -1,17 +1,20 @@
 package com.cq.myinsurance.controller.employee;
 
+import com.cq.myinsurance.pojo.Role;
 import com.cq.myinsurance.pojo.User;
 import com.cq.myinsurance.pojo.vo.UserLoad;
+import com.cq.myinsurance.pojo.vo.UserRole;
 import com.cq.myinsurance.service.EmployeeService;
+import com.cq.myinsurance.service.RoleService;
+import com.cq.myinsurance.service.UserService;
+import com.cq.myinsurance.utils.Result;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 @RequestMapping("/pages/welcome")
@@ -20,12 +23,15 @@ public class EmployeeController {
     @Resource
     EmployeeService employeeService;
 
+    @Resource
+    RoleService roleService;
+
 //    加载所有职员信息
     @RequestMapping("/loademployee")
     public String  loademployee(UserLoad userLoad, HttpServletRequest request){
         PageInfo pageInfo = employeeService.loademployee(userLoad);
         request.setAttribute("pageInfo",pageInfo);
-        System.out.println(pageInfo);
+
         return "/pages/welcome/employees_query";
     }
 
@@ -34,14 +40,57 @@ public class EmployeeController {
     @ResponseBody
     public PageInfo ajaxload(UserLoad userLoad){
         PageInfo pageInfo = employeeService.loademployee(userLoad);
-        System.out.println(pageInfo);
         return pageInfo;
     }
 
-    @RequestMapping("/loadone/{id}")
-    public String loadone(@PathVariable("id") Integer userId,HttpServletRequest request){
+//    根据用户id，查询用户信息以及所拥有的角色（职位）
+    @RequestMapping("/loadone")
+    public String loadone(@RequestParam("userid") Integer userId,HttpServletRequest request){
         User user = employeeService.loadone(userId);
+        List<Role> roles = roleService.loadall();
         request.setAttribute("user",user);
+        request.setAttribute("roles",roles);
         return "/pages/welcome/employees_upd";
+    }
+
+//    修改员工信息
+  @RequestMapping("/updateEmployee")
+  @ResponseBody
+    public Result update(@RequestBody UserRole userRole){
+      boolean b = employeeService.updateemployee(userRole);
+      if (b){
+          return  new Result(200,"修改成功");
+      }
+      return new Result(500,"failed");
+  }
+
+//  跳转增加员工页面
+  @RequestMapping("/add")
+    public String add(HttpServletRequest request){
+      List<Role> roles = roleService.loadall();
+      request.setAttribute("roles",roles);
+      return "/pages/welcome/employees_add.html";
+  }
+
+//  增加员工
+    @RequestMapping("/addemployee")
+    @ResponseBody
+    public Result addemployee(@RequestBody UserRole userRole,HttpServletRequest request){
+        boolean b = employeeService.addemployee(userRole);
+        if (b){
+            return  new Result(200,"增加成功！");
+        }
+        return new Result(500,"failed");
+    }
+
+//    删除员工
+    @RequestMapping("/delete")
+    @ResponseBody
+    public Result deleteemployee(Integer id){
+        boolean b = employeeService.deleteemployee(id);
+        if (b){
+            return  new Result(200,"删除成功");
+        }
+        return new Result(500,"failed");
     }
 }

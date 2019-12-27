@@ -1,6 +1,9 @@
 package com.cq.myinsurance.dao;
 
 import com.cq.myinsurance.pojo.Role;
+import com.github.pagehelper.PageInfo;
+
+import java.util.List;
 
 public interface RoleMapper {
     int deleteByPrimaryKey(Integer roleId);
@@ -10,6 +13,10 @@ public interface RoleMapper {
     int insertSelective(Role record);
 
     Role selectByPrimaryKey(Integer roleId);
+
+    List<String> selectRoles();
+
+    List<Role> selectallroles();
 
     int updateByPrimaryKeySelective(Role record);
 
