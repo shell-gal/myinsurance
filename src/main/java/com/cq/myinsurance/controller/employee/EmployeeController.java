@@ -31,7 +31,7 @@ public class EmployeeController {
     public String  loademployee(UserLoad userLoad, HttpServletRequest request){
         PageInfo pageInfo = employeeService.loademployee(userLoad);
         request.setAttribute("pageInfo",pageInfo);
-
+        System.out.println(pageInfo);
         return "/pages/welcome/employees_query";
     }
 

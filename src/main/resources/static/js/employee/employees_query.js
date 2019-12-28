@@ -105,10 +105,10 @@ function onload(indexpage,flag,param) {
                var pag=`
                   <li><a  href="javascript:void(0)" onclick="onload(1,null,null)" id="firstpage">首页</a></li>
 						<li><a href="javascript:void(0)" onclick="onload(`+pageInfo.prePage+`,null,null)" id="jian">&laquo;</a></li>
-					    <li><a href="#" id="currentpage" >pageInfo.pageNum</a></li>
+					    <li><a href="#" id="currentpage" >`+pageInfo.pageNum+`</a></li>
 					    <li><a href="javascript:void(0)" onclick="onload(`+pageInfo.nextPage+`,null,null)" id="jia">&raquo;</a></li>
 						<li><a href="javascript:void(0)" onclick="onload(`+pageInfo.pages+`,null,null)" id="lastpage">尾页</a></li>
-						<li><a href="#" id="endpage" >pageInfo.pages</a></li>
+						<li><a href="#" id="endpage" >`+pageInfo.pages+`</a></li>
                `;
 
                 $(".pagination").html(pag);
@@ -170,15 +170,27 @@ function find(flag){
 	if(flag==1){
 		//获取第一个框的值
 		param=$(".find_name1").val();
+		if (param==""){
+			onload(page,flag,null);
+		}else {
+			onload(page,flag,param);
+		}
 
-		onload(page,flag,param);
 	};
 	if(flag==2){
 		param=$(".find_name2").val();
-		onload(page,flag,param);
+		if (param==""){
+			onload(page,flag,null);
+		}else {
+			onload(page,flag,param);
+		}
 	};
 	if(flag==3){
 		param=$(".find_name3").val();
-		onload(page,flag,param);
+		if (param==""){
+			onload(page,flag,null);
+		}else {
+			onload(page,flag,param);
+		}
 	};	 
 }

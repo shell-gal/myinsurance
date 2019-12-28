@@ -37,7 +37,7 @@ public class EmployeeServiceImpls implements EmployeeService {
             userLoad.setIndexpage(1);
         }
         if (userLoad.getPagesize()==null){
-            userLoad.setPagesize(10);
+            userLoad.setPagesize(1);
         }
         if (userLoad.getFlag()!=null&&userLoad.getParam()!=null){
             if (userLoad.getFlag()==1){
