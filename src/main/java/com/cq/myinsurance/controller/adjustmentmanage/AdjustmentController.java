@@ -39,7 +39,6 @@ public class AdjustmentController {
         String search = request.getParameter("search");
         Integer pageNum = 1;
 
-        System.out.println("pageNumStr--"+pageNumStr+"---search--"+search);
         if (pageNumStr != null && !pageNumStr.trim().isEmpty()){
             pageNum = Integer.valueOf(pageNumStr.trim());
         }

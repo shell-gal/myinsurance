@@ -31,7 +31,6 @@ public class AdjustmentServiceImpl implements AdjustmentService {
 
     @Override
     public PageInfo<CaseVo> getCasePage(int pageNum, int pageSize ,String search) {
-        System.out.println("pageNum--"+pageNum);
 
         PageHelper.startPage(pageNum, pageSize);
         //service里面的代码
