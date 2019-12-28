@@ -2,17 +2,19 @@
 var page=1;
 var pageNum=1;
 var pages=1;
+
 $(function(){
 	init();
 	$("#select_but").click(function(){
-				init();
-			});
+		page=1;
+		init();
+	});
 	$("#reset_but").click(function(){
 		$("#peospectID").val("");
-		 init();
+		init();
 	});
 
-			
+
 	$("#jia").click(function(){
 		pageNum = Number(pageNum)+1;
 		if(pageNum > pages){
@@ -20,11 +22,11 @@ $(function(){
 			pageNum=pages;
 		} else {
 			page = Number(page)+1;
-			query();
+			init();
 		}
-		
+
 	})
-	
+
 	$("#jian").click(function(){
 		pageNum=Number(pageNum)-1;
 		if(pageNum<1){
@@ -32,52 +34,49 @@ $(function(){
 			pageNum=1;
 		}else{
 			page = Number(page)-1;
-			query();
+			init();
 		}
-		
+
 	})
-})
+});
 
-		function init(){
-	            var reported_number= $("#peospectID").val();
-				$.ajax({
-				url : "http://localhost:8080/getAdjustment/getAdjustment",
-				type : "post",
-				data: {"page":page,"reported_number":reported_number},
-				dataType : "json",
-				success : function(data) {
-					
-					pageNum=data.singerData.pageNum;
-		        	pages=data.singerData.pages;
-					
-					var newTr = "";
-					$.each(data.singerData.list,function(i,item) {
-						
-						newTr+="<tr class='remove'>"
- 							+"<th>"+item['reported_number']+"</th>"
- 							+"<th>"+item['informants']+"</th>"
-						    +"<th>"+item.warranty_info.license_number+"</th>"
-				 			+"<th>"+item['informants_tel']+"</th>"
-				 			+"<th>"+item['reported_time']+"</th>"
- 			 			    +"<th>"+item.prospect_info.prospect_address+"</th>"
-				 			+"<th>"+item['danger_cause']+"</th>"
-				 			+"<th>"+item['dispose_type']+"</th>"
-				 			+"<th>"+item['case_state']+"</th>"
-				 			+"<th><a href='lisuan_info.jsp?reported_number="+item['reported_number']+"' target='aa'>理算详情</a>"
- 							+"</th>"
- 							+"</tr>";		
-					});
-					$(".remove").remove();					
-					//$("#append").append(newTr);
-					$("table").append(newTr);
-				    $("#firstpage").html(pageNum);
-			        $("#lastpage").html(pages)
-				},
-				error : function() {
-					alert("系统错误，请联系管理员！");
-				}
+function init(){
+		var search= $("#peospectID").val();
+		$.ajax({
+		url : "http://localhost:8080/myinsurance/lisuan/adjustment",
+		type : "post",
+		data: {"pageNum":page,"search":search},
+		dataType : "json",
+		success : function(data) {
+			pageNum=data.pageNum;
+			pages=data.pages;
+
+			var newTr = "";
+			$.each(data.list,function(i,item) {
+
+				newTr+="<tr class='remove'>"
+					+"<th>"+item['caseId']+"</th>"
+					+"<th>"+item['reporterName']+"</th>"
+					+"<th>"+item['carNumber']+"</th>"
+					+"<th>"+item['reporterPhone']+"</th>"
+					+"<th>"+item['dangerDate']+"</th>"
+					+"<th>"+item['dangerAddress']+"</th>"
+					+"<th>"+item['dangerCause']+"</th>"
+					+"<th>"+item['dangerType']+"</th>"
+					+"<th>"+item['caseStatus']+"</th>"
+					+"<th><a href='lisuan_info.jsp?reported_number="+item['caseId']+"' target='aa'>理算详情</a>"
+					+"</th>"
+					+"</tr>";
 			});
+			$(".remove").remove();
+			//$("#append").append(newTr);
+			$("table").append(newTr);
+			$("#firstpage").html(pageNum);
+			$("#lastpage").html(pages)
+		},
+		error : function() {
+			alert("系统错误，请联系管理员！");
 		}
+	});
+}
 
-		
-		

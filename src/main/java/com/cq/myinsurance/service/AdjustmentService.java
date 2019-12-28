@@ -10,6 +10,11 @@ import com.github.pagehelper.PageInfo;
  * @Version 1.0
  */
 public interface AdjustmentService {
-
-    PageInfo<CaseVo> getCasePage(int pageNum, int pageSize);
+    /**
+     * 案件渲染页面
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    PageInfo<CaseVo> getCasePage(int pageNum, int pageSize,String search);
 }

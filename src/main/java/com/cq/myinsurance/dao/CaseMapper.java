@@ -1,6 +1,7 @@
 package com.cq.myinsurance.dao;
 
 import com.cq.myinsurance.pojo.Case;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,5 +18,7 @@ public interface CaseMapper {
 
     int updateByPrimaryKey(Case record);
 
-    List<Case> selectByStatus(String status);
+    List<Case> selectCaseByStatus(@Param("status") String status, @Param("search") String search);
+
+    Integer selectCount();
 }
