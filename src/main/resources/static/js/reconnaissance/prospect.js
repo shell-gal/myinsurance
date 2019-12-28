@@ -67,7 +67,7 @@ function queryReported(page) {
 	// ajax
 	$.ajax({
 		// 地址http://localhost:8080/prospect/queryReported.do
-		url : "http://localhost:8080/prospect/queryReported.do",
+		url : "http://localhost:8080/myinsurance/prospect/getProspect.do",
 		// 请求类型
 		type : "get",
 		// 传输数据

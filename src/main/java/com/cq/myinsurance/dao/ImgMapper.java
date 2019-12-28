@@ -1,7 +1,9 @@
 package com.cq.myinsurance.dao;
 
 import com.cq.myinsurance.pojo.Img;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface ImgMapper {
     int deleteByPrimaryKey(Integer imgId);
 
