@@ -32,7 +32,12 @@ public class AdjustmentController {
         return "/pages/adjustmentmanager/adjustment";
     }
 
-    @PostMapping("adjustment")
+    /**
+     * 案件详情接口
+     * @param request
+     * @return
+     */
+    @PostMapping("caseInfo")
     @ResponseBody
     public PageInfo<CaseVo> adjustment(HttpServletRequest request){
         String pageNumStr = request.getParameter("pageNum");
@@ -78,7 +83,6 @@ public class AdjustmentController {
      */
     @GetMapping("caseQuery")
     public String caseQuery(){
-        System.out.println("----caseQuery--------");
         return "/pages/welcome/case_query";
     }
 }

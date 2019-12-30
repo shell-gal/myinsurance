@@ -47,7 +47,7 @@ function init(page){
 	var search= $("#peospectID").val();
 
 	$.ajax({
-		url : "http://localhost:8080/myinsurance/lisuan/adjustment",
+		url : "http://localhost:8080/myinsurance/lisuan/caseInfo",
 		type : "post",
 		data: {"pageNum":page,"search":search,"status":"理赔中"},
 		dataType : "json",

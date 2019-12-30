@@ -48,7 +48,7 @@ function init(){
 	var search= $("#peospectID").val();
 	$.ajax({
 		//路径url
-		url : "http://localhost:8080/myinsurance/lisuan/adjustment",
+		url : "http://localhost:8080/myinsurance/lisuan/caseInfo",
 		//type
 		type : "post",
 		//参数data
