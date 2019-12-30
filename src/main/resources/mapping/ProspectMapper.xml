@@ -18,17 +18,20 @@
     <result column="driveing_license" jdbcType="VARCHAR" property="driveingLicense" />
     <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
 
-    <association property="case_info" javaType="com.cq.myinsurance.pojo.Case">
+    <association property="aCase" javaType="com.cq.myinsurance.pojo.Case">
       <result column="case_id" jdbcType="INTEGER" property="caseId"></result>
       <result column="reporter_name" jdbcType="VARCHAR" property="reporterName"></result>
       <result column="reporter_phone" jdbcType="VARCHAR" property="reporterPhone"></result>
-      <result column="danger_cause" jdbcType="VARCHAR" property="dangerCause"></result>
-      <result column="case_status" jdbcType="VARCHAR" property="caseStatus"></result>
+      <result column="danger_cause" jdbcType="VARCHAR" property="dangerCause" />
+      <result column="danger_address_province" jdbcType="VARCHAR" property="dangerAddressProvince" />
+      <result column="danger_address_city" jdbcType="VARCHAR" property="dangerAddressCity" />
+      <result column="detail_address" jdbcType="VARCHAR" property="detailAddress" />
+      <result column="road_direction" jdbcType="VARCHAR" property="roadDirection" />
+      <result column="danger_date" jdbcType="TIMESTAMP" property="dangerDate" />
+      <result column="danger_type" jdbcType="VARCHAR" property="dangerType" />
+      <result column="case_status" jdbcType="VARCHAR" property="caseStatus" />
     </association>
-    
-    <association property="user_info" javaType="com.cq.myinsurance.pojo.User">
-      <result column="user_name" jdbcType="VARCHAR" property="userName"></result>
-    </association>
+
   </resultMap>
   <sql id="Base_Column_List">
     prospect_id, case_id, img_id, prospect_address, accident_type, prospect_date, danger_pass, 
@@ -42,21 +45,25 @@
     where prospect_id = #{prospectId,jdbcType=INTEGER}
   </select>
 
-  <select id="selectAchieveProspect" resultMap="BaseResultMap">
-    select c.case_id,c.reporter_name,c.reporter_phone,c.danger_cause,c.case_status,
-    p.prospect_id,p.prospect_date,p.prospect_address,u.user_name
+  <!-- 查询已勘察的案件  -->
+  <select id="selectAchieveProspect"  parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select c.case_id,c.reporter_name,c.reporter_phone,c.danger_date,c.danger_address_province,c.danger_cause,c.case_status,
+    p.prospect_id,p.prospect_date,p.prospect_address
     from prospect_info p
     left join case_info c
     on
     (p.case_id = c.case_id)
-    left join user_info u
-    on(c.kanca_id = u.user_id)
-    where
-    c.case_status != '已报案' and c.case_status != '勘察中'
-    <if test="caseId != null">
-      and c.case_id = #{caseId}
-    </if>
+       where c.case_status='定损中'
+        and c.kanca_id=#{kancaId,jdbcType=INTEGER}
   </select>
+
+  <!--查询未勘察的案件  -->
+  <select id="selectUnAchieveProspect" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select * from case_info
+    where (case_status = '勘察中' or case_status = '已报案')
+    and kanca_id = #{kancaId,jdbcType=INTEGER}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from prospect_info
     where prospect_id = #{prospectId,jdbcType=INTEGER}

@@ -68,9 +68,7 @@ function queryReported(page) {
 		type : "get",
 		//传输数据
 		data : {
-			"case_state" : "定损中",
-			"page" : page,
-			"reported_number" : $("#peospectID").val()
+			"indexpage" : page,
 		},
 		//发送数据类型
 		contentType : "application/json;charset=utf-8",
@@ -78,25 +76,27 @@ function queryReported(page) {
 		dataType : "json",
 		//请求成功
 		success : function(data) {
+			console.log(data);
 			//当前页赋值
-			pageNum = data.singerData.pageNum;
+			pageNum = data.pageNum;
 			//总页数赋值
-			pages = data.singerData.pages;
+			pages = data.pages;
 			//定义属性拼接
 			var outHtml = "";
 			//each
-			$.each(data.singerData.list, function(i, r) {
+			$.each(data.list, function(i, r) {
 				//拼接
-				outHtml += "<tr class='addtr'>" + "<th>"
-						+ r['reported_number'] + "</th>" + "<th>"
-						+ r['informants'] + "</th>" + "<th>"
-						+ r['informants_tel'] + "</th>" + "<th>"
-						+ r['reported_time'] + "</th>" + "<th>"
-						+ r['reported_number'] + "</th>" + "<th>"
-						+ r['danger_cause'] + "</th>" + "<th>"
-						+ r['case_state'] + "</th>"
+				outHtml += "<tr class='addtr'>"
+					    + "<th>" + r.aCase.caseId + "</th>"
+				        + "<th>" + r.aCase.reporterName + "</th>"
+						+ "<th>" + r.aCase.reporterPhone + "</th>"
+						+ "<th>" + r.aCase.dangerDate + "</th>"
+						+ "<th>" + r.aCase.dangerAddressProvince + "</th>"
+						+ "<th>" + r.aCase.dangerCause + "</th>"
+						+ "<th>" + r.aCase.caseStatus+ "</th>"
 						+ "<th>"
-						+"<a href='minu_prospect2.jsp?number2="+ r['reported_number'] + "'>详情</a></th>" 
+						+"<a href='minu_prospect2.html?number2="+ r['caseId'] + "'>详情</a>" +
+						"</th>"
 						+ "</tr>";
 			});
 			//将.addtr清除

@@ -21,6 +21,7 @@ public class Case {
 
     private String roadDirection;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date dangerDate;
 
     private String dangerType;
@@ -43,6 +44,7 @@ public class Case {
 
     private Integer lipeiId;
 
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
     private Date createtime;
 
     @Override

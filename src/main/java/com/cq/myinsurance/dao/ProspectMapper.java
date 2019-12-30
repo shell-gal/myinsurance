@@ -21,5 +21,7 @@ public interface ProspectMapper {
 
     int updateByPrimaryKey(Prospect record);
 
-    PageInfo selectAchieveProspect(Case c);
+    List<Prospect> selectAchieveProspect(Integer kancaId);
+
+    List<Prospect> selectUnAchieveProspect(Integer kancaId);
 }

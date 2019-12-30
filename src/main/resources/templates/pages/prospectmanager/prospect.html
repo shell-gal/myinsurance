@@ -45,7 +45,7 @@
 	<div id="top">
 		<div class="col-md-1"></div>
 		<div id="menu1" class="col-md-7">
-			报案编号：<input type="text" id="peospectID" />
+			报案编号：<input type="text" id="prospectID" />
 		</div>
 		<div class="col-md-4" id="add_employees">
 			<button type="button" class="btn btn-primary btn-small"
@@ -78,12 +78,12 @@
 			</tr>
 		</table>
 		<ul class="pagination">
-			<li><a href="#" id="jian">&laquo;</a></li>
-			<li><a href="#" id="">当前页</a></li>
-			<li><a href="#" id="firstpage"></a></li>
-			<li><a href="#" id="">总页数</a></li>
-			<li><a href="#" id="lastpage"></a></li>
-			<li><a href="#" id="jia">&raquo;</a></li>
+			<li><a th:href="@{#}" id="jian">&laquo;</a></li>
+			<li><a th:href="@{#}" id="">当前页</a></li>
+			<li><a th:href="@{#}" id="firstpage"></a></li>
+			<li><a th:href="@{#}" id="">总页数</a></li>
+			<li><a th:href="@{#}" id="lastpage"></a></li>
+			<li><a th:href="@{#}" id="jia">&raquo;</a></li>
 		</ul>
 	</div>
 
@@ -132,7 +132,7 @@
 
 	<!-- Custom Theme Scripts -->
 	<script th:src="@{/build/js/custom.min.js}"></script>
-	<script th:src="@{/src/js/jquery-1.8.3.js}"></script>
-	<script th:src="@{/src/js/reconnaissance/prospect.js}"></script>
+	<script th:src="@{/js/jquery-1.8.3.js}"></script>
+	<script th:src="@{/js/reconnaissance/prospect.js}"></script>
 </body>
 </html>

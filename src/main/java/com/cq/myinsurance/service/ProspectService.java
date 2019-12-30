@@ -4,8 +4,10 @@ import com.cq.myinsurance.pojo.Case;
 import com.cq.myinsurance.pojo.Prospect;
 import com.cq.myinsurance.utils.Result;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 public interface ProspectService {
 
@@ -23,5 +25,13 @@ public interface ProspectService {
      * @param indexpage
      * @return
      */
-    PageInfo selectAchieveCaseMessage(HttpSession session,Integer indexpage);
+    PageInfo<Prospect> selectAchieveCaseMessage(HttpSession session, Integer indexpage);
+
+    /**
+     * 未勘察的案件
+     * @param session
+     * @param indexpage
+     * @return
+     */
+    PageInfo<Prospect> selectUnAchieveCaseMessage(HttpSession session,Integer indexpage);
 }

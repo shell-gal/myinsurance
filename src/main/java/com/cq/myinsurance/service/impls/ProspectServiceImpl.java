@@ -1,5 +1,6 @@
 package com.cq.myinsurance.service.impls;
 
+import com.cq.myinsurance.dao.CaseMapper;
 import com.cq.myinsurance.dao.ProspectMapper;
 import com.cq.myinsurance.pojo.Case;
 import com.cq.myinsurance.pojo.Prospect;
@@ -11,6 +12,7 @@ import com.cq.myinsurance.utils.enums.UserStatus;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,23 +25,31 @@ public class ProspectServiceImpl implements ProspectService {
     private ProspectMapper prospectMapper;
 
     @Override
-    public PageInfo selectAchieveCaseMessage(HttpSession session, Integer indexpage) {
+    public PageInfo<Prospect> selectAchieveCaseMessage(HttpSession session, Integer indexpage) {
+        User user= (User) session.getAttribute(UserStatus.CURRENT_USER);
+        Integer userId = user.getUserId();
         if (indexpage == null){
             indexpage = 1;
         }
         PageHelper.startPage(indexpage,1);
-//        PageInfo pageInfo = prospectMapper.selectAchieveProspect(c);
-//        return pageInfo;
-        return null;
+        List<Prospect> prospectList = prospectMapper.selectAchieveProspect(userId);
+        System.out.println(prospectList);
+        return new PageInfo(prospectList);
     }
 
-//    @Autowired
-//    private ProspectMapper prospectMapper;
-//
-//    @Override
-//    public int addProspect(Prospect prospect, HttpSession session) {
-//        int i = prospectMapper.insertSelective(prospect);
-//        session.setAttribute("kancaId",prospect.getProspectId());
-//        return i;
-//    }
+    @Override
+    public PageInfo<Prospect> selectUnAchieveCaseMessage(HttpSession session, Integer indexpage) {
+        User user = (User) session.getAttribute(UserStatus.CURRENT_USER);
+        Integer userId = user.getUserId();
+        if (indexpage == null){
+            indexpage = 1;
+        }
+        PageHelper.startPage(indexpage,1);
+        List<Prospect> prospectList = prospectMapper.selectUnAchieveProspect(userId);
+        PageInfo<Prospect> pageInfo = new PageInfo<>(prospectList);
+        System.out.println(pageInfo);
+        return pageInfo;
+    }
+
+
 }
