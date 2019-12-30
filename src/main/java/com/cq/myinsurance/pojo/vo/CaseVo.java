@@ -74,8 +74,11 @@ public class CaseVo implements Serializable {
     }
 
     public void setDangerAddress(String province,String city,String dangerAddress) {
-        province = province.indexOf("省")>0?province:province.concat("省");
         this.dangerAddress = province.concat(city).concat(dangerAddress);
+    }
+
+    public void setDangerAddress(String dangerAddress) {
+        this.dangerAddress = dangerAddress;
     }
 
     public String getDangerCause() {

@@ -30,11 +30,11 @@ public class AdjustmentServiceImpl implements AdjustmentService {
     WarrantyMapper warrantyMapper;
 
     @Override
-    public PageInfo<CaseVo> getCasePage(int pageNum, int pageSize ,String search) {
+    public PageInfo<CaseVo> getCasePage(int pageNum, int pageSize ,String status,String search) {
 
         PageHelper.startPage(pageNum, pageSize);
         //service里面的代码
-        List<Case> caseList = caseMapper.selectCaseByStatus(CaseStatus.CASE_ADJUST,search);
+        List<Case> caseList = caseMapper.selectCaseByStatus(status,search);
 
         PageInfo<Case> casePageInfo = new PageInfo<>(caseList);
 
@@ -51,15 +51,11 @@ public class AdjustmentServiceImpl implements AdjustmentService {
         for (int i = 0; i < casePageInfo.getSize(); i++) {
             //地区拼接
             caseVos.getList().get(i).setDangerAddress(caseList.get(i).getDangerAddressProvince(),caseList.get(i).getDangerAddressCity(),caseList.get(i).getDetailAddress());
-
             //获取车牌号
             Warranty warranty = warrantyMapper.selectByPrimaryKey(caseList.get(i).getWarrantyId());
             String carNumber = (warranty ==null?"":warranty.getCarNumber());
             caseVos.getList().get(i).setCarNumber(carNumber);
         }
-
-        System.out.println("caseVoPageInfo---"+caseVos);
-
         return caseVos;
     }
 }

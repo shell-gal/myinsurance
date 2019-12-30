@@ -16,5 +16,5 @@ public interface AdjustmentService {
      * @param pageSize
      * @return
      */
-    PageInfo<CaseVo> getCasePage(int pageNum, int pageSize,String search);
+    PageInfo<CaseVo> getCasePage(int pageNum, int pageSize,String status,String search);
 }

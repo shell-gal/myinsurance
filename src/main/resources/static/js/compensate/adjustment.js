@@ -5,16 +5,18 @@ var pages=1;
 
 $(function(){
 	init();
+	//查询
 	$("#select_but").click(function(){
 		page=1;
 		init();
 	});
+	//重置
 	$("#reset_but").click(function(){
 		$("#peospectID").val("");
 		init();
 	});
 
-
+	//下一页
 	$("#jia").click(function(){
 		pageNum = Number(pageNum)+1;
 		if(pageNum > pages){
@@ -27,6 +29,7 @@ $(function(){
 
 	})
 
+	//上一页
 	$("#jian").click(function(){
 		pageNum=Number(pageNum)-1;
 		if(pageNum<1){
@@ -42,10 +45,11 @@ $(function(){
 
 function init(){
 		var search= $("#peospectID").val();
+
 		$.ajax({
 		url : "http://localhost:8080/myinsurance/lisuan/adjustment",
 		type : "post",
-		data: {"pageNum":page,"search":search},
+		data: {"pageNum":page,"search":search,"status":"理算中"},
 		dataType : "json",
 		success : function(data) {
 			pageNum=data.pageNum;

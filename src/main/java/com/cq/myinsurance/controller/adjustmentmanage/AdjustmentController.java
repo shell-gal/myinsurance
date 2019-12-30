@@ -37,13 +37,19 @@ public class AdjustmentController {
     public PageInfo<CaseVo> adjustment(HttpServletRequest request){
         String pageNumStr = request.getParameter("pageNum");
         String search = request.getParameter("search");
+        String status = request.getParameter("status");
+
+//        System.out.println("pageNumStr--"+pageNumStr+"  --search--"+search+" --status--"+status);
+
         Integer pageNum = 1;
 
         if (pageNumStr != null && !pageNumStr.trim().isEmpty()){
             pageNum = Integer.valueOf(pageNumStr.trim());
         }
 
-        PageInfo<CaseVo> casePage = adjustmentService.getCasePage(pageNum,10 ,search);
+        PageInfo<CaseVo> casePage = adjustmentService.getCasePage(pageNum,10 ,status,search);
+
+//        System.out.println("casePage--"+casePage.getList());
 
         return casePage;
     }
@@ -54,7 +60,6 @@ public class AdjustmentController {
      */
     @GetMapping("nuclear")
     public String nuclear(){
-        System.out.println("----nuclear--------");
         return "/pages/nuclearmanager/Nuclear";
     }
 
