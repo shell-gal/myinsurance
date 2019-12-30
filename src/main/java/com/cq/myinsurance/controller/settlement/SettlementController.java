@@ -1,9 +1,8 @@
-package com.cq.myinsurance.controller.adjustmentmanage;
+package com.cq.myinsurance.controller.settlement;
 
 import com.cq.myinsurance.pojo.vo.CaseVo;
 import com.cq.myinsurance.service.AdjustmentService;
 import com.github.pagehelper.PageInfo;
-import netscape.javascript.JSObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("lisuan")
-public class AdjustmentController {
+public class SettlementController {
 
     @Resource
     AdjustmentService adjustmentService;
