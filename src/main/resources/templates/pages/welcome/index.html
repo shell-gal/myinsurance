@@ -49,10 +49,10 @@
                 <img src="images/img.jpg" alt="..." class="img-circle profile_img ">
               </div>
               <div class="profile_info">
-                <span>欢迎,</span>
-                <h2>${user.user_name}</h2>
-              </div>
-            </div>
+              <span>欢迎,</span>
+              <h2>${user.user_name}</h2>
+          </div>
+          </div>
             <!-- /menu profile quick info -->
 
             <br />
@@ -103,17 +103,17 @@
                   <li><a><i class="fa fa-home"></i> 定损核损 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                      <shiro:hasPermission name="定损管理">
-                    <li><a href="../DispatchManagement_Zhy/Dispatch.jsp" target="aa">调度管理</a></li>
-                    <li><a href="../prospect_lyt/loss_carinfo.jsp" target="aa">车损管理</a></li>
-					<li><a href="../prospect_lyt/loss_resinfo.jsp" target="aa">物损管理</a></li>
-					<li><a href="../prospect_lyt/loss_peopleinfo.jsp" target="aa">人伤管理</a></li>
-					<li><a href="../prospect_lyt/loss_info.jsp" target="aa">我的定损案件</a></li>
+                    <li><a th:href="@{/prospect_lyt/Dispatch}" target="aa">调度管理</a></li>
+                    <li><a th:href="@{/prospect_lyt/loss_carinfo}" target="aa">车损管理</a></li>
+					<li><a th:href="@{/prospect_lyt/loss_resinfo}" target="aa">物损管理</a></li>
+					<li><a th:href="@{/prospect_lyt/loss_peopleinfo}" target="aa">人伤管理</a></li>
+					<li><a th:href="@{/prospect_lyt/loss_info}" target="aa">我的定损案件</a></li>
              		</shiro:hasPermission>			
 											<!--<li><a href="../prospect_lyt/loss_assessment.jsp" target="aa">未通过核损信息</a></li>
 											-->
 					 <shiro:hasPermission name="核损管理">
-                     <li><a href="../DispatchManagement_Zhy/Dispatch.jsp" target="aa">调度管理</a></li>
-					<li><a href="../lzw/hesun_info.jsp" target="aa">核损审核</a></li>
+                     <li><a th:href="@{/prospect_lyt/Dispatch2}" target="aa">调度管理</a></li>
+					<li><a th:href="@{/prospect_lyt/hesun_info}" target="aa">核损审核</a></li>
                     </shiro:hasPermission>
                     </ul>
                   </li>
@@ -124,18 +124,18 @@
                   <li><a><i class="fa fa-home"></i> 理算核赔 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     	 <shiro:hasPermission name="理算管理">
-                         <li><a href="../DispatchManagement_Zhy/Dispatch.jsp" target="aa">调度管理</a></li>
-                    	 <li><a href="../adjustment_lyl/adjustment.jsp" target="aa">理算处理</a></li>
+                         <li><a href="../DispatchManagement_Zhy/Dispatch.html" target="aa">调度管理</a></li>
+                    	 <li><a href="../adjustment_lyl/adjustment.html" target="aa">理算处理</a></li>
                     	 </shiro:hasPermission>
                     	  <shiro:hasPermission name="核赔管理">
-                          <li><a href="../DispatchManagement_Zhy/Dispatch.jsp" target="aa">调度管理</a></li>
-                    	 <li><a href="../Nuclear_cq/Nuclear.jsp" target="aa">核赔处理</a></li>
+                          <li><a href="../DispatchManagement_Zhy/Dispatch.html" target="aa">调度管理</a></li>
+                    	 <li><a href="../Nuclear_cq/Nuclear.html" target="aa">核赔处理</a></li>
                     	 </shiro:hasPermission>
                     	  <shiro:hasPermission name="理赔管理">
-                          <li><a href="../DispatchManagement_Zhy/Dispatch.jsp" target="aa">调度管理</a></li>
-                    	 <li><a href="../settle_lh/settle.jsp" target="aa">理赔处理</a></li>
+                          <li><a href="../DispatchManagement_Zhy/Dispatch.html" target="aa">调度管理</a></li>
+                    	 <li><a href="../settle_lh/settle.html" target="aa">理赔处理</a></li>
                     	 </shiro:hasPermission>
-                    	 <li><a href="../welcome/case_query.jsp" target="aa">结案查询</a></li>
+                    	 <li><a href="../welcome/case_query.html" target="aa">结案查询</a></li>
                     
                     </ul>
                   </li>

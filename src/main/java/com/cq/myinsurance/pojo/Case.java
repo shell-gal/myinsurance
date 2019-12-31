@@ -1,8 +1,13 @@
 package com.cq.myinsurance.pojo;
 
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
+
 public class Case {
+
+
     private Integer caseId;
 
     private String reporterName;

@@ -19,7 +19,7 @@
     select 
     <include refid="Base_Column_List" />
     from peopleloss_info
-    where peopleloss_id = #{peoplelossId,jdbcType=INTEGER}
+    where case_id = #{peoplelossId}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from peopleloss_info

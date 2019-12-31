@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns:th="http://www.thymeleaf.org">
+ <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -22,81 +22,66 @@
 	<!-- Custom Theme Style -->
 	<link th:href="@{/build/css/custom.min.css}" rel="stylesheet">
 		<style type="text/css">
-
+             #zg{float: right;}
+             tr td .text{
+             	width: 100px;
+             }
 		</style>
 	</head>
-	
 
-	<body style="background: #F7F7F7;">
-	<input id="get_reported_number" type="hidden" th:value="${caseId}">
-     <input type="hidden" id="case_stateinfo" value="核损中"/>
-		<div id="body">
-			<div class="col-md-12 ">
-				<div id="title" align="center">
-					<h1>定损信息</h1></div>
-				<table class="table table-bordered" style="width: 100%">
-					<label>对方车辆损失</label>
-					<thead>
-					<tr>
-						<td>车辆部件</td>
-						<td>部件数量</td>
-						<td>定损单价</td>
-						<td>维修地点</td>
-					
-						<td>小计</td>
+	<body style="background: #F7F7F7;" >
+
+
+	<input id="reported_number" type="hidden" th:value="${caseId}">
+
+		<!--
+                	作者：offline
+                	时间：2017-10-24
+                	描述：内容开始
+               -->
+		
+				<table border="1" style="border-collapse:collapse;" class="table table-bordered" valign="middle">
+					<tr  id="mycar">
+						<td colspan="7">物品损失</td>
 					</tr>
-				    </thead>
-					<tbody id="other"></tbody>
-				</table>
-				<table class="table table-bordered" style="width: 100%">
-					<label>我方车辆损失</label>
-					<thead>
 					<tr>
+						
 						<td>物品名称</td>
 						<td>物品数量</td>
-						<td>物品单价</td>
-						<td>维修地点</td>
-						
+						<td>部件单价</td>
+						<td>赔偿单位</td>
 						<td>小计</td>
+						<td>图片</td>
+						<td>操作</td>
 					</tr>
-					</thead>
-					<tbody id="mecar"></tbody>
-				</table>
-
-				<table class="table table-bordered" style="width: 100%">
-					<label>物损单</label>
-					<thead>
-					<tr>
-						<td>物品名称</td>
-						<td>物品数量</td>
-						<td>物品单价</td>
-						<td>维修地点</td>
-						
-						<td>小计</td>
+					<tr class="tr add">
+						<td><input id="object_info_name" type="text" class="text" /></td>
+						<td><input id="loss_number" type="text" class="text"/></td>
+						<td><input id="price" type="text" class="text"/></td>
+						<td><input id="compensate" type="text" class="text"/></td>
+						<td><input id="loss_assessment_sum" type="text" class="text" disabled/></td>
+						<td><input type="file" name="nfile"></td>
+						<td>
+							<input type="button" value="+" id="add_but_2"/>
+							<input type="button" value="-" id="rem_but_2"/>
+						</td>
 					</tr>
-					</thead>
-					<tbody id="o"></tbody>
-				</table>
-				<table class="table table-bordered" style="width: 100%">
-					<label>人伤单</label>
-					<thead>
-					<tr>
-						<td>伤者姓名</td>
-						<td>医疗费用</td>
-						<td>医疗地点</td>
-						<td>小计</td>
+					<tr id="butt">
+						<tr>
+						<td colspan="7" ><div  id="zg" style="margin-right:30px ;"></div></td>
+						</tr>
+						<td colspan="7"align="center">
+							<input id="bc" type="button" value="保存">
+							<input type="button" value="返回">
+						</td>
 					</tr>
-					</thead>
-					<tbody id="p"></tbody>
 				</table>
-				<div id="footer" align="center" >
-					<button type="button" id="mytj" class="btn btn-primary" onclick="tjhs()">提交</button>
-					<button type="button" id="th" class="btn btn-primary">退回</button>
-				</div>
-			</div>
-
-		</div>
-	<!-- jQuery -->
+				<!--
+                	作者：offline
+                	时间：2017-10-24
+                	描述：内容结束
+                -->
+				<!-- jQuery -->
 	<script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
 	<!-- Bootstrap -->
 	<script th:src="@{/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
@@ -133,9 +118,10 @@
 	<!-- bootstrap-daterangepicker -->
 	<script th:src="@{/vendors/moment/min/moment.min.js}"></script>
 	<script th:src="@{/vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
-
+	<!-- Custom Theme Scripts -->
 	<script th:src="@{/build/js/custom.min.js}"></script>
 	<script th:src="@{/js/jquery-1.8.3.js}"></script>
-	    <script th:src="@{/js/lose/lose.js}"></script>
-</body>
+				
+				<script th:src="@{/js/lose/Thingadd.js}"></script>
+	</body>
 </html>

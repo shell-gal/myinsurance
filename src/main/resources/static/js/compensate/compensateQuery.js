@@ -6,6 +6,7 @@ $(function() {
 	CompensateQuery()
 	//按条件查询核损信息
 	$("#queryhesun").click(function(){
+		alert(22)
 		CompensateQuery()
 	})
 	//重置，查询
@@ -43,14 +44,16 @@ $(function() {
 function CompensateQuery() {
 	//获取id为reported_number的值
 	var Reported_number=$("#reported_number").val();
+	var da={'reported_number':Reported_number,"page":pageNum}
 	//ajax
 	$.ajax({
 		//路径
-		url : "http://localhost:8080/CompensateQuery/CompensateQuery.do",
+		url : "/myinsurance/prospect_lyt/CompensateQuery",
 		//类型
-		type : "get",
+		type : "post",
+		contentType : "application/json;charset=utf-8",
 		//参数
-		data : {'reported_number':Reported_number,"page":pageNum},
+		data : JSON.stringify(da),
 		//成功执行
 		success : function(data) {
 			//创建对象为用于拼接，值为空
@@ -62,17 +65,28 @@ function CompensateQuery() {
 				//pages
 				pages = data.singerData.pages;
 				//拼接
-				Html +="<tr class='tr'>"
-					   +"<td>"+r.reported_number+"</td>"
-					   +"<td>"+r.informants +"</td>"
-					   +"<td>"+r.warranty_info.license_number +"</td>"
-					   +"<td>"+r.informants_tel +"</td>"
-					   +"<td>"+r.reported_time +"</td>"
-					   +"<td>"+r.prospect_info.prospect_address +"</td>"
-					   +"<td>"+r.danger_cause +"</td>"
-					   +"<td>"+r.dispose_type +"</td>"
-					   +"<td>"+r.case_state +"</td>"
-					   +"<td>"+"<a href='../lzw/hesuninfo.jsp?reported_number="+r.reported_number+"'>核损详情</a>" +"</td>"
+					Html +="<tr class='tr'>"
+						+"<td>"+r.case_id+"</td>"
+						+"<td>"+r.reporter_name +"</td>"
+						+"<td>"+r.car_number +"</td>"
+						+"<td>"+r.reporter_phone +"</td>"
+						+"<td>"+r.danger_date +"</td>"
+						+"<td>"+r.danger_address_province+r.danger_address_city+r.detail_address +"</td>"
+						+"<td>"+r.danger_cause +"</td>"
+						+"<td>"+r.danger_type +"</td>"
+						+"<td>"+r.case_status +"</td>"
+						+"<td>"+"<a onclick='tiaozhuan("+r.case_id+")'>定损详情</a>" +"</td>"
+				// Html +="<tr class='tr'>"
+				// 	   +"<td>"+r.reported_number+"</td>"
+				// 	   +"<td>"+r.informants +"</td>"
+				// 	   +"<td>"+r.warranty_info.license_number +"</td>"
+				// 	   +"<td>"+r.informants_tel +"</td>"
+				// 	   +"<td>"+r.reported_time +"</td>"
+				// 	   +"<td>"+r.prospect_info.prospect_address +"</td>"
+				// 	   +"<td>"+r.danger_cause +"</td>"
+				// 	   +"<td>"+r.dispose_type +"</td>"
+				// 	   +"<td>"+r.case_state +"</td>"
+				// 	   +"<td>"+"<a href='../lzw/hesuninfo.jsp?reported_number="+r.reported_number+"'>核损详情</a>" +"</td>"
 				});
 			//移除
 			$(".tr").remove();
@@ -87,4 +101,14 @@ function CompensateQuery() {
 		error : function() {
 		}
 	});
+
+
+
+}
+
+
+
+function tiaozhuan(caseId){
+	window.location.href="/myinsurance/prospect_lyt/hesuninfo?caseId="+caseId
+
 }

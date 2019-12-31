@@ -4,27 +4,32 @@ $(function() {
 	reported_number = $("#reported_number").val();
 	$("#bc").click(function() {
 		thingaddeach();
-		alert("添加成功！");
 	})
 })
 function thingadd(object_info_name, loss_number, price, compensate,
 		loss_assessment_sum,id,loss_pic) {
-	$.ajax({
-		url : "http://localhost:8080/Thing/Thingadd.do",
-		type : "post",
-		data : {
-			"object_info_name" : object_info_name,
+	var data = {
+		"object_info_name" : object_info_name,
 			"loss_number" : loss_number,
 			"price" : price,
 			"compensate" : compensate,
 			"loss_assessment_sum" : loss_assessment_sum,
 			"reported_number" : reported_number,
-			"reported_number":id,
+			// \\"reported_number":id,
 			'loss_picture':loss_pic
-		},
+	}
+	$.ajax({
+		url : "http://localhost:8080/myinsurance/prospect_lyt/Thingadd",
+		type : "post",
+		contentType:"application/json",
+		data:JSON.stringify(data),
 		dataType : "json",
 		success : function(data) {
-			
+			if (data.isResult){
+				alert("OK")
+			} else {
+				alert(data.message)
+			}
 		},
 		error : function() {
 			alert("添加失败！");
@@ -92,7 +97,7 @@ function f1(loss_file) {
 			alert(789789);
 		}
 	}
-	xhr.open("post", "http://localhost:8080/lose/doUpload");
+	xhr.open("post", "http://localhost:8080/myinsurance/file/image");
 	xhr.send(fd);
 }
 

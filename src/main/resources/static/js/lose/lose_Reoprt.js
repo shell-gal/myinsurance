@@ -4,7 +4,7 @@ var pages=1;
 $(function(){
 	query(page);
 	$("#reset_but").click(function(){
-		query(page)
+		$("#reported_number").val("")
 	})
 	
 	$("#jia").click(function(){
@@ -18,6 +18,11 @@ $(function(){
 		}
 		
 	})
+
+	$("#look_but").click(function () {
+		query(page)
+	})
+
 	
 	$("#jian").click(function(){
 		pageNum=Number(pageNum)-1;
@@ -34,30 +39,27 @@ $(function(){
 
 function query(page){
 	var reported_number=$("#reported_number").val();
-	
+	var d={"reported_number":reported_number,"page":page}
 	$.ajax({
-		url:"http://localhost:8080/lose/Query",
-		type:"GET",
-		dataType: "json",
-		data:{
-			"reported_number":reported_number,
-			"page":page
-			
-		},
+		url:"/myinsurance/prospect_lyt/Query",
+		type:"post",
+		contentType: 'application/json',
+		data:JSON.stringify(d),
         success:function(data) {
         	if(data.result){
         		var tempHtml ="";
             	$.each(data.singerData.list,function(i,item){
           	      tempHtml+="<tr>"
-          	    	  +"<td>"+item.reported_number+"</td>"
-          	    	  +"<td>"+item.informants+"</td>"
-          	    	  +"<td>"+item.informants_tel+"</td>"
-          	    	  +"<td>"+item.reported_time+"</td>"
-          	    	  +"<td>"+item.province+item.city+item.road+"</td>"
-          	    	  +"<td>"+item.danger_cause+"</td>"
-          	    	  +"<td>"+item.dispose_type+"</td>"
-          	    	  +"<td>"+item.case_state+"</td>"
-          	    	  +"<td><a href='../section_dwl/loss_car.jsp?reported_number="+item.reported_number+"'>车辆定损</a></td>"
+          	    	  +"<td>"+item.caseId+"</td>"
+          	    	  +"<td>"+item.reporterName+"</td>"
+          	    	  +"<td>"+item.reporterPhone+"</td>"
+          	    	  +"<td>"+item.dangerDate+"</td>"
+          	    	  +"<td>"+item.dangerAddressProvince+item.dangerAddressCity+item.detailAddress+item.roadDirection+"</td>"
+          	    	  +"<td>"+item.dangerCause+"</td>"
+          	    	  +"<td>"+item.dangerType+"</td>"
+          	    	  +"<td>"+item.caseStatus+"</td>"
+          	    	  // +"<td><a th:href="@{'/prospect_lyt/loss_car'}" >定损管理</a></td>"
+					  +"<td><a onclick='tiaozhuan("+item.caseId+")'>定损管理</a></td>"
           	    	  +"</tr>";	    
           	});
             pageNum=data.singerData.pageNum;
@@ -79,5 +81,9 @@ function query(page){
 			alert("错误");
 		}
       });
+
+}
+function tiaozhuan(caseId){
+	window.location.href="/myinsurance/prospect_lyt/loss_car?caseId="+caseId
 
 }
