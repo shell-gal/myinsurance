@@ -74,15 +74,17 @@ public class CaseServiceImpls implements CaseService {
 //    查询我处理的案件信息
     @Override
     public PageInfo loadCase(Map<String, Object> map) {
-        if (CollectionUtils.isEmpty(map)){
-            return null;
-        }
+
         User user= (User) SecurityUtils.getSubject().getPrincipal();
         map.put("jieanid",user.getUserId());
-        Integer indexpage = (Integer) map.get("indexpage");
+        Integer indexpage = Integer.valueOf(map.get("indexpage").toString());
+
+        System.out.println("jieanid:"+user.getUserId());
+        System.out.println("indexpage:"+indexpage);
         PageHelper.startPage(indexpage,10);
         List<Object> objectList = caseMapper.selectcase(map);
         PageInfo pageInfo=new PageInfo(objectList);
+        System.out.println("pageInfo:"+pageInfo);
         if (CollectionUtils.isEmpty(objectList)){
             return null;
         }

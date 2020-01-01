@@ -73,8 +73,9 @@ public class CaseController {
 //   查询我处理的案件
     @RequestMapping("/myQuery")
     @ResponseBody
-    public PageInfo myQuery(Map<String,Object> map){
+    public PageInfo myQuery(@RequestBody Map<String,Object> map){
         PageInfo pageInfo = caseService.loadCase(map);
+        System.out.println(pageInfo);
         return pageInfo;
     }
 
@@ -86,7 +87,7 @@ public class CaseController {
 
     @RequestMapping("/AllQuery")
     @ResponseBody
-    public PageInfo AllQuery(Map<String,Object> map){
+    public PageInfo AllQuery(@RequestBody Map<String,Object> map){
         PageInfo pageInfo = caseService.loadcase(map);
         return pageInfo;
     }

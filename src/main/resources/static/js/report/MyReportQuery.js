@@ -41,15 +41,18 @@ $("#jian").click(function(){
 function query(page){
 	//获取文本框的值
 	var reported_number=$("#jiean").val();
+	var data={
+		"reported_number":reported_number,
+		"indexpage":page
+	};
 	$.ajax({
 		url:"http://localhost:8080/myinsurance/report/myQuery",
-		type:"GET",
+		type:"post",
+		contentType:"application/json;charset=utf-8",
 		dataType: "json",
-		data:{
-			"reported_number":reported_number,
-			"indexpage":page
-		},
+		data:JSON.stringify(data),
         success:function(data) {
+			console.log(data.list);
         	//获取pagenum的属性
         	pageNum=data.pageNum;
         	//获取pages的属性
@@ -58,16 +61,16 @@ function query(page){
         	//each循环拼接数据
         	$.each(data.list,function(i,item){
       	      tempHtml+="<tr>"
-      	    	  +"<td>"+item.reported_info.reported_number+"</td>"
-      	    	  +"<td>"+item.policyholders_info.policyholders_name+"</td>"
-      	    	  +"<td>"+item.recognizee_info.recognizee_name+"</td>"
-      	    	  +"<td>"+item.license_number+"</td>"
-      	    	  +"<td>"+item.reported_info.informants+"</td>"
-      	    	  +"<td>"+item.reported_info.informants_tel+"</td>"
-      	    	  +"<td>"+item.reported_info.danger_cause+"</td>"
-      	    	  +"<td>"+item.reported_info.province+item.reported_info.city+item.reported_info.road+"</td>"
-      	    	  +"<td>"+item.reported_info.reported_time+"</td>"
-      	    	  +"<td>"+item.reported_info.dispose_type+"</td>"
+      	    	  +"<td>"+item.caseId+"</td>"
+      	    	  +"<td>"+item.policyholders.policyholderName+"</td>"
+      	    	  +"<td>"+item.recognizee.recognizeeName+"</td>"
+      	    	  +"<td>"+item.warranty.carNumber+"</td>"
+      	    	  +"<td>"+item.reporterName+"</td>"
+      	    	  +"<td>"+item.reporterPhone+"</td>"
+      	    	  +"<td>"+item.dangerCause+"</td>"
+      	    	  +"<td>"+item.dangerAddressProvince+item.dangerAddressCity+item.detailAddress+"</td>"
+      	    	  +"<td>"+item.dangerDate+"</td>"
+      	    	  +"<td>"+item.dangerType+"</td>"
       	    	  +"</tr>";
       	      
       	});

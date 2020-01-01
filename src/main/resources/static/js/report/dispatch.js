@@ -102,10 +102,11 @@ function queryEmpoyee(){
 
 function paiqian(){
 	$("#paiqian").click(function(){
+		var data={"chakan":$("#diaoduyuan").val(),"reported_number":$("#id").val()};
 		$.ajax({
 			url:"http://localhost:8080/myinsurance/DispatchManagement/diaodu",
 			type:"post",
-			data:{"chakan":$("#diaoduyuan").val(),"reported_number":$("#id").val()},
+			data:JSON.stringify(data),
 			contentType:"application/json;charset=utf-8",
 			dataType:"json",
 			success:function(data){

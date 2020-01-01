@@ -46,8 +46,10 @@ public class DispatchController {
 
 //    调度
     @RequestMapping("/diaodu")
-    public String diaodu(Map<String,Object> map){
+    @ResponseBody
+    public String diaodu(@RequestBody Map<String,Object> map){
         System.out.println(map.get("chakan"));
+
         boolean b = dispatchService.diaodu(map);
         if (b){
             return "true";

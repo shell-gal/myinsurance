@@ -85,14 +85,14 @@
       on p.policyholder_id=w.policyholder_id
       left join recognizee_info r
       on r.recognizee_id=w.recognizee_id
-    <where>
-      <if test="jieanid!=null and jieanid!=''" >
-        jiean_id=#{jieanid}
-      </if>
-      <if test="reported_number!=null and reported_number!=''">
-        case_id=#{reported_number}
-      </if>
-    </where>
+    <!--<where>-->
+      <!--<if test="jieanid!=null and jieanid!=''" >-->
+        <!--jiean_id=#{jieanid}-->
+      <!--</if>-->
+      <!--<if test="reported_number!=null and reported_number!=''">-->
+         <!--case_id=#{reported_number}-->
+      <!--</if>-->
+    <!--</where>-->
   </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

@@ -41,14 +41,16 @@ $("#jia").click(function(){
 function query(page){
 	//获取文本框的值
 	var reported_number=$("#reported_number").val();
+	var data={
+		"reported_number":reported_number,
+		"indexpage":page
+	};
 	$.ajax({
 		url:"http://localhost:8080/myinsurance/report/AllQuery",
-		type:"GET",
+		type:"post",
 		dataType: "json",
-		data:{
-			"reported_number":reported_number,
-			"indexpage":page
-		},
+		contentType:"application/json;charset=utf-8",
+		data:JSON.stringify(data),
         success:function(data) {
         	//获取pagenum的属性
         	pageNum=data.pageNum;
@@ -58,17 +60,17 @@ function query(page){
         	//each循环拼接
         	$.each(data.list,function(i,item){
       	      tempHtml+="<tr>"
-      	    	  +"<td>"+item.reported_info.reported_number+"</td>"
-     	    	  +"<td>"+item.policyholders_info.policyholders_name+"</td>"
-     	    	  +"<td>"+item.recognizee_info.recognizee_name+"</td>"
-     	    	  +"<td>"+item.license_number+"</td>"
-     	    	  +"<td>"+item.reported_info.informants+"</td>"
-     	    	  +"<td>"+item.reported_info.informants_tel+"</td>"
-     	    	  +"<td>"+item.reported_info.danger_cause+"</td>"
-     	    	  +"<td>"+item.reported_info.province+item.reported_info.city+item.reported_info.road+"</td>"
-     	    	  +"<td>"+item.reported_info.reported_time+"</td>"
-     	    	  +"<td>"+item.reported_info.dispose_type+"</td>"
-      	    	  +"<td><a href='report_upd.jsp?reported_number="+item.reported_info.reported_number+"&informants="+item.reported_info.informants+"&informants_tel="+item.reported_info.informants_tel+"&danger_cause="+item.reported_info.danger_cause+"&road="+item.reported_info.road+"&dispose_type="+item.reported_info.dispose_type+"'>修改</a></td>"
+      	    	  +"<td>"+item.caseId+"</td>"
+     	    	  +"<td>"+item.policyholders.policyholderName+"</td>"
+     	    	  +"<td>"+item.recognizee.recognizeeName+"</td>"
+     	    	  +"<td>"+item.warranty.carNumber+"</td>"
+     	    	  +"<td>"+item.reporterName+"</td>"
+     	    	  +"<td>"+item.reporterPhone+"</td>"
+     	    	  +"<td>"+item.dangerCause+"</td>"
+     	    	  +"<td>"+item.dangerAddressProvince+item.dangerAddressCity+item.detailAddress+"</td>"
+     	    	  +"<td>"+item.dangerDate+"</td>"
+     	    	  +"<td>"+item.dangerType+"</td>"
+      	    	  // +"<td><a href='report_upd.jsp?reported_number="+item.reported_info.reported_number+"&informants="+item.reported_info.informants+"&informants_tel="+item.reported_info.informants_tel+"&danger_cause="+item.reported_info.danger_cause+"&road="+item.reported_info.road+"&dispose_type="+item.reported_info.dispose_type+"'>修改</a></td>"
       	    	  +"</tr>";
       	});
         	//消除表格里的内容

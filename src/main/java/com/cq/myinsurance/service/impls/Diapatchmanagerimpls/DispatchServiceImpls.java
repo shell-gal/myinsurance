@@ -51,9 +51,15 @@ public class DispatchServiceImpls implements DispatchService {
 
     @Override
     public boolean diaodu(Map<String, Object> map) {
-         Case c=new Case();
-        c.setCaseId((Integer) map.get("reported_number"));
-        c.setKancaId((Integer) map.get("chakan"));
+        String chakan = (String) map.get("chakan");
+        String[] s=chakan.split(":");
+        map.put("chakanid",s[0]);
+
+//
+        Case c=new Case();
+        c.setCaseId((Integer.valueOf(map.get("reported_number").toString())) );
+        c.setKancaId(Integer.valueOf( map.get("chakanid").toString()));
+        c.setCaseStatus("勘察中");
         int i = caseMapper.updateByPrimaryKeySelective(c);
         if (i>0){
             return true;
