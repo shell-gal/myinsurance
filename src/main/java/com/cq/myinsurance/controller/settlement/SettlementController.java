@@ -36,10 +36,9 @@ public class SettlementController {
      * @param request
      * @return
      */
-    @PostMapping("caseInfo")
+    @RequestMapping("caseInfo")
     @ResponseBody
     public PageInfo<CaseVo> adjustment(HttpServletRequest request){
-        System.out.println();
 
         String pageNumStr = request.getParameter("pageNum");
         String search = request.getParameter("search");
@@ -100,7 +99,6 @@ public class SettlementController {
      */
     @GetMapping("lisuanInfo")
     public String lisuanInfo(){
-        System.out.println("--lisuanInfo--");
         return "/pages/adjustmentmanager/lisuan_info";
     }
 
@@ -108,9 +106,8 @@ public class SettlementController {
      * 核赔详情
      * @return
      */
-    @GetMapping("heuan_info")
+    @GetMapping("heuanInfo")
     public String heuan_info(){
-        System.out.println("--heuan_info--");
         return "/pages/nuclearmanager/heuan_info";
     }
 }

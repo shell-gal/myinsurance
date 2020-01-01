@@ -64,7 +64,7 @@ function init(){
 				+"<th>"+item['dangerCause']+"</th>"
 				+"<th>"+item['dangerType']+"</th>"
 				+"<th>"+item['caseStatus']+"</th>"
-				+"<th><a href='lisuan_info.jsp?reported_number="+item['caseId']+"'  target='aa'>理赔详情</a>"
+				+"<th><a href='http://localhost:8080/myinsurance/lisuan/lisuanInfo?caseId="+item['caseId']+"'  target='aa'>理赔详情</a>"
 				+"</th>"
 				+"</tr>";
 			});
