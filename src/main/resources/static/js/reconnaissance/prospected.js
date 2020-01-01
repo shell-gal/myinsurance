@@ -95,8 +95,8 @@ function queryReported(page) {
 						+ "<th>" + r.aCase.dangerCause + "</th>"
 						+ "<th>" + r.aCase.caseStatus+ "</th>"
 						+ "<th>"
-						+"<a href='minu_prospect2.html?number2="+ r['caseId'] + "'>详情</a>" +
-						"</th>"
+						+ "<a href='http://localhost:8080/myinsurance/prospect/getProspectDetail?caseId="+ r.aCase.caseId + "'>详情</a>"
+						+ "</th>"
 						+ "</tr>";
 			});
 			//将.addtr清除

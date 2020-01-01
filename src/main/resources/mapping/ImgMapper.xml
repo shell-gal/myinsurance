@@ -3,10 +3,11 @@
 <mapper namespace="com.cq.myinsurance.dao.ImgMapper">
   <resultMap id="BaseResultMap" type="com.cq.myinsurance.pojo.Img">
     <id column="img_id" jdbcType="INTEGER" property="imgId" />
+    <result column="prospect_id" jdbcType="VARCHAR" property="prospectId" />
     <result column="img_name" jdbcType="VARCHAR" property="imgName" />
   </resultMap>
   <sql id="Base_Column_List">
-    img_id, img_name
+    img_id, prospect_id, img_name
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -14,6 +15,11 @@
     from img
     where img_id = #{imgId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectImg" resultType="com.cq.myinsurance.pojo.Img" resultMap="BaseResultMap">
+    select * from img where prospect_id = #{prospectId,jdbcType=INTEGER}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from img
     where img_id = #{imgId,jdbcType=INTEGER}

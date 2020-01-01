@@ -64,6 +64,15 @@
     and kanca_id = #{kancaId,jdbcType=INTEGER}
   </select>
 
+  <!--查询勘察报告信息  -->
+  <select id="selectProspectMessage" resultMap="BaseResultMap">
+    select p.prospect_id,c.reporter_name,c.danger_date,p.prospect_date,p.prospect_address,
+    p.accident_type,p.duty,c.danger_cause,p.driver_name,p.driver_phone,p.driveing_license,p.driver_license
+    from prospect_info p
+    LEFT JOIN case_info c
+    on p.case_id = c.case_id
+    where c.case_id = #{caseId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from prospect_info
     where prospect_id = #{prospectId,jdbcType=INTEGER}

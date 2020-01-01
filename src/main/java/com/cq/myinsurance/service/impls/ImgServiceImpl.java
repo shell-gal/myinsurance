@@ -7,6 +7,8 @@ import com.cq.myinsurance.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ImgServiceImpl implements ImgService {
 
@@ -14,16 +16,18 @@ public class ImgServiceImpl implements ImgService {
     private ImgMapper imgMapper;
 
     @Override
-    public Result addImg(Img img) {
-        Result result = new Result();
+    public int addImg(Img img) {
         int i = imgMapper.insertSelective(img);
         if (i > 0){
-            result.setMessage("添加成功");
-            result.setResultstatus(200);
-        }else {
-            result.setMessage("添加失败！");
-            result.setResultstatus(500);
+            System.out.println("上传成功！");
+            return i;
         }
-        return null;
+        return 0;
+    }
+
+    @Override
+    public List<Img> selectImg(Integer prospectId) {
+        List<Img> imgList = imgMapper.selectImg(prospectId);
+        return imgList;
     }
 }

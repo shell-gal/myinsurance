@@ -16,11 +16,11 @@ function queryAllReported(){
 	//调用ajax方法
 	$.ajax({
 		//地址http://localhost:8080/prospect/queryAllReported.do
-		url:"http://localhost:8080/prospect/queryAllReported.do",
+		url:"http://localhost:8080/myinsurance/prospect/selectUnAchieveCaseMessage.do",
 		//请求类型
 		type:"get",
 		//传输数据
-		data:{"case_state":"调度中","reported_number":$("#parmeId").val(),"page":"1"},
+		data:{"caseId":$("#parmeId").val()},
 		//发送数据类型
 		contentType:"application/json;charset=utf-8",
 		//接收数据类型
@@ -30,22 +30,22 @@ function queryAllReported(){
 			//定义值拼接
 			var outHtml = "";
 			//each循环
-			$.each(data.singerData.list, function(i, r) {
+			$.each(data.list, function(i, r) {
 				//拼接
 				outHtml += "<tr class='count'>" 
-						+ "<th>" + r['reported_number'] + "</th>"
-						+ "<th>" + r['informants'] + "</th>" + "<th>"
-						+ r['informants_tel'] + "</th>" + "<th>"
-						+ r['reported_time'] + "</th>" + "<th>"
-						+ r['province']+r['city']+r['road'] + "</th>" + "<th>"
-						+ r['danger_cause'] + "</th>" + "<th>"
-						+ r['case_state'] + "</th>"
+						+ "<th>" + r.aCase.caseId + "</th>"
+						+ "<th>" + r.aCase.reporterName + "</th>"
+						+ "<th>" + r.aCase.reporterPhone + "</th>"
+						+ "<th>" + r.aCase.dangerDate + "</th>"
+						+ "<th>" + r.aCase.dangerAddressProvince + r.aCase.dangerAddressCity + r.aCase.roadDirection + "</th>"
+						+ "<th>" + r.aCase.dangerCause + "</th>"
+						+ "<th>" + r.aCase.caseStatus + "</th>"
 					});
 						//将值拼接到#addProspect_table里面
 						$("#addProspect_table").append(outHtml);
 					},
 		//接受失败
-		error : function() {
+		error : function(){
 			//提示
 			alert("系统错误");
 		}
@@ -64,23 +64,23 @@ function addProspect(){
 		//ajax
 		$.ajax({	
 					//访问路径http://localhost:8080/prospect/addProspect.do
-	  				url:"http://localhost:8080/prospect/addProspect.do",
+	  				url:"http://localhost:8080/myinsurance/prospect/addProspectMessage.do",
 	  				//请求类型
 	  				type:"get",
 	  				//传输数据
 	  				data:{
-	  					"prospect_time":$("#prospect_time").val(),
-	  					"accident_type":$("#accident_type").val(),
+	  					"prospect_time":$("#prospectDate").val(),
+	  					"accident_type":$("#accidentType").val(),
 	  					"duty":$('input[name="duty"]:checked').val(),
-	  					"prospect_address":$("#prospect_address").val(),
-	  					"prospect_pass":$("#prospect_pass").val(),
-	  					"loss_info":$("#loss_info").val(),
-	  					"police_duty":$("#police_duty").val(),
-	  					"driver_name":$("#driver_name").val(),
-	  					"driver_tel":$("#driver_tel").val(),
-	  					"driving_licence":$("#driving_licence").val(),
-	  				    "driving_license":$("#driving_license").val(),
-	  				    "reported_number":$("#parmeId").val(),
+	  					"prospect_address":$("#prospectAddress").val(),
+	  					"prospect_pass":$("#dangerPass").val(),
+	  					"loss_info":$("#lossInfo").val(),
+	  					"police_duty":$("#policeDuty").val(),
+	  					"driver_name":$("#driverName").val(),
+	  					"driver_tel":$("#driverPhone").val(),
+	  					"driving_licence":$("#driverLicense").val(),
+	  				    "driving_license":$("#driveingLicense").val(),
+	  				    "caseId":$("#parmeId").val(),
 	  				},
 	  				//发送数据类型
 	  				contentType:"application/json;charset=utf-8",
@@ -107,11 +107,11 @@ function updReported(){
 	//ajax
 	$.ajax({
 		//路径http://localhost:8080/prospect/updReported.do
-		url:"http://localhost:8080/prospect/updReported.do",
+		url:"http://localhost:8080/myinsurance/prospect/updateProspectMessage.do",
 		//请求类型
 		type:"get",
 		//传输的数据
-		data:{"case_state":"定损中","reported_number":$("#parmeId").val()},
+		data:{"caseState":"定损中","caseId":$("#parmeId").val()},
 		//发送数据类型
 		contentType:"application/json;charset=utf-8",
 		//接收数据类型

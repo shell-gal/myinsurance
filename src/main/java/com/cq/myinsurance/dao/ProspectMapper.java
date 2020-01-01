@@ -24,4 +24,6 @@ public interface ProspectMapper {
     List<Prospect> selectAchieveProspect(Integer kancaId);
 
     List<Prospect> selectUnAchieveProspect(Integer kancaId);
+
+    Prospect selectProspectMessage(Integer caseId);
 }

@@ -34,4 +34,20 @@ public interface ProspectService {
      * @return
      */
     PageInfo<Prospect> selectUnAchieveCaseMessage(HttpSession session,Integer indexpage);
+
+    /**
+     * 查询勘察报告
+     * @param caseId
+     * @return
+     */
+    Prospect selectProspectMessage(Integer caseId);
+
+    /**
+     * 添加勘察信息
+     * @param prospect
+     * @return
+     */
+    int addProspect(Prospect prospect,HttpSession session);
+
+    int updateProspect(Prospect prospect,HttpSession session);
 }

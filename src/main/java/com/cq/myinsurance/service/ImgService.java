@@ -3,6 +3,8 @@ package com.cq.myinsurance.service;
 import com.cq.myinsurance.pojo.Img;
 import com.cq.myinsurance.utils.Result;
 
+import java.util.List;
+
 public interface ImgService {
 
     /**
@@ -10,5 +12,13 @@ public interface ImgService {
      * @param img
      * @return
      */
-    Result addImg(Img img);
+    int addImg(Img img);
+
+    /**
+     * 查询勘察图片
+     * @param prospectId
+     * @return
+     */
+    List<Img> selectImg(Integer prospectId);
+
 }

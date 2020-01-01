@@ -99,7 +99,7 @@ function queryReported(page) {
 						+ "<th>" + r.aCase.dangerCause+ "</th>"
 						+ "<th>" + r.aCase.dangerType + "</th>"
 						+ "<th>" + r.aCase.caseStatus + "</th>"
-						+ "<th><a href='add_prospect.jsp?id="
+						+ "<th><a href='http://localhost:8080/myinsurance/prospect/addProspectMessage?caseId="
 						+ r.aCase.caseId + "'>处理</a></th>" + "</tr>";
 			});
 			// 将.addtr清除

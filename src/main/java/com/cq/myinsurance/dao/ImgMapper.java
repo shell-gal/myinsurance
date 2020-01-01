@@ -3,6 +3,8 @@ package com.cq.myinsurance.dao;
 import com.cq.myinsurance.pojo.Img;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ImgMapper {
     int deleteByPrimaryKey(Integer imgId);
@@ -16,4 +18,6 @@ public interface ImgMapper {
     int updateByPrimaryKeySelective(Img record);
 
     int updateByPrimaryKey(Img record);
+
+    List<Img> selectImg(Integer prospectId);
 }

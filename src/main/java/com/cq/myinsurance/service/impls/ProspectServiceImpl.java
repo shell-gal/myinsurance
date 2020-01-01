@@ -51,5 +51,37 @@ public class ProspectServiceImpl implements ProspectService {
         return pageInfo;
     }
 
+    @Override
+    public Prospect selectProspectMessage(Integer caseId) {
+        Prospect prospect = prospectMapper.selectProspectMessage(caseId);
+        if (prospect != null){
+            return prospect;
+        }
+        return null;
+    }
+
+    @Override
+    public int addProspect(Prospect prospect,HttpSession session) {
+        User user = (User) session.getAttribute(UserStatus.CURRENT_USER);
+        Integer userId = user.getUserId();
+        session.setAttribute("prospectId",userId);
+        int i = prospectMapper.insertSelective(prospect);
+        if (i > 0){
+            System.out.println("添加成功！");
+            return i;
+        }
+        return 0;
+    }
+
+    @Override
+    public int updateProspect(Prospect prospect, HttpSession session) {
+        int i = prospectMapper.updateByPrimaryKey(prospect);
+        if (i > 0){
+            System.out.println("修改成功！");
+            return i;
+        }
+        return 0;
+    }
+
 
 }

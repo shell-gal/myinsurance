@@ -1,17 +1,12 @@
 package com.cq.myinsurance.controller;
 
-import com.cq.myinsurance.pojo.Case;
 import com.cq.myinsurance.pojo.Prospect;
 import com.cq.myinsurance.service.ProspectService;
-import com.cq.myinsurance.utils.Result;
 import com.github.pagehelper.PageInfo;
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -67,5 +62,60 @@ public class ProspectController{
         PageInfo<Prospect> pageInfo = prospectService.selectUnAchieveCaseMessage(session, indexpage);
         System.out.println(pageInfo);
         return pageInfo;
+    }
+
+    /**
+     * 跳转已勘察详情
+     * @param caseId
+     * @param request
+     * @return
+     */
+    @RequestMapping("/getProspectDetail")
+    public String getProspectDetail(Integer caseId,HttpServletRequest request){
+        request.setAttribute("caseId",caseId);
+        return "pages/prospectmanager/minu_prospect2";
+    }
+
+    /**
+     * 获取勘察报告数据
+     * @param caseId
+     * @return
+     */
+    @RequestMapping("/selectProspectMessage.do")
+    @ResponseBody
+    public Prospect selectProspectMessage(Integer caseId){
+        Prospect prospect = prospectService.selectProspectMessage(caseId);
+        System.out.println(prospect.toString());
+        return prospect;
+    }
+
+    /**
+     * 跳转添加勘察页面
+     * @return
+     */
+    @RequestMapping("/addProspectMessage")
+    public String addProspectMessage(Integer caseId,HttpServletRequest request){
+        request.setAttribute("caseId",caseId);
+        return "pages/prospectmanager/add_prospect";
+    }
+
+    /**
+     * 获取添加勘察页面数据
+     * @param prospect
+     * @param session
+     * @return
+     */
+    @RequestMapping("/addProspectMessage.do")
+    @ResponseBody
+    public int addProspectMessage(Prospect prospect,HttpSession session){
+        int i = prospectService.addProspect(prospect, session);
+        return i;
+    }
+
+    @RequestMapping("/updateProspectMessage.do")
+    @ResponseBody
+    public int updateProspectMessage(Prospect prospect,HttpSession session){
+        int i = prospectService.updateProspect(prospect, session);
+        return i;
     }
 }
