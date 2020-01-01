@@ -123,24 +123,22 @@
                   
                   <li><a><i class="fa fa-home"></i> 理算核赔 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                    	 <shiro:hasPermission name="理算管理">
-                         <li><a href="../DispatchManagement_Zhy/Dispatch.jsp" target="aa">调度管理</a></li>
-                    	 <li><a href="http://localhost:8080/myinsurance/lisuan/adjustment" target="aa">理算处理</a></li>
+                        <shiro:hasPermission name="理算管理">
+                            <li><a href="http://localhost:8080/myinsurance/lisuan/Dispatch" target="aa">调度管理</a></li>
+                            <li><a href="http://localhost:8080/myinsurance/lisuan/adjustment" target="aa">理算处理</a></li>
+                        </shiro:hasPermission>
+                        <shiro:hasPermission name="核赔管理">
+                            <li><a href="http://localhost:8080/myinsurance/lisuan/Dispatch" target="aa">调度管理</a></li>
+                            <li><a href="http://localhost:8080/myinsurance/lisuan/nuclear" target="aa">核赔处理</a></li>
                     	 </shiro:hasPermission>
-                    	  <shiro:hasPermission name="核赔管理">
-                          <li><a href="../DispatchManagement_Zhy/Dispatch.jsp" target="aa">调度管理</a></li>
-                    	 <li><a href="http://localhost:8080/myinsurance/lisuan/nuclear" target="aa">核赔处理</a></li>
-                    	 </shiro:hasPermission>
-                    	  <shiro:hasPermission name="理赔管理">
-                          <li><a href="../DispatchManagement_Zhy/Dispatch.jsp" target="aa">调度管理</a></li>
-                    	 <li><a href="http://localhost:8080/myinsurance/lisuan/settle" target="aa">理赔处理</a></li>
-                    	 </shiro:hasPermission>
-                    	 <li><a href="http://localhost:8080/myinsurance/lisuan/caseQuery" target="aa">结案查询</a></li>
-                    
+                        <shiro:hasPermission name="理赔管理">
+                            <li><a href="http://localhost:8080/myinsurance/lisuan/Dispatch" target="aa">调度管理</a></li>
+                            <li><a href="http://localhost:8080/myinsurance/lisuan/settle" target="aa">理赔处理</a></li>
+                        </shiro:hasPermission>
+                        <li><a href="http://localhost:8080/myinsurance/lisuan/caseQuery" target="aa">结案查询</a></li>
                     </ul>
                   </li>
-                 
-              
+
                  <shiro:hasPermission name="公司管理">
                   <li><a><i class="fa fa-desktop"></i> 员工管理 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">

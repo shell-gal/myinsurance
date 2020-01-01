@@ -27,7 +27,7 @@ $(function(){
 			init();
 		}
 
-	})
+	});
 
 	//上一页
 	$("#jian").click(function(){
@@ -46,6 +46,7 @@ $(function(){
 function init(){
    //根据id为peospectID获取文本框的值
 	var search= $("#peospectID").val();
+
 	$.ajax({
 		//路径url
 		url : "http://localhost:8080/myinsurance/lisuan/caseInfo",
@@ -63,7 +64,6 @@ function init(){
 			//加载newTr
 			var newTr = "";
 			$.each(data.list,function(i,item) {
-
 				newTr+="<tr class='remove'>"
 					+"<th>"+item['caseId']+"</th>"
 					+"<th>"+item['reporterName']+"</th>"
@@ -74,7 +74,7 @@ function init(){
 					+"<th>"+item['dangerCause']+"</th>"
 					+"<th>"+item['dangerType']+"</th>"
 					+"<th>"+item['caseStatus']+"</th>"
-					+"<th><a href='heuan_info.jsp?reported_number="+item['caseId']+"'  target='aa'>理算详情</a>"
+					+"<th><a href='heuan_info?caseId="+item['caseId']+"'  target='aa'>核赔详情</a>"
 					+"</th>"
 					+"</tr>";
 			});
@@ -85,7 +85,7 @@ function init(){
 			//获取当前页面
 			$("#firstpage").html(pageNum);
 			//获取页码
-			$("#lastpage").html(pages)
+			$("#lastpage").html(pages);
 		},
 		error : function() {
 			alert("系统错误，请联系管理员！");

@@ -34,7 +34,7 @@ $(function() {
 //查询未查勘案件信息
 function queryReported(page,r_number) {
 	$.ajax({
-		url:"http://localhost:8080/prospect/queryAllReported.do",
+		url:"http://localhost:8080/myinsurance/dispacth/queryAllReported",
 		type:"get",
 		data:{"case_state":"已报案","page":page,"reported_number":r_number},
 		contentType:"application/json;charset=utf-8",
@@ -68,7 +68,7 @@ function queryReported(page,r_number) {
 						
 		},
 		error : function() {
-			alert("系统错误");
+			alert("获取查勘案件信息失败！！");
 		}
 	});
 }
@@ -79,22 +79,21 @@ function diaoDu(id){
 
 //获取勘察员工
 function queryEmpoyee(){
-		$.ajax({
-			url:"http://localhost:8080/employee/getEmployeeOfType.do",
-			type:"get",
-			contentType:"application/json;charset=utf-8",
-			dataType:"json",
-			success:function(data){
-				var rolename=document.getElementById("diaoduyuan");
-					$.each(data.datas, function(i, u) {
-					rolename.add(new Option(u.user_number+":"+u.user_name),null); 
-					});
-			},
-			error:function(){
-				alert("System error!!!!!");
-			}
-		});
-
+	$.ajax({
+		url:"http://localhost:8080/employee/getEmployeeOfType.do",
+		type:"get",
+		contentType:"application/json;charset=utf-8",
+		dataType:"json",
+		success:function(data){
+			var rolename=document.getElementById("diaoduyuan");
+				$.each(data.datas, function(i, u) {
+				rolename.add(new Option(u.user_number+":"+u.user_name),null);
+				});
+		},
+		error:function(){
+			alert("获取勘察员失败!");
+		}
+	});
 }
 
 function paiqian(){
@@ -112,7 +111,7 @@ function paiqian(){
 				queryReported(page,r_number);
 			},
 			error:function(){
-				alert("System error!!!!!");
+				alert("调度失败!!");
 			}
 		});
 	});
