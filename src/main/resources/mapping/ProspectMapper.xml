@@ -32,6 +32,10 @@
       <result column="case_status" jdbcType="VARCHAR" property="caseStatus" />
     </association>
 
+    <association property="user" javaType="com.cq.myinsurance.pojo.User">
+      <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    </association>
+
   </resultMap>
   <sql id="Base_Column_List">
     prospect_id, case_id, img_id, prospect_address, accident_type, prospect_date, danger_pass, 
@@ -72,6 +76,19 @@
     LEFT JOIN case_info c
     on p.case_id = c.case_id
     where c.case_id = #{caseId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAllProspect" resultMap="BaseResultMap">
+    select * from case_info
+    <where>
+      <if test="caseStatus != null">
+        case_status = '定损中'
+      </if>
+      <if test="caseId != null">
+         case_id = #{caseId,jdbcType=INTEGER}
+      </if>
+    </where>
+    order by case_id desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from prospect_info
