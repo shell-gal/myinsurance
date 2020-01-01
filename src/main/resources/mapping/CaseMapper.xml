@@ -36,11 +36,23 @@
          <result column="car_number" jdbcType="VARCHAR" property="carNumber"></result>
     </association>
   </resultMap>
+
   <sql id="Base_Column_List">
-    case_id, reporter_name, reporter_phone, danger_cause, danger_address_province, danger_address_city, 
-    detail_address, road_direction, danger_date, danger_type, case_status, warranty_id, 
+    case_id, reporter_name, reporter_phone, danger_cause, danger_address_province, danger_address_city,
+    detail_address, road_direction, danger_date, danger_type, case_status, warranty_id,
     jiean_id, kanca_id, dingsun_id, hesun_id, lisuan_id, hepei_id, lipei_id, createtime
+
   </sql>
+
+
+  <select id="selectCasePage" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from case_info
+    <if test="caseId != null and caseId !=''">
+      where case_id = #{caseId}
+    </if>
+  </select>
 
 
   <select id="selectCaseByEx" parameterType="map" resultMap="BaseResultMap">
@@ -56,6 +68,7 @@
       </if>
     </where>
   </select>
+
   <select id="selectByWarantyid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
       select case_id,reporter_name,danger_date,danger_address_province,danger_address_city,detail_address,case_status
       from case_info
@@ -83,7 +96,7 @@
   </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from case_info
     where case_id = #{caseId,jdbcType=INTEGER}
@@ -91,7 +104,7 @@
 
 
 
-  <select id="selectByStatus" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <!--<select id="selectByStatus" parameterType="java.lang.String" resultMap="BaseResultMap">-->
 
   <select id="selectCaseByStatus" parameterType="java.lang.String" resultMap="BaseResultMap">
 
@@ -106,63 +119,10 @@
 
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    <resultMap id="BaseResultMap" type="com.cq.myinsurance.pojo.Case">
-        <id column="case_id" jdbcType="INTEGER" property="caseId" />
-        <result column="reporter_name" jdbcType="VARCHAR" property="reporterName" />
-        <result column="reporter_phone" jdbcType="VARCHAR" property="reporterPhone" />
-        <result column="danger_cause" jdbcType="VARCHAR" property="dangerCause" />
-        <result column="danger_address_province" jdbcType="VARCHAR" property="dangerAddressProvince" />
-        <result column="danger_address_city" jdbcType="VARCHAR" property="dangerAddressCity" />
-        <result column="detail_address" jdbcType="VARCHAR" property="detailAddress" />
-        <result column="road_direction" jdbcType="VARCHAR" property="roadDirection" />
-        <result column="danger_date" jdbcType="TIMESTAMP" property="dangerDate" />
-        <result column="danger_type" jdbcType="VARCHAR" property="dangerType" />
-        <result column="case_status" jdbcType="VARCHAR" property="caseStatus" />
-        <result column="warranty_id" jdbcType="INTEGER" property="warrantyId" />
-        <result column="jiean_id" jdbcType="INTEGER" property="jieanId" />
-        <result column="kanca_id" jdbcType="INTEGER" property="kancaId" />
-        <result column="dingsun_id" jdbcType="INTEGER" property="dingsunId" />
-        <result column="hesun_id" jdbcType="INTEGER" property="hesunId" />
-        <result column="lisuan_id" jdbcType="INTEGER" property="lisuanId" />
-        <result column="hepei_id" jdbcType="INTEGER" property="hepeiId" />
-        <result column="lipei_id" jdbcType="INTEGER" property="lipeiId" />
-        <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
-    </resultMap>
-    <sql id="Base_Column_List">
-    case_id, reporter_name, reporter_phone, danger_cause, danger_address_province, danger_address_city,
-    detail_address, road_direction, danger_date, danger_type, case_status, warranty_id,
-    jiean_id, kanca_id, dingsun_id, hesun_id, lisuan_id, hepei_id, lipei_id, createtime
-  </sql>
-    <select id="selectCasePage" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from case_info
-        <if test="caseId != null and caseId !=''">
-            where case_id = #{caseId}
-        </if>
-    </select>
-
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from case_info
-        where case_id = #{caseId,jdbcType=INTEGER}
-    </select>
-    <select id="selectCaseByStatus" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from case_info
-        where case_status = #{status,jdbcType=VARCHAR}
-        <if test="search != null and search !=''">
-            and case_id = #{search,jdbcType=INTEGER}
-        </if>
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-
     delete from case_info
     where case_id = #{caseId,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="com.cq.myinsurance.pojo.Case">
+  <insert id="insert" parameterType="com.cq.myinsurance.pojo.Case">
     insert into case_info (case_id, reporter_name, reporter_phone,
       danger_cause, danger_address_province, danger_address_city,
       detail_address, road_direction, danger_date,
@@ -178,6 +138,8 @@
       #{hesunId,jdbcType=INTEGER}, #{lisuanId,jdbcType=INTEGER}, #{hepeiId,jdbcType=INTEGER},
       #{lipeiId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP})
   </insert>
+
+
 
   <insert id="insertSelective" parameterType="com.cq.myinsurance.pojo.Case">
     insert into case_info
@@ -370,199 +332,6 @@
     where case_id = #{caseId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.cq.myinsurance.pojo.Case">
-
-    <insert id="insertSelective" parameterType="com.cq.myinsurance.pojo.Case">
-        insert into case_info
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="caseId != null">
-                case_id,
-            </if>
-            <if test="reporterName != null">
-                reporter_name,
-            </if>
-            <if test="reporterPhone != null">
-                reporter_phone,
-            </if>
-            <if test="dangerCause != null">
-                danger_cause,
-            </if>
-            <if test="dangerAddressProvince != null">
-                danger_address_province,
-            </if>
-            <if test="dangerAddressCity != null">
-                danger_address_city,
-            </if>
-            <if test="detailAddress != null">
-                detail_address,
-            </if>
-            <if test="roadDirection != null">
-                road_direction,
-            </if>
-            <if test="dangerDate != null">
-                danger_date,
-            </if>
-            <if test="dangerType != null">
-                danger_type,
-            </if>
-            <if test="caseStatus != null">
-                case_status,
-            </if>
-            <if test="warrantyId != null">
-                warranty_id,
-            </if>
-            <if test="jieanId != null">
-                jiean_id,
-            </if>
-            <if test="kancaId != null">
-                kanca_id,
-            </if>
-            <if test="dingsunId != null">
-                dingsun_id,
-            </if>
-            <if test="hesunId != null">
-                hesun_id,
-            </if>
-            <if test="lisuanId != null">
-                lisuan_id,
-            </if>
-            <if test="hepeiId != null">
-                hepei_id,
-            </if>
-            <if test="lipeiId != null">
-                lipei_id,
-            </if>
-            <if test="createtime != null">
-                createtime,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="caseId != null">
-                #{caseId,jdbcType=INTEGER},
-            </if>
-            <if test="reporterName != null">
-                #{reporterName,jdbcType=VARCHAR},
-            </if>
-            <if test="reporterPhone != null">
-                #{reporterPhone,jdbcType=VARCHAR},
-            </if>
-            <if test="dangerCause != null">
-                #{dangerCause,jdbcType=VARCHAR},
-            </if>
-            <if test="dangerAddressProvince != null">
-                #{dangerAddressProvince,jdbcType=VARCHAR},
-            </if>
-            <if test="dangerAddressCity != null">
-                #{dangerAddressCity,jdbcType=VARCHAR},
-            </if>
-            <if test="detailAddress != null">
-                #{detailAddress,jdbcType=VARCHAR},
-            </if>
-            <if test="roadDirection != null">
-                #{roadDirection,jdbcType=VARCHAR},
-            </if>
-            <if test="dangerDate != null">
-                #{dangerDate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="dangerType != null">
-                #{dangerType,jdbcType=VARCHAR},
-            </if>
-            <if test="caseStatus != null">
-                #{caseStatus,jdbcType=VARCHAR},
-            </if>
-            <if test="warrantyId != null">
-                #{warrantyId,jdbcType=INTEGER},
-            </if>
-            <if test="jieanId != null">
-                #{jieanId,jdbcType=INTEGER},
-            </if>
-            <if test="kancaId != null">
-                #{kancaId,jdbcType=INTEGER},
-            </if>
-            <if test="dingsunId != null">
-                #{dingsunId,jdbcType=INTEGER},
-            </if>
-            <if test="hesunId != null">
-                #{hesunId,jdbcType=INTEGER},
-            </if>
-            <if test="lisuanId != null">
-                #{lisuanId,jdbcType=INTEGER},
-            </if>
-            <if test="hepeiId != null">
-                #{hepeiId,jdbcType=INTEGER},
-            </if>
-            <if test="lipeiId != null">
-                #{lipeiId,jdbcType=INTEGER},
-            </if>
-            <if test="createtime != null">
-                #{createtime,jdbcType=TIMESTAMP},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.cq.myinsurance.pojo.Case">
-        update case_info
-        <set>
-            <if test="reporterName != null">
-                reporter_name = #{reporterName,jdbcType=VARCHAR},
-            </if>
-            <if test="reporterPhone != null">
-                reporter_phone = #{reporterPhone,jdbcType=VARCHAR},
-            </if>
-            <if test="dangerCause != null">
-                danger_cause = #{dangerCause,jdbcType=VARCHAR},
-            </if>
-            <if test="dangerAddressProvince != null">
-                danger_address_province = #{dangerAddressProvince,jdbcType=VARCHAR},
-            </if>
-            <if test="dangerAddressCity != null">
-                danger_address_city = #{dangerAddressCity,jdbcType=VARCHAR},
-            </if>
-            <if test="detailAddress != null">
-                detail_address = #{detailAddress,jdbcType=VARCHAR},
-            </if>
-            <if test="roadDirection != null">
-                road_direction = #{roadDirection,jdbcType=VARCHAR},
-            </if>
-            <if test="dangerDate != null">
-                danger_date = #{dangerDate,jdbcType=TIMESTAMP},
-            </if>
-            <if test="dangerType != null">
-                danger_type = #{dangerType,jdbcType=VARCHAR},
-            </if>
-            <if test="caseStatus != null">
-                case_status = #{caseStatus,jdbcType=VARCHAR},
-            </if>
-            <if test="warrantyId != null">
-                warranty_id = #{warrantyId,jdbcType=INTEGER},
-            </if>
-            <if test="jieanId != null">
-                jiean_id = #{jieanId,jdbcType=INTEGER},
-            </if>
-            <if test="kancaId != null">
-                kanca_id = #{kancaId,jdbcType=INTEGER},
-            </if>
-            <if test="dingsunId != null">
-                dingsun_id = #{dingsunId,jdbcType=INTEGER},
-            </if>
-            <if test="hesunId != null">
-                hesun_id = #{hesunId,jdbcType=INTEGER},
-            </if>
-            <if test="lisuanId != null">
-                lisuan_id = #{lisuanId,jdbcType=INTEGER},
-            </if>
-            <if test="hepeiId != null">
-                hepei_id = #{hepeiId,jdbcType=INTEGER},
-            </if>
-            <if test="lipeiId != null">
-                lipei_id = #{lipeiId,jdbcType=INTEGER},
-            </if>
-            <if test="createtime != null">
-                createtime = #{createtime,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        where case_id = #{caseId,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.cq.myinsurance.pojo.Case">
-
     update case_info
     set reporter_name = #{reporterName,jdbcType=VARCHAR},
       reporter_phone = #{reporterPhone,jdbcType=VARCHAR},
