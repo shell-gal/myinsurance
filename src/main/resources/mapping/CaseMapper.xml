@@ -90,11 +90,18 @@
   </select>
 
 
+
   <select id="selectByStatus" parameterType="java.lang.String" resultMap="BaseResultMap">
+
+  <select id="selectCaseByStatus" parameterType="java.lang.String" resultMap="BaseResultMap">
+
     select
     <include refid="Base_Column_List" />
     from case_info
     where case_status = #{status,jdbcType=VARCHAR}
+    <if test="search != null and search !=''">
+      and case_id = #{search,jdbcType=INTEGER}
+    </if>
   </select>
 
 
