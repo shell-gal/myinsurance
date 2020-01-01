@@ -20,12 +20,55 @@
     <result column="peopleloss_invoice_img" jdbcType="VARCHAR" property="peoplelossInvoiceImg" />
     <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
   </resultMap>
+
   <sql id="Base_Column_List">
     loss_id, case_id, loss_date, loss_money, objectloss_money, objectloss_img, objectloss_invoice_img, 
     self_carloss_money, self_carloss_img, self_carloss_invoice_img, other_carloss_money, 
     other_carloss_img, other_carloss_invoice_img, peopleloss_money, peopleloss_img, peopleloss_invoice_img, 
     createtime
   </sql>
+
+
+  <!--&lt;!&ndash; 按条件查询定损信息 &ndash;&gt;-->
+  <!--<resultMap type="cn.yihuan.pojo.Reported_Compensate_Info" id="Reported_info">-->
+    <!--<result column="reported_number" property="reported_number"/>-->
+    <!--<result column="informants_tel" property="informants_tel"/>-->
+    <!--<result column="reported_time" property="reported_time"/>-->
+    <!--<result column="danger_cause" property="danger_cause"/>-->
+    <!--<result column="dispose_type" property="dispose_type"/>-->
+    <!--<result column="case_state" property="case_state"/>-->
+    <!--<result column="informants" property="informants"/>-->
+    <!--<association property="warranty_info" javaType="cn.yihuan.pojo.Warranty_info">-->
+      <!--<result column="car_number" property="license_number" />-->
+    <!--</association>-->
+  <!--</resultMap>-->
+  <select id="losequery" resultType="java.util.Map">
+    SELECT
+    r.case_id,r.reporter_phone,r.reporter_name,r.danger_address_province,r.danger_address_city,r.detail_address,r.createtime,r.danger_date,r.danger_cause,r.danger_type,r.case_status,r.danger_cause,
+    w.car_number
+    FROM case_info r LEFT JOIN warranty_info w ON r.warranty_id=w.warranty_id
+    <where>
+      r.case_status='定损中'
+      <if test="reported_number !=null and reported_number !=0">
+        and r.case_id=#{reported_number}
+      </if>
+    </where>
+  </select>
+
+
+  <select id="CompensateQuery" resultType="java.util.Map">
+    SELECT
+    r.case_id,r.reporter_phone,r.reporter_name,r.danger_address_province,r.danger_address_city,r.detail_address,r.createtime,r.danger_date,r.danger_cause,r.danger_type,r.case_status,r.danger_cause,
+    w.car_number
+    FROM case_info r LEFT JOIN warranty_info w ON r.warranty_id=w.warranty_id
+    <where>
+      r.case_status='理算'
+      <if test="reported_number !=null and reported_number !=0">
+        and r.case_id=#{reported_number}
+      </if>
+    </where>
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

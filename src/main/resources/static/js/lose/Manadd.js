@@ -4,24 +4,31 @@ $(function() {
 	reported_number = $("#reported_number").val();
 	$("#bc").click(function() {
 		Manaddeach();
-		alert("添加成功！");
+
 	})
 })
 function Manadd(wounded_name, wounded_site, wounded_money, subtotal_costs,id) {
-	$.ajax({
-		url : "http://localhost:8080/Man/Manadd.do",
-		type : "post",
-		data : {
-			"wounded_name" : wounded_name,
+
+	var data= {
+		"wounded_name" : wounded_name,
 			"wounded_site" : wounded_site,
 			"wounded_money" : wounded_money,
 			"subtotal_costs" : subtotal_costs,
 			"reported_number" : reported_number,
-			'reported_number':id
-		},
+	}
+	console.log(data)
+	$.ajax({
+		url : "http://localhost:8080/myinsurance/prospect_lyt/Manadd",
+		type : "post",
+		contentType:"application/json",
+		data:JSON.stringify(data),
 		dataType : "json",
 		success : function(data) {
-			
+			if (data.isResult){
+				alert("己方OK")
+			} else {
+				alert(data.message)
+			}
 		},
 		error : function() {
 			alert("添加失败！");

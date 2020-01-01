@@ -1,122 +1,121 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Insert title here</title>
+	<!-- Bootstrap -->
+	<link th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link th:href="@{/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+	<!-- NProgress -->
+	<link th:href="@{/vendors/nprogress/nprogress.css}" rel="stylesheet">
+	<!-- iCheck -->
+	<link th:href="@{/vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
+
+	<!-- bootstrap-progressbar -->
+	<link th:href="@{/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css}" rel="stylesheet">
+	<!-- JQVMap -->
+	<link th:href="@{/vendors/jqvmap/dist/jqvmap.min.css}" rel="stylesheet"/>
+	<!-- bootstrap-daterangepicker -->
+	<link th:href="@{/vendors/bootstrap-daterangepicker/daterangepicker.css}" rel="stylesheet">
+	<!-- Custom Theme Style -->
+	<link th:href="@{/build/css/custom.min.css}" rel="stylesheet">
+	<style type="text/css">
+		#zg{float: right;}
+		tr td .text{
+			width: 150px;
+		}
+	</style>
+</head>
+
+<body style="background: #F7F7F7;" >
+
+<input id="reported_number" type="hidden" th:value="${caseId}">
+<!--
+            作者：offline
+            时间：2017-10-24
+            描述：内容开始
+       -->
+<table border="1" style="border-collapse:collapse;" class="table table-bordered" valign="middle">
+	<tr  id="mycar">
+		<td colspan="6">人伤</td>
+	</tr>
+	<tr>
+		<td>医疗项目</td>
+		<td>医疗地点</td>
+		<td>医疗费用</td>
+		<td>小计</td>
+		<td>操作</td>
+
+	</tr>
+	<tr class="fg app">
+		<td><input id="wounded_name" type="text" class='text'/></td>
+		<td><input id="wounded_site" type="text" class='text'/></td>
+		<td><input class="wounded_money" type="text" /></td>
+		<td><input id="subtotal_costs" type="text" class='text'	disabled/></td>
+
+		<td>
+			<input type="button" value="+" id="add_but_ren"/>
+			<input type="button" value="-" id="rem_but_ren"/>
+		</td>
+	</tr>
+	<tr id="vg">
+	<tr>
+		<td colspan="7" ><div  id="zg" style="margin-right:30px ;"></div></td>
+	</tr>
+	<td colspan="6"align="center">
+		<input id="bc" type="button" value="保存">
+		<input type="button" value="返回">
+	</td>
+	</tr>
+</table>
+<!--
+    作者：offline
+    时间：2017-10-24
+    描述：内容结束
+-->
+<!-- jQuery -->
+<script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
 <!-- Bootstrap -->
-		<link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-		<!-- Font Awesome -->
-		<link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-		<!-- NProgress -->
-		<link href="../../../vendors/nprogress/nprogress.css" rel="stylesheet">
-		<!-- iCheck -->
-		<link href="../../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+<script th:src="@{/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+<!-- FastClick -->
+<script th:src="@{/vendors/fastclick/lib/fastclick.js}"></script>
+<!-- NProgress -->
+<script th:src="@{/vendors/nprogress/nprogress.js}"></script>
+<!-- Chart.js -->
+<script th:src="@{/vendors/Chart.js/dist/Chart.min.js}"></script>
+<!-- gauge.js -->
+<script th:src="@{/vendors/gauge.js/dist/gauge.min.js}"></script>
+<!-- bootstrap-progressbar -->
+<script th:src="@{/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
+<!-- iCheck -->
+<script th:src="@{/vendors/iCheck/icheck.min.js}"></script>
+<!-- Skycons -->
+<script th:src="@{/vendors/skycons/skycons.js}"></script>
+<!-- Flot -->
+<script th:src="@{/vendors/Flot/jquery.flot.js}"></script>
+<script th:src="@{/vendors/Flot/jquery.flot.pie.js}"></script>
+<script th:src="@{/vendors/Flot/jquery.flot.time.js}"></script>
+<script th:src="@{/vendors/Flot/jquery.flot.stack.js}"></script>
+<script th:src="@{/vendors/Flot/jquery.flot.resize.js}"></script>
+<!-- Flot plugins -->
+<script th:src="@{/vendors/flot.orderbars/js/jquery.flot.orderBars.js}"></script>
+<script th:src="@{/vendors/flot-spline/js/jquery.flot.spline.min.js}"></script>
+<script th:src="@{/vendors/flot.curvedlines/curvedLines.js}"></script>
+<!-- DateJS -->
+<script th:src="@{/vendors/DateJS/build/date.js}"></script>
+<!-- JQVMap -->
+<script th:src="@{/vendors/jqvmap/dist/jquery.vmap.js}"></script>
+<script th:src="@{/vendors/jqvmap/dist/maps/jquery.vmap.world.js}"></script>
+<script th:src="@{/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js}"></script>
+<!-- bootstrap-daterangepicker -->
+<script th:src="@{/vendors/moment/min/moment.min.js}"></script>
+<script th:src="@{/vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
+<!-- Custom Theme Scripts -->
+<script th:src="@{/build/js/custom.min.js}"></script>
+<script th:src="@{/js/jquery-1.8.3.js}"></script>
 
-		<!-- bootstrap-progressbar -->
-		<link href="../../../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-		<!-- JQVMap -->
-		<link href="../../../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
-		<!-- bootstrap-daterangepicker -->
-		<link href="../../../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+<script th:src="@{/js/lose/Manadd.js}"></script>
+</body>
 
-		<!-- Custom Theme Style -->
-		<link href="../../../build/css/custom.min.css" rel="stylesheet">
-		<style type="text/css">
-             #zg{float: right;}
-             tr td .text{
-             	width: 150px;
-             }
-		</style>
-	</head>
-
-	<body style="background: #F7F7F7;" >
-	
-	<input id="reported_number" type="hidden" value="<%=request.getParameter("reported_number") %>"/>
-		<!--
-                	作者：offline
-                	时间：2017-10-24
-                	描述：内容开始
-               -->
-				<table border="1" style="border-collapse:collapse;" class="table table-bordered" valign="middle">
-					<tr  id="mycar">
-						<td colspan="6">人伤</td>
-					</tr>
-					<tr>
-						<td>医疗项目</td>
-						<td>医疗地点</td>
-						<td>医疗费用</td>
-						<td>小计</td>
-						<td>操作</td>
-						
-					</tr>
-					<tr class="fg app">
-						<td><input id="wounded_name" type="text" class='text'/></td>
-						<td><input id="wounded_site" type="text" class='text'/></td>
-						<td><input class="wounded_money" type="text" class='text'/></td>
-						<td><input id="subtotal_costs" type="text" class='text'	disabled/></td>
-
-						<td>
-							<input type="button" value="+" id="add_but_ren"/>
-							<input type="button" value="-" id="rem_but_ren"/>
-						</td>
-					</tr>
-					<tr id="vg">
-						<tr>
-						<td colspan="7" ><div  id="zg" style="margin-right:30px ;"></div></td>
-						</tr>
-						<td colspan="6"align="center">
-							<input id="bc" type="button" value="保存">
-							<input type="button" value="返回">
-						</td>
-					</tr>
-				</table>
-				<!--
-                	作者：offline
-                	时间：2017-10-24
-                	描述：内容结束
-                -->
-				<!-- jQuery -->
-				<script src="../../../vendors/jquery/dist/jquery.min.js"></script>
-				<!-- Bootstrap -->
-				<script src="../../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-				<!-- FastClick -->
-				<script src="../../../vendors/fastclick/lib/fastclick.js"></script>
-				<!-- NProgress -->
-				<script src="../../../vendors/nprogress/nprogress.js"></script>
-				<!-- Chart.js -->
-				<script src="../../../vendors/Chart.js/dist/Chart.min.js"></script>
-				<!-- gauge.js -->
-				<script src="../../../vendors/gauge.js/dist/gauge.min.js"></script>
-				<!-- bootstrap-progressbar -->
-				<script src="../../../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-				<!-- iCheck -->
-				<script src="../../../vendors/iCheck/icheck.min.js"></script>
-				<!-- Skycons -->
-				<script src="../../../vendors/skycons/skycons.js"></script>
-				<!-- Flot -->
-				<script src="../../../vendors/Flot/jquery.flot.js"></script>
-				<script src="../../../vendors/Flot/jquery.flot.pie.js"></script>
-				<script src="../../../vendors/Flot/jquery.flot.time.js"></script>
-				<script src="../../../vendors/Flot/jquery.flot.stack.js"></script>
-				<script src="../../../vendors/Flot/jquery.flot.resize.js"></script>
-				<!-- Flot plugins -->
-				<script src="../../../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-				<script src="../../../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-				<script src="../../../vendors/flot.curvedlines/curvedLines.js"></script>
-				<!-- DateJS -->
-				<script src="../../../vendors/DateJS/build/date.js"></script>
-				<!-- JQVMap -->
-				<script src="../../../vendors/jqvmap/dist/jquery.vmap.js"></script>
-				<script src="../../../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-				<script src="../../../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-				<!-- bootstrap-daterangepicker -->
-				<script src="../../../vendors/moment/min/moment.min.js"></script>
-				<script src="../../../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-				<!-- Custom Theme Scripts -->
-				<script src="../../../build/js/custom.min.js"></script>
-				<script type="text/javascript" src="../../js/jquery-1.8.3.js" ></script>
-			
-				<script src="../../js/lose/Manadd.js"></script>
-	</body>
 </html>

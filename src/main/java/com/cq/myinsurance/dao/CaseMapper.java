@@ -1,12 +1,16 @@
 package com.cq.myinsurance.dao;
 
+
 import com.cq.myinsurance.pojo.Case;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+
 import java.util.Map;
 
-public interface CaseMapper {
+public interface CaseMapper   {
+
+
     int deleteByPrimaryKey(Integer caseId);
 
     int insert(Case record);
@@ -28,7 +32,12 @@ public interface CaseMapper {
 //    查询案件
     List<Object> selectcase(Map<String,Object> map);
 
+//    List<Case> selectCaseByStatus(@Param("status") String status, @Param("search") String search);
+
+
     List<Case> selectCaseByStatus(@Param("status") String status, @Param("search") String search);
+
+    List<Case>  selectCasePage(@Param("caseId") Long caseId);
 
     Integer selectCount();
 

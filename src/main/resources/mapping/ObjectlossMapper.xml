@@ -21,7 +21,7 @@
     select 
     <include refid="Base_Column_List" />
     from objectloss_info
-    where objectloss_id = #{objectlossId,jdbcType=INTEGER}
+    where case_id = #{objectlossId}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from objectloss_info

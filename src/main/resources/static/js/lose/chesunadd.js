@@ -2,24 +2,29 @@ $(function(){
 	$("#bc").click(function(){
 		addCarhe();
 		addon();
-		alert("成功！");
 	})
 })
 function chesunadd(data1,data2,data3,data4,data5,id,loss_pic){
+	var d={'condition_info_name':data1,
+		'loss_number':data2,
+		'loss_assessment_price':data3,
+		'maintenance_point':data4,
+		'loss_assessment_sum':data5,
+		'reported_number':id,
+		'loss_picture':loss_pic
+	}
 	$.ajax({
-		url:"http://localhost:8080/lose/chesunadd.do",
+		url:"http://localhost:8080/myinsurance/prospect_lyt/otherchesunadd",
 		type:"post",
-		data:{'condition_info_name':data1,
-			  'loss_number':data2,
-			  'loss_assessment_price':data3,
-			  'maintenance_point':data4,
-			  'loss_assessment_sum':data5,
-			  'reported_number':id,
-			  'loss_picture':loss_pic
-		},
+		contentType:"application/json",
+		data:JSON.stringify(d),
 		dataType : "json",
 		success : function(data) {
-			
+			if (data.isResult){
+				 alert("他人OK")
+			} else {
+				alert(data.message)
+			}
 		},
 		error : function() {
 			alert("添加失败!");
@@ -40,6 +45,7 @@ function addCarhe(){
 		var loss_pic=$(loss_file).val().substring(parseInt($(loss_file).val().lastIndexOf("\\"))+1);
 		
 		var id=$("#reported_number").val();
+
 		chesunadd(name,number,price,point,sum,id,loss_pic);
 		f1(loss_file);
 	})
@@ -49,20 +55,26 @@ function addCarhe(){
 
 function addonajax(condition_info_name,loss_number,loss_assessment_price,maintenance_point,loss_assessment_sum,id,loss_pic)
 {
+	var d={'condition_info_name':condition_info_name,
+		'loss_number':loss_number,
+		'loss_assessment_price':loss_assessment_price,
+		'maintenance_point':maintenance_point,
+		'loss_assessment_sum':loss_assessment_sum,
+		'reported_number':id,
+		'loss_picture':loss_pic
+	}
 	$.ajax({
-		url:"http://localhost:8080/lose/addon.do",
+		url:"http://localhost:8080/myinsurance/prospect_lyt/mychesunadd",
 		type:"post",
-		data:{'condition_info_name':condition_info_name,
-			  'loss_number':loss_number,
-			  'loss_assessment_price':loss_assessment_price,
-			  'maintenance_point':maintenance_point,
-			  'loss_assessment_sum':loss_assessment_sum,
-			  'reported_number':id,
-			  'loss_picture':loss_pic
-		},
+		contentType: 'application/json',
+		data:JSON.stringify(d),
 		dataType : "json",
 		success : function(data) {
-			
+			if (data.isResult){
+				alert("己方OK")
+			} else {
+				alert(data.message)
+			}
 		},
 		error : function() {
 			alert("添加失败!");
@@ -103,6 +115,6 @@ function f1(loss_file) {
 			alert(789789);
 		}
 	}
-	xhr.open("post", "http://localhost:8080/lose/doUpload");
+	xhr.open("post", "http://localhost:8080/myinsurance/file/image");
 	xhr.send(fd);
 }

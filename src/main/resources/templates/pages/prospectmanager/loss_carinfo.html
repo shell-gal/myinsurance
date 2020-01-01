@@ -1,26 +1,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+ <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <!-- Bootstrap -->
-    <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link th:href="@{/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
     <!-- NProgress -->
-    <link href="../../../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link th:href="@{/vendors/nprogress/nprogress.css}" rel="stylesheet">
     <!-- iCheck -->
-    <link href="../../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <link th:href="@{/vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
 	
     <!-- bootstrap-progressbar -->
-    <link href="../../../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <link th:href="@{/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css}" rel="stylesheet">
     <!-- JQVMap -->
-    <link href="../../../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <link th:href="@{/vendors/jqvmap/dist/jqvmap.min.css}" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
-    <link href="../../../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link th:href="@{/vendors/bootstrap-daterangepicker/daterangepicker.css}" rel="stylesheet">
 
     <!-- Custom Theme Style -->
-    <link href="../../../build/css/custom.min.css" rel="stylesheet">
+    <link th:href="@{/build/css/custom.min.css}" rel="stylesheet">
     <style type="text/css">
     				#prospect_table th{text-align: center;}
     	</style>
@@ -39,10 +39,10 @@
                                          报案编号：<input type="text" id="reported_number"/>
             </div>
             <div class="col-md-4" id="add_employees">
-           <button type="button" class="btn btn-primary btn-small" id="reset_but" onclick="xxx();">
+           <button type="button" class="btn btn-primary btn-small" id="reset_but" >
 										 重置条件
 									</button>
-        					<button type="button" class="btn btn-primary btn-small" id="reset_but" onclick="xxx();">
+        					<button type="button" class="btn btn-primary btn-small" id="look_but" >
 										 查询
 									</button>
 									
@@ -68,63 +68,63 @@
 								<th>案件状态</th>
 								<th>操作</th>
 							</tr>
-							
+
 						</table>
 					</div>
 			</div>
 			<ul class="pagination">
 			<li><a href="#" id="jian">&laquo;</a></li>
-			<li><a href="#" id="">当前页</a></li>
-			<li><a href="#" id="firstpage"></a></li>
-			<li><a href="#" id="">总页数</a></li>
-			<li><a href="#" id="lastpage"></a></li>
+			<li><a href="#" >当前页</a></li>
+			<li><a href="#" id="firstpage">1</a></li>
+			<li><a href="#" >总页数</a></li>
+			<li><a href="#" id="lastpage">1</a></li>
 			<li><a href="#" id="jia">&raquo;</a></li>
 		</ul>
     
 
     <!-- jQuery -->
-    <script src="../../../vendors/jquery/dist/jquery.min.js"></script>
+    <script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
     <!-- Bootstrap -->
-    <script src="../../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script th:src="@{/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
     <!-- FastClick -->
-    <script src="../../../vendors/fastclick/lib/fastclick.js"></script>
+    <script th:src="@{/vendors/fastclick/lib/fastclick.js}"></script>
     <!-- NProgress -->
-    <script src="../../../vendors/nprogress/nprogress.js"></script>
+    <script th:src="@{/vendors/nprogress/nprogress.js}"></script>
     <!-- Chart.js -->
-    <script src="../../../vendors/Chart.js/dist/Chart.min.js"></script>
+    <script th:src="@{/vendors/Chart.js/dist/Chart.min.js}"></script>
     <!-- gauge.js -->
-    <script src="../../../vendors/gauge.js/dist/gauge.min.js"></script>
+    <script th:src="@{/vendors/gauge.js/dist/gauge.min.js}"></script>
     <!-- bootstrap-progressbar -->
-    <script src="../../../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <script th:src="@{/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
     <!-- iCheck -->
-    <script src="../../../vendors/iCheck/icheck.min.js"></script>
+    <script th:src="@{/vendors/iCheck/icheck.min.js}"></script>
     <!-- Skycons -->
-    <script src="../../../vendors/skycons/skycons.js"></script>
+    <script th:src="@{/vendors/skycons/skycons.js}"></script>
     <!-- Flot -->
-    <script src="../../../vendors/Flot/jquery.flot.js"></script>
-    <script src="../../../vendors/Flot/jquery.flot.pie.js"></script>
-    <script src="../../../vendors/Flot/jquery.flot.time.js"></script>
-    <script src="../../../vendors/Flot/jquery.flot.stack.js"></script>
-    <script src="../../../vendors/Flot/jquery.flot.resize.js"></script>
+    <script th:src="@{/vendors/Flot/jquery.flot.js}"></script>
+    <script th:src="@{/vendors/Flot/jquery.flot.pie.js}"></script>
+    <script th:src="@{/vendors/Flot/jquery.flot.time.js}"></script>
+    <script th:src="@{/vendors/Flot/jquery.flot.stack.js}"></script>
+    <script th:src="@{/vendors/Flot/jquery.flot.resize.js}"></script>
     <!-- Flot plugins -->
-    <script src="../../../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-    <script src="../../../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-    <script src="../../../vendors/flot.curvedlines/curvedLines.js"></script>
+    <script th:src="@{/vendors/flot.orderbars/js/jquery.flot.orderBars.js}"></script>
+    <script th:src="@{/vendors/flot-spline/js/jquery.flot.spline.min.js}"></script>
+    <script th:src="@{/vendors/flot.curvedlines/curvedLines.js}"></script>
     <!-- DateJS -->
-    <script src="../../../vendors/DateJS/build/date.js"></script>
+    <script th:src="@{/vendors/DateJS/build/date.js}"></script>
     <!-- JQVMap -->
-    <script src="../../../vendors/jqvmap/dist/jquery.vmap.js"></script>
-    <script src="../../../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-    <script src="../../../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <script th:src="@{/vendors/jqvmap/dist/jquery.vmap.js}"></script>
+    <script th:src="@{/vendors/jqvmap/dist/maps/jquery.vmap.world.js}"></script>
+    <script th:src="@{/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js}"></script>
     <!-- bootstrap-daterangepicker -->
-    <script src="../../../vendors/moment/min/moment.min.js"></script>
-    <script src="../../../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script th:src="@{/vendors/moment/min/moment.min.js}"></script>
+    <script th:src="@{/vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="../../../build/js/custom.min.js"></script>
-    <script src="../../js/prospect/prospect.js"></script>
+    <script th:src="@{/build/js/custom.min.js}"></script>
+    <script th:src="@{/js/prospect/prospect.js}"></script>
     
-    <script src="../../js/jquery-1.8.3.js"></script>
-	<script src="../../js/lose/lose_Reoprt.js"></script>
+    <script th:src="@{/js/jquery-1.8.3.js}"></script>
+	<script th:src="@{/js/lose/lose_Reoprt.js}"></script>
   </body>
 </html>
