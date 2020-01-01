@@ -3,8 +3,10 @@ package com.cq.myinsurance.dao;
 
 import com.cq.myinsurance.pojo.Case;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 
 import java.util.Map;
 

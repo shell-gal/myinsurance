@@ -1,5 +1,7 @@
 package com.cq.myinsurance.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Prospect {
@@ -13,6 +15,7 @@ public class Prospect {
 
     private String accidentType;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date prospectDate;
 
     private String dangerPass;
@@ -32,6 +35,38 @@ public class Prospect {
     private String driveingLicense;
 
     private Date createtime;
+
+    private Case aCase;
+
+    @Override
+    public String toString() {
+        return "Prospect{" +
+                "prospectId=" + prospectId +
+                ", caseId=" + caseId +
+                ", imgId=" + imgId +
+                ", prospectAddress='" + prospectAddress + '\'' +
+                ", accidentType='" + accidentType + '\'' +
+                ", prospectDate=" + prospectDate +
+                ", dangerPass='" + dangerPass + '\'' +
+                ", lossInfo='" + lossInfo + '\'' +
+                ", duty='" + duty + '\'' +
+                ", policeDuty='" + policeDuty + '\'' +
+                ", driverName='" + driverName + '\'' +
+                ", driverPhone='" + driverPhone + '\'' +
+                ", driverLicense='" + driverLicense + '\'' +
+                ", driveingLicense='" + driveingLicense + '\'' +
+                ", createtime=" + createtime +
+                ", aCase=" + aCase +
+                '}';
+    }
+
+    public Case getaCase() {
+        return aCase;
+    }
+
+    public void setaCase(Case aCase) {
+        this.aCase = aCase;
+    }
 
     public Integer getProspectId() {
         return prospectId;
