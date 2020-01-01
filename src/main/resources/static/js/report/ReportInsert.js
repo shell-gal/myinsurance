@@ -15,30 +15,39 @@ $(function(){
 		var dispose_type =$("#dispose_type").val();
 		var warranty_number=$("#warranty_number").val();
 		var case_state="已报案";
+		var data={
+			"reporterName":informants,
+			"reporterPhone":informants_tel,
+			"dangerCause":danger_cause,
+			"dangerAddressProvince":province,
+			"dangerAddressCity":city,
+			"detailAddress":road,
+			"dangerDate":reported_time,
+			"roadDirection":road_direction,
+			"dangerType":dispose_type,
+			"caseStatus":"已报案",
+			"warrantyId":warranty_number
+		};
            $.ajax({
-        	    url:"http://localhost:8080/report/api/ReportInsert",
+        	    url:"http://localhost:8080/myinsurance/report/ReportInsert",
         	    type:"post",
         	    dataType:"Json",
-			    data: {
-			        	"informants":informants,
-			        	"informants_tel":informants_tel,
-			        	"danger_cause":danger_cause,
-			        	"province":province,
-			        	"city":city,
-			        	"road":road,
-			        	"reported_time":reported_time,
-			        	"road_direction":road_direction,
-			        	"dispose_type":dispose_type,
-			        	"case_state":"已报案",
-			        	"warranty_number":warranty_number
-			    },
+			   contentType:"application/json;charset=utf-8",
+			    data:JSON.stringify(data) ,
 			    success:function(data){
-			    	alert(data.message);
+        	    	if (data==true) {
+						alert("报案成功！");
+						// 跳转页面report_allquery
+						window.location.href("http://localhost:8080/myinsurance/report/reportallquery");
+					}
+        	    	else {
+						alert("系统错误！");
+					}
+
 			    }
         	   
-           })	
-           //跳转页面report_allquery
-           window.location.replace("report_allquery.jsp");
+           })	;
+
 	})
 	
 	
@@ -50,7 +59,7 @@ function query(){
 	var warranty_number=$("#warranty_number").val();
 	
 	$.ajax({
-		url:"http://localhost:8080/report/api/Asingle",
+		url:"http://localhost:8080/myinsurance/report/Asingle",
 		type:"post",
         dataType: "json",
         data:{"warranty_number":warranty_number
@@ -59,17 +68,17 @@ function query(){
             
         	var tempHtml = "";
         	//each循环拼接
-        	$.each(data.datas,function(i,item){
+        	$.each(data,function(i,item){
         		tempHtml+="<tr>"
-        	    	  +"<td>"+item.warranty_number+"</td>"
-        	    	  +"<td>"+item.policyholders.policyholders_name+"</td>"
-        	    	  +"<td>"+item.policyholders.credentials_number+"</td>"
-        	    	  +"<td>"+item.recognizee.recognizee_name+"</td>"
-        	    	  +"<td>"+item.recognizee.tel+"</td>"
-        	    	  +"<td>"+item.insurance_begin_date+"</td>"
-        	    	  +"<td>"+item.insurance_end_date+"</td>"
-        	    	  +"<td>"+item.sail_number+"</td>"
-        	    	  +"<td>"+item.license_number+"</td>"
+        	    	  +"<td>"+item.warrantyId+"</td>"
+        	    	  +"<td>"+item.policyholders.policyholderName+"</td>"
+        	    	  +"<td>"+item.policyholders.policyholderCardid+"</td>"
+        	    	  +"<td>"+item.recognizee.recognizeeName+"</td>"
+        	    	  +"<td>"+item.recognizee.recognizeePhone+"</td>"
+        	    	  +"<td>"+render(item.insuranceBeginDate)+"</td>"
+        	    	  +"<td>"+render(item.insuranceEndDate)+"</td>"
+        	    	  +"<td>"+item.dirveingLicense+"</td>"
+        	    	  +"<td>"+item.carNumber+"</td>"
         	    	  +"</tr>";
         	});
         	//把数据拼接到表格

@@ -4,6 +4,8 @@ var pages = 1;
 $(function() {
 
 	queryroles();
+
+	//监听事件，添加角色
 	$("#add").click(function(){
 		addroles()
 	})
@@ -33,11 +35,11 @@ $(function() {
                 alert($(this).val());
         }
     });
-	
-	
-	
-	
-	
+
+
+
+
+
 	role_right_set();
 	
 	del_();
@@ -46,22 +48,22 @@ $(function() {
 // 查询信息
 function queryroles() {
 	$.ajax({
-		url : "http://localhost:8080/rolesmanage/rolesmanageQuery.do",
+		url : "http://localhost:8080/myinsurance/rightmanager/rolesmanageQuery",
 		type : "get",
 		data : {"page":pageNum},
-		contentType : "application/json;charset=utf-8",
+		// contentType : "application/json;charset=utf-8",
 		dataType : "json",
 		success : function(data) {
-			pageNum=data.singerData.pageNum;
-			pages = data.singerData.pages;
+			pageNum=data.pageNum;
+			pages = data.pages;
 			var Html = "";
-			$.each(data.singerData.list,function(i, r) {
+			$.each(data.list,function(i, r) {
 				Html +="<tr class='tr'>"
-					   +"<td>"+r.roleid+"</td>"
-					   +"<td>"+r.rolename +"</td>"
-					   +"<td><input type='button' onclick='find("+r.roleid+",\""+r.rolename+"\")' class='btn btn-primary btn-sm' data-toggle='modal' data-target='#myModal' value='赋予权限'>&nbsp;&nbsp;" +
-					  "<input type='button' onclick='del_right("+r.roleid+",\""+r.rolename+"\")' class='btn btn-primary btn-sm' data-toggle='modal' data-target='.ModalOfRight' value='取消权限'>&nbsp;&nbsp;" +		
-					   "<input type='button' onclick='del("+r.roleid+")' class='btn btn-primary btn-sm'  value='删除角色'></td>"
+					   +"<td>"+r.roleId+"</td>"
+					   +"<td>"+r.roleName +"</td>"
+					   +"<td><input type='button' onclick='find("+r.roleId+",\""+r.roleName+"\")' class='btn btn-primary btn-sm' data-toggle='modal' data-target='#myModal' value='赋予权限'>&nbsp;&nbsp;" +
+					  "<input type='button' onclick='del_right("+r.roleId+",\""+r.roleName+"\")' class='btn btn-primary btn-sm' data-toggle='modal' data-target='.ModalOfRight' value='取消权限'>&nbsp;&nbsp;" +
+					   "<input type='button' onclick='del("+r.roleId+")' class='btn btn-primary btn-sm'  value='删除角色'></td>"
 					   +"</tr>"
 				});
 			$(".tr").remove();
@@ -75,19 +77,21 @@ function queryroles() {
 	});
 }
 
+//查询用户已有权限
 function find(data,data2){
     $("#b").val(data);
     $("#role_name").html(data2);
     
     $.ajax({
-		url:"http://localhost:8080/rolesmanage/getQxOfRoleId.do",
+		url:"http://localhost:8080/myinsurance/rightmanager/getQxOfRoleId",
 		type:"post",
-		data:{"roleid":data},
+		data:{"roleId":data},
 		dataType : "json",
 		success : function(data) {
+			console.log(data);
 			var quanx="";
-			$.each(data.datas,function(i, r) {
-				quanx +=r.rightname+","
+			$.each(data,function(i, r) {
+				quanx +=r.rightName+","
 			});
 			$("#quan_x").html(quanx);
 		},
@@ -100,20 +104,20 @@ function find(data,data2){
 }
 
 
-
+//取消角色拥有权限
 function del_right(data,data2){
 	 $(".roleNumber_del").val(data);
 	 $("#role_nameOfRight").html(data2);
 	    
 	    $.ajax({
-			url:"http://localhost:8080/rolesmanage/getQxOfRoleId.do",
+			url:"http://localhost:8080/myinsurance/rightmanager/getAllRight",
 			type:"post",
-			data:{"roleid":data},
+			data:{"roleId":data},
 			dataType : "json",
 			success : function(data) {
 				var quanx="";
-				$.each(data.datas,function(i, r) {
-					quanx +=r.rightname+","
+				$.each(data,function(i, r) {
+					quanx +=r.rightName+","
 				});
 				$("#quan_xOfRight").html(quanx);
 			},
@@ -132,9 +136,9 @@ function role_right_set(){
 		for(var i=0; i<obj.length; i++){ 
     		if(obj[i].checked){
     			$.ajax({
-	    			url:"http://localhost:8080/rolesmanage/setRoleAndRight.do",
+	    			url:"http://localhost:8080/myinsurance/rightmanager/setRoleAndRight",
 	    			type:"get",
-	    			data:{"roleid":$("#b").val(),"rightid":obj[i].value},
+	    			data:{"roleId":$("#b").val(),"rightId":obj[i].value},
 	    			dataType : "json",
 	    			success : function(data) {
 	    				
@@ -160,24 +164,11 @@ function role_right_set(){
 	
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-//添加权限信息
+//添加角色信息
 function addroles(){
 	var rolename=$("#add_rolename").val();
 	$.ajax({
-		url:"http://localhost:8080/rolesmanage/rolesmanageAdd.do",
+		url:"http://localhost:8080/myinsurance/rightmanager/rolesmanageAdd",
 		type:"post",
 		data:{'rolename':rolename},
 		dataType : "json",
@@ -194,11 +185,11 @@ function addroles(){
 
 //删除角色信息
 function del(data){
-	if(confirm("是否删除权限信息？")){
+	if(confirm("是否删除角色信息？")){
 		$.ajax({
-	  				url:"http://localhost:8080/rolesmanage/rolesmanageDel.do",
+	  				url:"http://localhost:8080/myinsurance/rightmanager/rolesmanageDel",
 	  				type:"get",
-	  				data:{"rightid":data},
+	  				data:{"roleid":data},
 	  				contentType:"application/json;charset=utf-8",
 	  				dataType:"json",
 	  				success:function(data){
@@ -218,17 +209,17 @@ function del(data){
 //获取角色没有的所有权限
 function getAllRight(data){
 	$.ajax({
-		url:"http://localhost:8080/rolesmanage/getAllRight.do",
+		url:"http://localhost:8080/myinsurance/rightmanager/getAllRight",
 		type:"get",
-		data:{"roleid":data},
+		data:{"roleId":data},
 		dataType : "json",
 		success : function(data) {
 			$("#rightAll").html("");
 			var right="";
-			$.each(data.datas,function(i, r) {
+			$.each(data,function(i, r) {
 				
-				right+="<input type='checkbox' class='check' name='check' id='rightb' value='"+r.rightid+"'/>"
-				+r.rightname+"&nbsp;&nbsp;&nbsp;&nbsp;"
+				right+="<input type='checkbox' class='check' name='check' id='rightb' value='"+r.rightId+"'/>"
+				+r.rightName+"&nbsp;&nbsp;&nbsp;&nbsp;"
 				if(i%3==0&i!=0){
 					right+="<br>"
 				}
@@ -241,20 +232,20 @@ function getAllRight(data){
 }
 
 
-
+//查询用户已有权限
 function getRightOfRole(data){
 	$.ajax({
-		url:"http://localhost:8080/rolesmanage/getQxOfRoleId.do",
+		url:"http://localhost:8080/myinsurance/rightmanager/getQxOfRoleId",
 		type:"get",
-		data:{"roleid":data},
+		data:{"roleId":data},
 		dataType : "json",
 		success : function(data) {
 			$("#rightAllOfRight").html("");
 			var right="";
-			$.each(data.datas,function(i, r) {
+			$.each(data,function(i, r) {
 				
-				right+="<input type='checkbox' class='check' name='check_del' id='rightb' value='"+r.rightid+"'/>"
-				+r.rightname+"&nbsp;&nbsp;&nbsp;&nbsp;"
+				right+="<input type='checkbox' class='check' name='check_del' id='rightb' value='"+r.rightId+"'/>"
+				+r.rightName+"&nbsp;&nbsp;&nbsp;&nbsp;"
 				if(i%3==0&i!=0){
 					right+="<br>"
 				}
@@ -268,21 +259,26 @@ function getRightOfRole(data){
 
 
 
-//删除权限信息
+//删除角色权限信息
 function del_(){
 	$("#del_OfRight").click(function(){
 		var obj=document.getElementsByName('check_del');
 		for(var i=0; i<obj.length; i++){ 
     		if(obj[i].checked){
     			$.ajax({
-	    			url:"http://localhost:8080/rolesmanage/delRoleAndRight.do",
+	    			url:"http://localhost:8080/myinsurance/rightmanager/delRoleAndRight",
 	    			type:"get",
-	    			data:{"roleid":$(".roleNumber_del").val(),"rightid":obj[i].value},
+	    			data:{"roleId":$(".roleNumber_del").val(),"rightId":obj[i].value},
 	    			dataType : "json",
 	    			success : function(data) {
-	    				
+	    				if (data==true){
+	    					alert("修改成功");
+						} else {
+							alert("修改失败");
+						}
 	    			},
 	    			error : function() {
+						alert("System error!");
 	    			}
     			});
     		}	

@@ -95,7 +95,8 @@ function updEmployee(){
 	  				success:function(data){
 	  					//判断是否成功并输出提示信息
 	  					if(data.resultstatus==200){
-	  						alert(data.message+",请刷新");
+	  						alert(data.message);
+	  						window.location.href="http://localhost:8080/myinsurance/pages/welcome/loademployee"
 	  					}else{
 	  						alert("修改失败！");
 	  					}

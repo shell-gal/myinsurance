@@ -5,6 +5,7 @@ import com.cq.myinsurance.dao.UserMapper;
 import com.cq.myinsurance.pojo.Role;
 import com.cq.myinsurance.pojo.User;
 import com.cq.myinsurance.service.UserService;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -47,19 +48,29 @@ public class UserServiceImpls implements UserService {
 
 //    修改密码
     @Override
-    public boolean updatepwd(String pwd, String accountPwd, HttpSession session) {
-        if (pwd!=null&&accountPwd!=null){
-            User currentuser = (User) session.getAttribute("currentuser");
-            User finduser = finduser(currentuser.getAccountNumber(), pwd);
-            if(finduser!=null) {
+    public boolean updatepwd(String pwd, String accountPwd) {
+
+        if (pwd==null){
+              return false;
+        }
+
+        if (accountPwd==null){
+            return false;
+        }
+            User u= (User) SecurityUtils.getSubject().getPrincipal();
+//            User currentuser = (User) session.getAttribute("currentuser");
+            User finduser = finduser(u.getAccountNumber(), pwd);
+            if(finduser==null) {
+                return false;
+            }
                 User user=new User();
-                user.setUserId(finduser.getUserId());
+                user.setUserId(u.getUserId());
                 user.setAccountPwd(accountPwd);
                 int i = userMapper.updateuserByPrimaryKeySelective(user);
-                if (i>0)
+                if (i>0){
                     return true;
-            }
-        }
+                }
+
         return false;
     }
 

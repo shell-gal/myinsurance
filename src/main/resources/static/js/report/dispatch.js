@@ -33,29 +33,31 @@ $(function() {
 
 //查询未查勘案件信息
 function queryReported(page,r_number) {
+	var data={"case_state":"已报案","indexpage":page,"reported_number":r_number};
 	$.ajax({
-		url:"http://localhost:8080/prospect/queryAllReported.do",
-		type:"get",
-		data:{"case_state":"已报案","page":page,"reported_number":r_number},
+		url:"http://localhost:8080/myinsurance/DispatchManagement/queryAllReported",
+		type:"post",
+		data:JSON.stringify(data),
 		contentType:"application/json;charset=utf-8",
 		dataType:"json",
 		success:function(data) {
-			pageNum=data.singerData.pageNum;
-			pages = data.singerData.pages;
+			console.log(data);
+			pageNum=data.pageNum;
+			pages = data.pages;
 			var outHtml="";
-			$.each(data.singerData.list, function(i, d) {
+			$.each(data.list, function(i, d) {
 				outHtml += "<tr class='tr'>"
-					+"<td class='info'>"+d.reported_number+"</td>"
-					+"<td class='info'>"+d.informants+"</td>"
-					+"<td class='info'>"+d.reported_time+"</td>"
-					+"<td class='info'>"+d.province+d.city+d.road+"</td>"
-					+"<td class='info'>"+d.informants+"</td>"
-					+"<td class='info'>"+d.road_direction+"</td>"
-					+"<td class='info'>"+d.informants_tel+"</td>"
+					+"<td class='info'>"+d.caseId+"</td>"
+					+"<td class='info'>"+d.reporterName+"</td>"
+					+"<td class='info'>"+d.createtime+"</td>"
+					+"<td class='info'>"+d.dangerAddressProvince+d.dangerAddressCity+d.detailAddress+"</td>"
+					+"<td class='info'>"+d.reporterPhone+"</td>"
+					+"<td class='info'>"+d.roadDirection+"</td>"
+					+"<td class='info'>"+d.dangerCause+"</td>"
 
-					+"<td class='info'>"+d.case_state+"</td>"
+					+"<td class='info'>"+d.caseStatus+"</td>"
 		 			+"<td class='info'>"
-		 			+"	<button  type='button'  class='btn btn-primary btn-sm' data-toggle='modal' onclick='diaoDu("+d.reported_number+")' data-target='.myModal' >"
+		 			+"	<button  type='button'  class='btn btn-primary btn-sm' data-toggle='modal' onclick='diaoDu("+d.caseId+")' data-target='.myModal' >"
 					+"	 派遣人员"
 					+"	</button>"
 					+"</td>"
@@ -80,14 +82,15 @@ function diaoDu(id){
 //获取勘察员工
 function queryEmpoyee(){
 		$.ajax({
-			url:"http://localhost:8080/employee/getEmployeeOfType.do",
-			type:"get",
+			url:"http://localhost:8080/myinsurance/DispatchManagement/getEmployeeOfType",
+			type:"post",
 			contentType:"application/json;charset=utf-8",
 			dataType:"json",
 			success:function(data){
+				console.log(data);
 				var rolename=document.getElementById("diaoduyuan");
-					$.each(data.datas, function(i, u) {
-					rolename.add(new Option(u.user_number+":"+u.user_name),null); 
+					$.each(data, function(i, u) {
+					rolename.add(new Option(u.userId+":"+u.userName),null);
 					});
 			},
 			error:function(){
@@ -100,9 +103,8 @@ function queryEmpoyee(){
 function paiqian(){
 	$("#paiqian").click(function(){
 		$.ajax({
-			url:"http://localhost:8080/reportapi/diaodu.do",
-			
-			type:"get",
+			url:"http://localhost:8080/myinsurance/DispatchManagement/diaodu",
+			type:"post",
 			data:{"chakan":$("#diaoduyuan").val(),"reported_number":$("#id").val()},
 			contentType:"application/json;charset=utf-8",
 			dataType:"json",

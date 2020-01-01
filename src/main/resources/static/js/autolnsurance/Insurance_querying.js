@@ -51,33 +51,36 @@
 		var policyholders_name = $("input[name='policyholders_name']").val();
 		var recognizee_name = $("input[name='recognizee_name']").val();
 		$.ajax({
-			url : "http://localhost:8080/insurance/insurancequery.do",
+			url : "http://localhost:8080/myinsurance/insurance/insurancequery",
 			type : "post",
-			data: {"pagenum":pagenum,"warranty_number":warranty_number,"policyholders.policyholders_name":policyholders_name,"recognizee.recognizee_name":recognizee_name},
+			data: {"indexpage":pagenum,"warranty_number":warranty_number,"policyholders_name":policyholders_name,"recognizee_name":recognizee_name},
 			dataType : "json",
 
 			success : function(data) {
 				var insurance ="";
-				$("#pagenum").text(data.pageNum);
+				$("#pagenum").text(data.pageNum)
+				console.log(data.list);
 				$.each(data.list,function(i,item){
-					insurance += "<tr style='height: 40px;' class='remove'>"
-									+"<td>"+item['warranty_number']+"</td>"
-									+"<td>"+item.policyholders.policyholders_name+"</td>"
-									+"<td>"+item.recognizee.recognizee_name+"</td>"
-									+"<td>"+item.recognizee.credentials_number+"</td>"
-									+"<td>"+item['license_number']+"</td>"
-									+"<td>"+item['insurance_begin_date']+"</td>"
-									+"<td>"+item['insurance_end_date']+"</td>"
+					console.log(item.policyholders.policyholderName);
+					var insurancehtml= "<tr style='height: 40px;' class='remove'>"
+									+"<td>"+item['warrantyId']+"</td>"
+									+"<td>"+item.policyholders.policyholderName+"</td>"
+									+"<td>"+item.recognizee.recognizeeName+"</td>"
+									+"<td>"+item.recognizee.recognizeeCardid+"</td>"
+									+"<td>"+item['carNumber']+"</td>"
+									+"<td>"+render(item['insuranceBeginDate'])+"</td>"
+									+"<td>"+render(item['insuranceEndDate'])+"</td>"
 									+"<td>"
-									+"<a href='Modification_insurance.jsp?warranty_number="+item['warranty_number']+"&pageNum="+data.pageNum+"'>"
+									+"<a href='Modificationinsurance?warranty_number="+item['warrantyId']+"&pageNum="+data.pageNum+"'>"
 									+"<button type='button' class='btn btn-primary' style='height: 35px;'>修改</button></a>&nbsp;"
-									+"<a href='Case_message.jsp?warranty_number="+item['warranty_number']+"'>"
+									+"<a href='Casemessage?warranty_number="+item['warrantyId']+"'>"
 									+"<button type='button' class='btn btn-primary' style='height: 35px;'>案件</button></a>&nbsp;"
-									+"<button type='button' class='btn btn-primary'  data-toggle='modal' onclick='baodanid("+item['warranty_number']+")' data-target='#myModal' style='height: 35px;'>续保</button>&nbsp;"
-									+"<a href='continue_insure.jsp?warranty_number="+item['warranty_number']+"'>"
+									+"<button type='button' class='btn btn-primary'  data-toggle='modal' onclick='baodanid("+item['warrantyId']+")' data-target='#myModal' style='height: 35px;'>续保</button>&nbsp;"
+									+"<a href='continue_insure.jsp?warranty_number="+item['warrantyId']+"'>"
 									+"<button type='button' class='btn btn-primary' style='height: 35px;'>继续投保</button></a>"
 									+"</td>"
 									+"</tr>"
+					insurance+=insurancehtml;
 				});
 				$(".remove").remove();
 				$("#append").append(insurance);
@@ -87,4 +90,17 @@
 			}
 			
 		});
+	}
+
+
+
+	function render(time) {
+		var d = new Date(time);
+		var times=d.getFullYear() + '-' + (d.getMonth() + 1) + '-';
+	    var day=d.getDate();
+	    if (parseInt(day)<10){
+	    	day='0'+day;
+		}
+	    times+=day;
+		return times;
 	}

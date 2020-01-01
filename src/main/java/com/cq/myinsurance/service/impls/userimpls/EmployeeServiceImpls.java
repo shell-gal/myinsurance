@@ -37,9 +37,13 @@ public class EmployeeServiceImpls implements EmployeeService {
             userLoad.setIndexpage(1);
         }
         if (userLoad.getPagesize()==null){
-            userLoad.setPagesize(1);
+            userLoad.setPagesize(10);
         }
-        if (userLoad.getFlag()!=null&&userLoad.getParam()!=null){
+        if (userLoad.getUserstatus()==null){
+            userLoad.setUserstatus(1);
+        }
+
+        if (userLoad.getFlag()!=null&&userLoad.getParam()!=null&&userLoad.getParam()!=""){
             if (userLoad.getFlag()==1){
 //                根据用户名查
                  userLoad.setUserName(userLoad.getParam());

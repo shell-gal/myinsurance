@@ -22,24 +22,82 @@
     <result column="hepei_id" jdbcType="INTEGER" property="hepeiId" />
     <result column="lipei_id" jdbcType="INTEGER" property="lipeiId" />
     <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+
+    <association property="policyholders" javaType="com.cq.myinsurance.pojo.Policyholder">
+      <result column="policyholder_name" jdbcType="VARCHAR" property="policyholderName"></result>
+    </association>
+
+
+    <association property="recognizee" javaType="com.cq.myinsurance.pojo.Recognizee">
+      <result column="recognizee_name" jdbcType="VARCHAR" property="recognizeeName"></result>
+    </association>
+
+    <association property="warranty" javaType="com.cq.myinsurance.pojo.Warranty">
+         <result column="car_number" jdbcType="VARCHAR" property="carNumber"></result>
+    </association>
   </resultMap>
   <sql id="Base_Column_List">
     case_id, reporter_name, reporter_phone, danger_cause, danger_address_province, danger_address_city, 
     detail_address, road_direction, danger_date, danger_type, case_status, warranty_id, 
     jiean_id, kanca_id, dingsun_id, hesun_id, lisuan_id, hepei_id, lipei_id, createtime
   </sql>
+
+
+  <select id="selectCaseByEx" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from case_info
+    <where>
+      <if test="case_state!=null and case_state!=''">
+        case_status=#{case_state}
+      </if>
+      <if test="reported_number!=null and reported_number!=''">
+        and case_id=#{reported_number}
+      </if>
+    </where>
+  </select>
+  <select id="selectByWarantyid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+      select case_id,reporter_name,danger_date,danger_address_province,danger_address_city,detail_address,case_status
+      from case_info
+      where warranty_id=#{warranty_number}
+  </select>
+
+
+  <select id="selectcase" parameterType="map" resultMap="BaseResultMap">
+      SELECT c.case_id,c.reporter_name,c.reporter_phone,w.car_number, p.policyholder_name,r.recognizee_name,c.danger_cause,c.danger_address_province,c.danger_address_city,c.detail_address,c.danger_date,c.danger_type
+      from case_info c
+      left join warranty_info w
+      on c.warranty_id=w.warranty_id
+      left join policyholder_info p
+      on p.policyholder_id=w.policyholder_id
+      left join recognizee_info r
+      on r.recognizee_id=w.recognizee_id
+    <where>
+      <if test="jieanid!=null and jieanid!=''" >
+        jiean_id=#{jieanid}
+      </if>
+      <if test="reported_number!=null and reported_number!=''">
+        case_id=#{reported_number}
+      </if>
+    </where>
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from case_info
     where case_id = #{caseId,jdbcType=INTEGER}
   </select>
+
+
   <select id="selectByStatus" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from case_info
     where case_status = #{status,jdbcType=VARCHAR}
   </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from case_info
     where case_id = #{caseId,jdbcType=INTEGER}
@@ -60,6 +118,9 @@
       #{hesunId,jdbcType=INTEGER}, #{lisuanId,jdbcType=INTEGER}, #{hepeiId,jdbcType=INTEGER}, 
       #{lipeiId,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP})
   </insert>
+
+
+
   <insert id="insertSelective" parameterType="com.cq.myinsurance.pojo.Case">
     insert into case_info
     <trim prefix="(" suffix=")" suffixOverrides=",">

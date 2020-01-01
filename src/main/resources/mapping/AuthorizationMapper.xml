@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cq.myinsurance.dao.AuthorizationMapper">
+
+    <resultMap id="BaseResultMap" type="com.cq.myinsurance.pojo.Right">
+        <id column="right_id" jdbcType="INTEGER" property="rightId" />
+        <result column="right_name" jdbcType="VARCHAR" property="rightName" />
+    </resultMap>
+
+    <resultMap id="BaseMap" type="com.cq.myinsurance.pojo.User">
+        <id column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    </resultMap>
+
+    <!--查询角色是勘察员的用户id以及用户名-->
+    <select id="selectUserByrolename" resultMap="BaseMap">
+        select user_id,user_name from user_info
+        where user_id in (
+        select user_id from user_role_info
+        where role_id =
+        (
+        select role_id from role_info where role_name='勘察员'
+        )
+        )
+    </select>
+
     <!--查询用户所拥有的角色-->
     <select id="selectRolesByuserid" parameterType="java.lang.Integer" resultType="java.lang.String">
      select role_name roleName from role_info
@@ -52,4 +75,47 @@
             </if>
         </trim>
     </insert>
+
+
+    <!--查询角色拥有的权限-->
+    <select id="selectRightByRoleid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select  right_id,right_name from right_info where right_id in
+   (
+  select right_id from  role_right_info where role_id = #{roleId,jdbcType=INTEGER}
+   )
+  </select>
+
+    <!--查询角色未拥有的权限-->
+    <select id="selectunRightByRoleid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select  right_id,right_name from right_info where right_id  not in
+   (
+  select right_id from  role_right_info where role_id = #{roleId,jdbcType=INTEGER}
+   )
+  </select>
+
+    <!--删除角色拥有的权限-->
+    <delete id="deleteallRightByroleid" parameterType="java.lang.Integer">
+        delete from role_right_info
+        where role_id=#{roleId,jdbcType=INTEGER}
+    </delete>
+
+    <!--取消用户的权限-->
+    <!--删除角色拥有的权限-->
+    <delete id="deleteRightByroleid">
+        delete from role_right_info
+        where role_id=#{roleId,jdbcType=INTEGER}
+        and right_id=#{rightId,jdbcType=INTEGER}
+    </delete>
+
+    <!--增加角色的权限-->
+    <insert id="insert">
+          insert  into role_right_info(role_id,right_id) values
+              (#{roleId},#{rightId})
+    </insert>
+
+    <!--根据权限id，删除权限时，删除角色拥有的权限-->
+    <delete id="deleteByrightid">
+        delete from role_right_info
+        where right_id=#{rightId,jdbcType=INTEGER}
+    </delete>
 </mapper>

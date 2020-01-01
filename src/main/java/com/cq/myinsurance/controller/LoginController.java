@@ -62,8 +62,8 @@ public class LoginController {
 //    修改密码
     @RequestMapping("/updatepwd")
     @ResponseBody
-    public Result updatepwd(String pwd,String newPwd,HttpSession session){
-        boolean b = userService.updatepwd(pwd, newPwd, session);
+    public Result updatepwd(String pwd,String newPwd){
+        boolean b = userService.updatepwd(pwd, newPwd);
         if (b){
             return new Result(200,"修改成功");
         }
@@ -71,11 +71,10 @@ public class LoginController {
     }
 
 //   退出登录
-     @RequestMapping("loginout")
-     @ResponseBody
-    public Result loginout(){
+     @RequestMapping("/loginout")
+    public String loginout(){
         SecurityUtils.getSubject().logout();
-        return new Result(200,"退出登录");
+         return "login";
      }
 
 }

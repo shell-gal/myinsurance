@@ -35,6 +35,27 @@ public class Warranty {
 
     private Date createtime;
 
+
+    private Policyholder policyholders; // 投保人-外键
+    private Recognizee recognizee; // 被保人-外键
+
+
+    public Policyholder getPolicyholders() {
+        return policyholders;
+    }
+
+    public void setPolicyholders(Policyholder policyholders) {
+        this.policyholders = policyholders;
+    }
+
+    public Recognizee getRecognizee() {
+        return recognizee;
+    }
+
+    public void setRecognizee(Recognizee recognizee) {
+        this.recognizee = recognizee;
+    }
+
     public Integer getWarrantyId() {
         return warrantyId;
     }

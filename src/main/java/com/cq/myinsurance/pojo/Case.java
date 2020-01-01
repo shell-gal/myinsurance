@@ -21,7 +21,9 @@ public class Case {
 
     private String roadDirection;
 
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date dangerDate;
+
 
     private String dangerType;
 
@@ -44,6 +46,35 @@ public class Case {
     private Integer lipeiId;
 
     private Date createtime;
+
+//    外键
+    private Policyholder policyholders;
+    private Recognizee recognizee;
+    private  Warranty warranty;
+
+    public Policyholder getPolicyholders() {
+        return policyholders;
+    }
+
+    public void setPolicyholders(Policyholder policyholders) {
+        this.policyholders = policyholders;
+    }
+
+    public Recognizee getRecognizee() {
+        return recognizee;
+    }
+
+    public void setRecognizee(Recognizee recognizee) {
+        this.recognizee = recognizee;
+    }
+
+    public Warranty getWarranty() {
+        return warranty;
+    }
+
+    public void setWarranty(Warranty warranty) {
+        this.warranty = warranty;
+    }
 
     @Override
     public String toString() {

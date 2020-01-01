@@ -16,20 +16,22 @@
 	function casemessage(pagenum){
 		 var warranty_number = $("input[name='warranty_number']").val();
 			$.ajax({
-				url : "/insurance/reportedinfo.do",
+				url : "http://localhost:8080/myinsurance/insurance/reportedinfo",
 				type : "post",
-				data: {"warranty_number":warranty_number,"pagenum":pagenum},
+				data: {"warranty_number":warranty_number,"indexpage":pagenum},
 				dataType : "json",
 				success : function(data) {
 					var pagenum = $("#pagenum").text(data.pageNum);
 					case_message = "";
+					console.log(data.list);
 					$.each(data.list,function(i,item){
+						var city=item['dangerAddressProvince']+item['dangerAddressCity']+item['detailAddress'];
 						case_message += "<tr class='remove'>"
-										+"<td>"+item['reported_number']+"</td>"
-										+"<td>"+item['informants']+"</td>"
-										+"<td>"+item['reported_time']+"</td>"
-										+"<td>"+item['city']+"</td>"
-										+"<td>"+item['case_state']+"</td>"
+										+"<td>"+item['caseId']+"</td>"
+										+"<td>"+item['reporterName']+"</td>"
+										+"<td>"+render(item['dangerDate'])+"</td>"
+										+"<td>"+city+"</td>"
+										+"<td>"+item['caseStatus']+"</td>"
 										+"</tr>"
 					});
 					$(".remove").remove();

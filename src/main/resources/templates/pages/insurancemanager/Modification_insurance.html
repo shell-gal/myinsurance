@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 	<head>
 		<meta charset="UTF-8">
 		<title>修改保单</title>
 			<!-- Bootstrap -->
 	<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
 
 	<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
-	<link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+	<link th:href="@{/css/bootstrap-theme.min.css}" rel="stylesheet" type="text/css" />
 
-	<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
-	<script src="../../js/autolnsurance/Modification_insurance.js"></script>
+	<script type="text/javascript" th:src="@{/js/jquery-1.11.1.js}"></script>
 	</head>
 	<style>
 
@@ -32,7 +31,7 @@
 	</style>
 	<body>
 	<!-- 获取保单编号warranty_number -->
-	<input type="hidden" name="baodanid" value="${param.warranty_number}">
+	<input type="hidden" name="baodanid" th:value="${warranty_number}">
 	<!-- 保单id -->
 		<input name="warranty_number" type="hidden"/>
 	<!-- 投保人id -->
@@ -280,10 +279,10 @@
 	
 	<div>
 		<!--获取当前页 -->
-		<input type="hidden" id="pagenum" value="${param.pageNum}" />
+		<input type="hidden" id="pagenum" th:value="${pageNum}" />
 	</div>
 	</body>
-
+	<script th:src="@{/js/autolnsurance/Modification_insurance.js}"></script>
 </html>
 
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 	<head>
 		<meta charset="utf-8" />
@@ -8,18 +8,18 @@
 
 	<!-- Bootstrap -->
 	<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
 
 	<!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
-	<link href="css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+	<link th:href="@{/css/bootstrap-theme.min.css}" rel="stylesheet" type="text/css" />
 	
-	<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+	<script type="text/javascript" th:src="@{/js/jquery-1.11.1.js}"></script>
 	
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" th:src="@{/js/js/bootstrap.min.js}"></script>
 	
 
-	<script src="../../js/autolnsurance/Insurance_querying.js"></script>
+	<script th:src="@{/js/autolnsurance/Insurance_querying.js}"></script>
 	<style>
 		#height {
 			height: 30px;
@@ -62,7 +62,7 @@
 			
 			<div style="height: 350px;">
 				<table class="table table-hover" id="append" style="width: 100%;text-align: center;">
-						<tr id="biaoti" style="background-color:#F2F2F2;font-family: '黑体'" style="height: 40px;">
+						<tr id="biaoti" style="background-color:#F2F2F2;font-family: '黑体';height: 40px;">
 							<td><h5>保单编号</h5></td>
 							<td><h5>投保人姓名</h5></td>
 							<td><h5>被保人姓名</h5></td>

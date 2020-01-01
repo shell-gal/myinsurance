@@ -14,17 +14,18 @@
     select 
     <include refid="Base_Column_List" />
     from role_info
-    where role_id = #{roleId,jdbcType=INTEGER}
+    where role_id = #{roleId,jdbcType=INTEGER} and role_status=1
 </select>
 
   <select id="selectallroles"  resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from role_info
+    where role_status=1
   </select>
 
   <select id="selectRoles"  resultType="java.lang.String">
-     select role_name roleName from role_info
+     select role_name roleName from role_info and role_status=1
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -63,6 +64,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.cq.myinsurance.pojo.Role">
     update role_info
     <set>

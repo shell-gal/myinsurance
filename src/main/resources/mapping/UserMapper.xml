@@ -35,14 +35,15 @@
     <include refid="Base_List" />
     from user_info
    <where>
-     <if test="userName!=null">
-       user_name=#{userName,jdbcType=VARCHAR}
+       user_status=1
+     <if test="userName!=null and userName!=''">
+        and user_name=#{userName,jdbcType=VARCHAR}
      </if>
-     <if test="userId!=null">
-       user_id=#{userId,jdbcType=INTEGER}
+     <if test="userId!=null and userId!=''">
+       and user_id=#{userId,jdbcType=INTEGER}
      </if>
-     <if test="depart!=null">
-       depart=#{depart,jdbcType=VARCHAR}
+     <if test="depart!=null and depart!=''">
+       and depart=#{depart,jdbcType=VARCHAR}
      </if>
    </where>
   </select>
@@ -51,7 +52,7 @@
     select 
     <include refid="Base_Column_List" />
     from user_info
-    where user_id = #{userId,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER} and  user_status=1
   </select>
 
   <!--登录-->
@@ -59,16 +60,17 @@
     select
     <include refid="Base_Column_List" />
     from user_info
-    where account_number = #{account_number,jdbcType=VARCHAR}
+    where account_number = #{account_number,jdbcType=VARCHAR} and  user_status=1
   </select>
 
   <!--根据用户账户名和密码查询用户-->
-  <select id="finduser" resultType="com.cq.myinsurance.pojo.User">
+  <select id="finduser" parameterType="java.util.Map" resultType="com.cq.myinsurance.pojo.User">
     select
     <include refid="Base_Column_List" />
     from user_info
     where account_number = #{accountNumber,jdbcType=VARCHAR}
-    and account_pwd== #{accountPwd,jdbcType=VARCHAR}
+    and account_pwd = #{accountPwd,jdbcType=VARCHAR}
+    and  user_status=1
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -230,10 +232,10 @@
   <update id="updateuserByPrimaryKeySelective" parameterType="com.cq.myinsurance.pojo.User">
     update user_info
     <set>
-      <if test="userStatus != null">
+      <if test="userStatus != null and userStatus!=''">
         user_status = #{userStatus,jdbcType=VARCHAR},
       </if>
-      <if test="accountPwd!=null">
+      <if test="accountPwd!=null and accountPwd!=''">
         account_pwd=#{accountPwd,jdbcType=VARCHAR},
       </if>
     </set>

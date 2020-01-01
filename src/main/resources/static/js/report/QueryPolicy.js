@@ -44,36 +44,36 @@ function query(page){
 	var license_number=$("#license_number").val();
 	var credentials_number=$("#credentials_number").val();
 	$.ajax({
-		url:"http://localhost:8080/report/api/QueryPolicy",
+		url:"http://localhost:8080/myinsurance/report/QueryPolicy",
 		type:"GET",
 		dataType: "json",
 		data:{
 			"warranty_number":warranty_number,
 			"license_number":license_number,
 			"credentials_number":credentials_number,
-			"page":page
+			"indexpage":page
 		},
         success:function(data) {
+			console.log(data.list);
         	//判断data.result是否为ture
-        	if(data.result){
         		//获取pagenum的属性
-	        	pageNum=data.singerData.pageNum;
+	        	pageNum=data.pageNum;
 	        	//获取pages的属性
-	        	pages=data.singerData.pages;
+	        	pages=data.pages;
 	        	var tempHtml ="";
 	        	//each循环拼接
-	        	$.each(data.singerData.list,function(i,item){
+	        	$.each(data.list,function(i,item){
 	      	      tempHtml+="<tr>"
-	      	    	  +"<td>"+item.warranty_number+"</td>"
-	      	    	  +"<td>"+item.policyholders.policyholders_name+"</td>"
-	      	    	  +"<td>"+item.policyholders.credentials_number+"</td>"
-	      	    	  +"<td>"+item.recognizee.recognizee_name+"</td>"
-	      	    	  +"<td>"+item.recognizee.tel+"</td>"
-	      	    	  +"<td>"+item.insurance_begin_date+"</td>"
-	      	    	  +"<td>"+item.insurance_end_date+"</td>"
-	      	    	  +"<td>"+item.sail_number+"</td>"
-	      	    	  +"<td>"+item.license_number+"</td>"
-	      	    	  +"<td><a href='report_insert.jsp?warranty_number="+item.warranty_number+"'>报案</a></td>"
+	      	    	  +"<td>"+item.warrantyId+"</td>"
+	      	    	  +"<td>"+item.policyholders.policyholderName+"</td>"
+	      	    	  +"<td>"+item.policyholders.policyholderCardid+"</td>"
+	      	    	  +"<td>"+item.recognizee.recognizeeName+"</td>"
+	      	    	  +"<td>"+item.recognizee.recognizeePhone+"</td>"
+	      	    	  +"<td>"+render(item.insuranceBeginDate)+"</td>"
+	      	    	  +"<td>"+render(item.insuranceEndDate)+"</td>"
+	      	    	  +"<td>"+item.dirveingLicense+"</td>"
+	      	    	  +"<td>"+item.carNumber+"</td>"
+	      	    	  +"<td><a href='reportinsert?warranty_number="+item.warrantyId+"'>报案</a></td>"
 	      	    	  +"</tr>";
 	      	      
 	        		});
@@ -85,9 +85,6 @@ function query(page){
 		          $("#firstpage").html(pageNum);
 		          //把pages放到页面
 		          $("#lastpage").html(pages)
-        	}else{
-        		alert(data.message);
-        	}
         } ,
 		
 		error:function(){

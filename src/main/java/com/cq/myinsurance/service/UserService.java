@@ -10,9 +10,8 @@ import java.util.Set;
 
 public interface UserService {
     User login(String username);
-
     User finduser(String accountNumber,String accountPwd);
-    boolean updatepwd(String pwd,String accountPwd, HttpSession session);
+    boolean updatepwd(String pwd,String accountPwd);
     List<String> loadRoleByid(Integer userid);
     List<String> loadRightByid(Integer userid);
 }

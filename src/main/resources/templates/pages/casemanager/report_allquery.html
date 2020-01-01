@@ -1,27 +1,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <!-- Bootstrap -->
-    <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link th:href="@{/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
     <!-- NProgress -->
    
     <!-- iCheck -->
-   
-	
-    <!-- bootstrap-progressbar 
-    <link href="../../../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-    <!-- JQVMap 
-    <link href="../../../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
-    <!-- bootstrap-daterangepicker 
-    <link href="../../../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
-    <!-- Custom Theme Style 
-    <link href="../../../build/css/custom.min.css" rel="stylesheet">
-    -->
     <style type="text/css">
     
     form{
@@ -35,7 +24,8 @@
 }
     	</style>
 		<title></title>
-	</head>
+	<script src="../../../static/js/report/AllReportQuery.js"></script>
+</head>
 	<body style="background: #F7F7F7;">
 		
 		<form class="form-inline">
@@ -73,6 +63,6 @@
 			<li><a href="#" id="jia">&raquo;</a></li>
 		</ul>
 	</body>
-	<script src="../../js/jquery-1.8.3.js"></script>
-	<script src="../../js/report/AllReportQuery.js"></script>
+	<script th:src="@{/js/jquery-1.8.3.js}"></script>
+	<script th:src="@{/js/report/AllReportQuery.js}"></script>
 </html>

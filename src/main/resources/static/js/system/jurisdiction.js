@@ -41,21 +41,21 @@ $(function() {
 function queryjurisdiction() {
 	var rightid=$("#right_id").val();
 	$.ajax({
-		url : "http://localhost:8080/Jurisdiction/jurisdictionQuery.do",
+		url : "http://localhost:8080/myinsurance/Jurisdiction/jurisdictionQuery",
 		type : "get",
 		data : {'rightid':rightid,"page":pageNum},
-		contentType : "application/json;charset=utf-8",
+		// contentType : "application/json;charset=utf-8",
 		dataType : "json",
 		success : function(data) {
-			pageNum=data.singerData.pageNum;
-			pages = data.singerData.pages;
+			pageNum=data.pageNum;
+			pages = data.pages;
 			var Html = "";
-			$.each(data.singerData.list,function(i, r) {
+			$.each(data.list,function(i, r) {
 				Html +="<tr class='tr'>"
-					   +"<td>"+r.rightid+"</td>"
-					   +"<td>"+r.rightname +"</td>"
-					   +"<td class='col-md-3'><input type='button' class='btn btn-primary' onclick='del("+r.rightid+")' value='删除'/>&nbsp;<input type='button' data-toggle='modal' " +
-					   		"data-target='.myModal_upd' class='btn btn-primary' onclick='find("+r.rightid+")' value='修改'/></td>"
+					   +"<td>"+r.rightId+"</td>"
+					   +"<td>"+r.rightName +"</td>"
+					   +"<td class='col-md-3'><input type='button' class='btn btn-primary' onclick='del("+r.rightId+")' value='删除'/>&nbsp;<input type='button' data-toggle='modal' " +
+					   		"data-target='.myModal_upd' class='btn btn-primary' onclick='find("+r.rightId+")' value='修改'/></td>"
 					   +"</tr>"
 
 				});
@@ -80,7 +80,7 @@ function find(data){
 function updjurisdiction(){
 	$("#upd_").click(function(){
 	$.ajax({
-		url:"http://localhost:8080/Jurisdiction/jurisdictionUpd.do",
+		url:"http://localhost:8080/myinsurance/Jurisdiction/jurisdictionUpd",
 		type:"post",
 		data:{
 			'rightname':$("#quanxian_name").val(),
@@ -105,7 +105,7 @@ function updjurisdiction(){
 function addjurisdiction(){
 	var rightName=$("#add_rightname").val();
 	$.ajax({
-		url:"http://localhost:8080/Jurisdiction/jurisdictionAdd.do",
+		url:"http://localhost:8080/myinsurance/Jurisdiction/jurisdictionAdd",
 		type:"post",
 		data:{'rightname':rightName},
 		dataType : "json",
@@ -124,10 +124,10 @@ function addjurisdiction(){
 function del(data){
 	if(confirm("是否删除权限信息？")){
 		$.ajax({
-	  				url:"http://localhost:8080/Jurisdiction/deleteRights",
+	  				url:"http://localhost:8080/myinsurance/Jurisdiction/deleteRights",
 	  				type:"get",
 	  				data:{"rightid":data},
-	  				contentType:"application/json;charset=utf-8",
+	  				// contentType:"application/json;charset=utf-8",
 	  				dataType:"json",
 	  				success:function(data){
 	  					if(data==true){

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cq.myinsurance.dao.WarrantyMapper">
+    <resultMap id="Basemap" type="com.cq.myinsurance.pojo.Warranty">
+        <id column="warranty_id" jdbcType="INTEGER" property="warrantyId" />
+        <result column="policyholder_id" jdbcType="INTEGER" property="policyholderId" />
+        <result column="recognizee_id" jdbcType="INTEGER" property="recognizeeId" />
+        <result column="insurance_begin_date" jdbcType="TIMESTAMP" property="insuranceBeginDate" />
+        <result column="insurance_end_date" jdbcType="TIMESTAMP" property="insuranceEndDate" />
+        <result column="policy_money" jdbcType="INTEGER" property="policyMoney" />
+        <result column="premium_money" jdbcType="INTEGER" property="premiumMoney" />
+        <result column="payment_time" jdbcType="TIMESTAMP" property="paymentTime" />
+        <result column="sign_time" jdbcType="TIMESTAMP" property="signTime" />
+        <result column="car_number" jdbcType="VARCHAR" property="carNumber" />
+        <result column="factory_number" jdbcType="VARCHAR" property="factoryNumber" />
+        <result column="engine_number" jdbcType="VARCHAR" property="engineNumber" />
+        <result column="frame_number" jdbcType="VARCHAR" property="frameNumber" />
+        <result column="dirveing_license" jdbcType="VARCHAR" property="dirveingLicense" />
+        <result column="car_owner_name" jdbcType="VARCHAR" property="carOwnerName" />
+        <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+
+        <association property="recognizee" javaType="com.cq.myinsurance.pojo.Recognizee">
+            <result column="recognizee_name" property="recognizeeName"></result>
+            <result column="recognizee_cardid" property="recognizeeCardid"></result>
+            <result column="recognizee_id" property="recognizeeId"></result>
+            <result column="recognizee_phone" property="recognizeePhone"></result>
+            <result column="recognizee_sex" property="recognizeeSex"></result>
+            <result column="recognizee_email" property="recognizeeEmail"></result>
+            <result column="recognizee_account" property="recognizeeAccount"></result>
+            <result column="recognizee_address_province" property="recognizeeAddressProvince"></result>
+            <result column="recognizee_address_city" property="recognizeeAddressCity"></result>
+            <result column="recognizee_driverlicense" property="recognizeeDriverlicense"></result>
+        </association>
+
+        <association property="policyholders" javaType="com.cq.myinsurance.pojo.Policyholder">
+            <result column="policyholder_name" property="policyholderName"></result>
+            <result column="policyholder_phone" property="policyholderPhone"></result>
+            <result column="policyholder_id" property="policyholderId"></result>
+            <result column="policyholder_address_province" property="policyholderAddressProvince"></result>
+            <result column="policyholder_address_city" property="policyholderAddressCity"></result>
+            <result column="policyholder_sex" property="policyholderSex"></result>
+            <result column="policyholder_cardid" property="policyholderCardid"></result>
+        </association>
+    </resultMap>
+
+    <select id="selectWarranty" resultMap="Basemap" parameterType="map">
+            select w.car_number,w.dirveing_license,w.warranty_id,w.car_number,w.insurance_begin_date,w.insurance_end_date,p.policyholder_name,p.policyholder_cardid,p.policyholder_phone,r.recognizee_name,r.recognizee_cardid,r.recognizee_phone
+            from warranty_info w
+            left join recognizee_info r
+            on w.recognizee_id=r.recognizee_id
+            left join
+            policyholder_info p
+            on w.policyholder_id=p.policyholder_id
+
+            <where>
+                <if test="warranty_number !=null and warranty_number !=0">
+                     w.warranty_id=#{warranty_number}
+                </if>
+                <if test="policyholders_name !=null and policyholders_name !=''">
+                     p.policyholder_name=#{policyholders_name}
+                </if>
+                <if test="recognizee_name != null  and recognizee_name !=''">
+                     r.recognizee_name=#{recognizee_name}
+                </if>
+                <if test="credentials_number !=null and credentials_number !=''">
+                    p.policyholder_cardid=#{credentials_number}
+                </if>
+                <if test="license_number != null  and license_number !=''">
+                    w.car_number=#{license_number}
+                </if>
+            </where>
+    </select>
+
+
+    <select id="selectWarantyOne" resultMap="Basemap" parameterType="java.lang.Integer">
+        select w.warranty_id,w.car_number,w.insurance_begin_date,w.insurance_end_date,w.premium_money,w.policy_money,w.payment_time,w.sign_time,w.car_number,w.factory_number,
+        w.engine_number,w.frame_number,w.dirveing_license,w.car_owner_name,
+        p.policyholder_name,p.policyholder_phone,p.policyholder_id,p.policyholder_address_province,p.policyholder_address_city,p.policyholder_sex,p.policyholder_cardid,
+        r.recognizee_name,r.recognizee_cardid,r.recognizee_id,r.recognizee_phone,r.recognizee_sex,r.recognizee_email,r.recognizee_account,r.recognizee_address_province,r.recognizee_address_city,
+        r.recognizee_driverlicense
+        from warranty_info w
+        left join recognizee_info r
+        on w.recognizee_id=r.recognizee_id
+        left join
+        policyholder_info p
+        on w.policyholder_id=p.policyholder_id
+        where warranty_id=#{warrantyId}
+    </select>
+</mapper>

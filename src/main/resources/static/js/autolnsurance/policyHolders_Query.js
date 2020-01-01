@@ -33,7 +33,7 @@ $(function(){
 
 function query(page){
 	$.ajax({
-		url:"http://localhost:8080/autoInsurance/api/query",
+		url:"http://localhost:8080/autoInsurance/api/queryPolicyholder",
 		data:{"page":page},
 		type:"post",
 		dataType: "json",

@@ -1,5 +1,6 @@
 package com.cq.myinsurance.service.impls.userimpls;
 
+import com.cq.myinsurance.dao.AuthorizationMapper;
 import com.cq.myinsurance.dao.RightMapper;
 import com.cq.myinsurance.pojo.Right;
 import com.cq.myinsurance.pojo.Role;
@@ -17,6 +18,9 @@ public class RightServiceImpls implements RightService {
 
     @Resource
     RightMapper rightMapper;
+
+    @Resource
+    AuthorizationMapper authorizationMapper;
 
 //    查询权限名称
     @Override
@@ -39,7 +43,7 @@ public class RightServiceImpls implements RightService {
 
 //分页查询权限
     @Override
-    public PageInfo loadroles(Integer indexpage, Integer pagesize) {
+    public PageInfo loadright(Integer indexpage, Integer pagesize) {
         if (indexpage==null)
             indexpage=1;
         if (pagesize==null)
@@ -56,37 +60,51 @@ public class RightServiceImpls implements RightService {
 
 //    修改权限
     @Override
-    public boolean updateright(Right right) {
-        if (right!=null){
+    public boolean updateright(String rightname,Integer rightid) {
+        if (rightname==null){
+            return false;
+        }
+        if (rightid==null){
+            return false;
+        }
+        Right right=new Right();
+        right.setRightName(rightname);
+        right.setRightId(rightid);
             int i = rightMapper.updateByPrimaryKeySelective(right);
             if (i>0){
                 return true;
             }
-        }
         return false;
     }
 
 //    增加权限
     @Override
-    public boolean addright(Right right) {
-        if (right!=null){
+    public boolean addright(String rightname) {
+         if (rightname==null){
+             return false;
+         }
+         Right right=new Right();
+         right.setRightName(rightname);
             int i = rightMapper.insertSelective(right);
-            if (i>0){
-                return true;
-            }
-        }
-        return false;
+           if (i>0){
+               return true;
+           }
+           return false;
     }
 
 //    删除权限
     @Override
     public boolean deleteright(Integer rightid) {
-        if (rightid!=null){
+           if (rightid==null){
+               return false;
+           }
             int i = rightMapper.deleteByPrimaryKey(rightid);
             if (i>0){
+                int j = authorizationMapper.deleteByrightid(rightid);
+                if (j>0)
                 return true;
             }
-        }
+
         return false;
     }
 }

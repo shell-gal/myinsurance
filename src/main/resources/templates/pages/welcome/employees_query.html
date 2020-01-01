@@ -125,11 +125,11 @@
 						</div>
 						<div id="">
 							<ul class="pagination">
-						<li><a  href="pages/welcome/loademployee?indexpage=1" id="firstpage">首页</a></li>
-						<li><a th:href="'pages/welcome/loademployee?indexpage='+${pageInfo.prePage}" id="jian">&laquo;</a></li>
+						<li><a  th:href="'http://localhost:8080/myinsurance/pages/welcome/loademployee?indexpage='+1" id="firstpage">首页</a></li>
+						<li><a th:href="'http://localhost:8080/myinsurance/pages/welcome/loademployee?indexpage='+${pageInfo.prePage}" id="jian">&laquo;</a></li>
 					    <li><a href="#" id="currentpage" th:text="${pageInfo.pageNum}" ></a></li>
-					    <li><a th:href="'pages/welcome/loademployee?indexpage='+${pageInfo.nextPage}" id="jia">&raquo;</a></li>
-						<li><a th:href="'pages/welcome/loademployee?indexpage='+${pageInfo.pages}" id="lastpage">尾页</a></li>
+					    <li><a th:href="'http://localhost:8080/myinsurance/pages/welcome/loademployee?indexpage='+${pageInfo.nextPage}" id="jia">&raquo;</a></li>
+						<li><a th:href="'http://localhost:8080/myinsurance/pages/welcome/loademployee?indexpage='+${pageInfo.pages}" id="lastpage">尾页</a></li>
 						<li><a href="#" id="endpage" th:text="${pageInfo.pages}"></a></li>
 					</ul>
 						</div>

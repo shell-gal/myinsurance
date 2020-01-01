@@ -8,8 +8,8 @@ import java.util.List;
 public interface RightService {
     List<String> loadrights();
     Right loadone(Integer rightid);
-    PageInfo loadroles(Integer indexpage, Integer pagesize);
-    boolean updateright(Right right);
-    boolean  addright(Right right);
+    PageInfo loadright(Integer indexpage, Integer pagesize);
+    boolean updateright(String rightname,Integer rightid);
+    boolean  addright(String rightname);
     boolean deleteright(Integer rightid);
 }

@@ -1,23 +1,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html xmlns:th="http://www.thymeleaf.org"> 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <!-- Bootstrap -->
-    <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link th:href="@{/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
     <!-- NProgress -->
-    <link href="../../../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link th:href="@{/vendors/nprogress/nprogress.css}" rel="stylesheet">
     <!-- iCheck -->
-    <link href="../../../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <link th:href="@{/vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
 	
     <!-- bootstrap-progressbar -->
-    <link href="../../../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <link th:href="@{/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css}" rel="stylesheet">
     <!-- JQVMap -->
-    <link href="../../../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <link th:href="@{/vendors/jqvmap/dist/jqvmap.min.css}" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
-    <link href="../../../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link th:href="@{/vendors/bootstrap-daterangepicker/daterangepicker.css}" rel="stylesheet">
 
 <!-- Custom Theme Style -->
     
@@ -31,7 +31,8 @@
     		margin-left:500px ;
     	}
     	</style>
-	</head>
+	<!--<script th:src="@{/js/report/MyReportQuery.js}"></script>-->
+</head>
 	<body style="background: #F7F7F7;">
 	  <form class="form-inline" id="fom1" style="text-align: center;">
 	  	
@@ -70,6 +71,6 @@
 			<li><a href="#" id="jia">&raquo;</a></li>
 		</ul>
 	</body>
-	<script src="../../js/jquery-1.8.3.js"></script>
-	<script src="../../js/report/MyReportQuery.js"></script>
+	<script th:src="@{/js/jquery-1.8.3.js}"></script>
+	<script th:src="@{/js/report/MyReportQuery.js}"></script>
 </html>

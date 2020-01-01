@@ -24,8 +24,8 @@ function updPwd(dataOne,dataTwo){
   				dataType:"json",
   				success:function(data){
   					if(data.resultstatus==200){
-  						alert(data.message);
-
+  						alert(data.message+",请重新登录！");
+                          window.location.href="http://localhost:8080/myinsurance/loginout";
   					}else{
   						alert(data.message);
   					}

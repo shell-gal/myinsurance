@@ -1,26 +1,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <!-- Bootstrap -->
-    <link href="../../../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
     <!-- Font Awesome -->
-    <link href="../../../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link th:href="@{/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
     <!-- NProgress -->
    
     <!-- iCheck -->
    
 	
     <!-- bootstrap-progressbar 
-    <link href="../../../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <link th:href="@{/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
     <!-- JQVMap 
-    <link href="../../../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <link th:href="@{/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker 
-    <link href="../../../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link th:href="@{/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
 
     <!-- Custom Theme Style 
-    <link href="../../../build/css/custom.min.css" rel="stylesheet">
+    <link th:href="@{/build/css/custom.min.css" rel="stylesheet">
     -->
     <style type="text/css">
     	
@@ -59,7 +60,11 @@
 					 			<td class="active">角色名称</td>
 					 			<td class="active">操作</td>
 					 		</tr>	
-					 		
+                            <!--<tr th:each="role:${pageInfo.list}">-->
+                                <!--<td th:text="${role.roleId}" ></td>-->
+                                <!--<td th:text="${role.roleName}"></td>-->
+                                <!--<td th:text="${role.roleId}"></td>-->
+                            <!--</tr>-->
 						</table>
 						<div id="">
 					<ul class="pagination">
@@ -81,7 +86,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">添加权限</h4>
+        <h4 class="modal-title" id="myModalLabel">添加角色</h4>
       </div>
       <div class="modal-body">
       		角色名：<input type="text" id="add_rolename"/>
@@ -137,8 +142,8 @@
       </div>
       <div class="modal-body">
       	角色编号：<input type="hidden" class="roleNumber_del" id="roleNumber_del"/><span id="role_nameOfRight"></span>
-      	<div>已拥有权限：<br>&nbsp;&nbsp;&nbsp;&nbsp;<span id="quan_xOfRight"></span></div>
-      	已有权限：<div id="rightAllOfRight"><br>&nbsp;&nbsp;&nbsp;&nbsp;
+      	<div>未拥有权限：<br>&nbsp;&nbsp;&nbsp;&nbsp;<span id="quan_xOfRight"></span></div>
+      	已拥有权限：<div id="rightAllOfRight"><br>&nbsp;&nbsp;&nbsp;&nbsp;
       			
       			
       			
@@ -153,54 +158,49 @@
   </div>
 </div>
                    
-                  
-				<!--
-                	作者：offline
-                	时间：2017-10-24
-                	描述：内容结束
-                -->								
+
     <!-- jQuery -->
-    <script src="../../../vendors/jquery/dist/jquery.min.js"></script>
+    <script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
     <!-- Bootstrap -->
-    <script src="../../../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script th:src="@{/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
     <!-- FastClick -->
-    <script src="../../../vendors/fastclick/lib/fastclick.js"></script>
+    <script th:src="@{/vendors/fastclick/lib/fastclick.js}"></script>
     <!-- NProgress -->
-    <script src="../../../vendors/nprogress/nprogress.js"></script>
-    <!-- Chart.js -->
-    <script src="../../../vendors/Chart.js/dist/Chart.min.js"></script>
-    <!-- gauge.js -->
-    <script src="../../../vendors/gauge.js/dist/gauge.min.js"></script>
+    <script th:src="@{/vendors/nprogress/nprogress.js}"></script>
+    <!-- Chart.js} -->
+    <script th:src="@{/vendors/Chart.js/dist/Chart.min.js}"></script>
+    <!-- gauge.js} -->
+    <script th:src="@{/vendors/gauge.js/dist/gauge.min.js}"></script>
     <!-- bootstrap-progressbar -->
-    <script src="../../../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <script th:src="@{/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
     <!-- iCheck -->
-    <script src="../../../vendors/iCheck/icheck.min.js"></script>
+    <script th:src="@{/vendors/iCheck/icheck.min.js}"></script>
     <!-- Skycons -->
-    <script src="../../../vendors/skycons/skycons.js"></script>
+    <script th:src="@{/vendors/skycons/skycons.js}"></script>
     <!-- Flot -->
-    <script src="../../../vendors/Flot/jquery.flot.js"></script>
-    <script src="../../../vendors/Flot/jquery.flot.pie.js"></script>
-    <script src="../../../vendors/Flot/jquery.flot.time.js"></script>
-    <script src="../../../vendors/Flot/jquery.flot.stack.js"></script>
-    <script src="../../../vendors/Flot/jquery.flot.resize.js"></script>
+    <script th:src="@{/vendors/Flot/jquery.flot.js}"></script>
+    <script th:src="@{/vendors/Flot/jquery.flot.pie.js}"></script>
+    <script th:src="@{/vendors/Flot/jquery.flot.time.js}"></script>
+    <script th:src="@{/vendors/Flot/jquery.flot.stack.js}"></script>
+    <script th:src="@{/vendors/Flot/jquery.flot.resize.js}"></script>
     <!-- Flot plugins -->
-    <script src="../../../vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-    <script src="../../../vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-    <script src="../../../vendors/flot.curvedlines/curvedLines.js"></script>
+    <script th:src="@{/vendors/flot.orderbars/js/jquery.flot.orderBars.js}"></script>
+    <script th:src="@{/vendors/flot-spline/js/jquery.flot.spline.min.js}"></script>
+    <script th:src="@{/vendors/flot.curvedlines/curvedLines.js}"></script>
     <!-- DateJS -->
-    <script src="../../../vendors/DateJS/build/date.js"></script>
+    <script th:src="@{/vendors/DateJS/build/date.js}"></script>
     <!-- JQVMap -->
-    <script src="../../../vendors/jqvmap/dist/jquery.vmap.js"></script>
-    <script src="../../../vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-    <script src="../../../vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+    <script th:src="@{/vendors/jqvmap/dist/jquery.vmap.js}"></script>
+    <script th:src="@{/vendors/jqvmap/dist/maps/jquery.vmap.world.js}"></script>
+    <script th:src="@{/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js}"></script>
     <!-- bootstrap-daterangepicker -->
-    <script src="../../../vendors/moment/min/moment.min.js"></script>
-    <script src="../../../vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script th:src="@{/vendors/moment/min/moment.min.js}"></script>
+    <script th:src="@{/vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
 
     <!-- Custom Theme Scripts -->
-    <script src="../../../build/js/custom.min.js"></script>
-	<script src="../../js/Dispath.js"></script>
-	<script src="../../../src/js/jquery-1.8.3.js"></script>
-	<script src="../../../src/js/system/rolesmanage.js"></script>
+    <script th:src="@{/build/js/custom.min.js}"></script>
+	<script th:src="@{/js/Dispath.js}"></script>
+	<script th:src="@{/js/jquery-1.8.3.js}"></script>
+	<script th:src="@{/js/system/rolesmanage.js}"></script>
   </body>
 </html>

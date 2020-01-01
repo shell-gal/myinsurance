@@ -42,21 +42,21 @@ function query(page){
 	//获取文本框的值
 	var reported_number=$("#reported_number").val();
 	$.ajax({
-		url:"http://localhost:8080/report/api/AllQuery",
+		url:"http://localhost:8080/myinsurance/report/AllQuery",
 		type:"GET",
 		dataType: "json",
 		data:{
 			"reported_number":reported_number,
-			"page":page
+			"indexpage":page
 		},
         success:function(data) {
         	//获取pagenum的属性
-        	pageNum=data.singerData.pageNum;
+        	pageNum=data.pageNum;
         	//获取pages的属性
-        	pages=data.singerData.pages;
+        	pages=data.pages;
         	var tempHtml ="";
         	//each循环拼接
-        	$.each(data.singerData.list,function(i,item){
+        	$.each(data.list,function(i,item){
       	      tempHtml+="<tr>"
       	    	  +"<td>"+item.reported_info.reported_number+"</td>"
      	    	  +"<td>"+item.policyholders_info.policyholders_name+"</td>"

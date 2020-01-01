@@ -79,7 +79,7 @@ function onload(indexpage,flag,param) {
 					 +"<th>"+d['userId']+"</th>"
 					 +"<th>"+d['userName']+"</th>"
 					 +"<th>"+d['userSex']+"</th>"
-					 +"<th>"+renderTime(d['birthday'])+"</th>"
+					 +"<th>"+render(d['birthday'])+"</th>"
 					 +"<th>"+d['education']+"</th>"
 					 +"<th>"+d['depart']+"</th>"
 
@@ -87,9 +87,9 @@ function onload(indexpage,flag,param) {
 
 					 +"<th>"+d['userPhone']+"</th>"
 					 +"<th>"+d['userEmail']+"</th>"
-					 +"<th>"+renderTime(d['employeeDate'])+"</th>"
+					 +"<th>"+render(d['employeeDate'])+"</th>"
 					 +"<th>"
-					 +	"<a href='employees_upd.jsp?userId="+d['userId']+"' target='aa'>"
+					 +	"<a href='http://localhost:8080/myinsurance/pages/welcome/loadone?userid="+d['userId']+"' target='aa'>"
 					 +	"	<button type='button' class='btn btn-sm btn-primary'>修改</button>"
 
 					 +"</a>&nbsp;&nbsp;&nbsp;"
@@ -129,10 +129,15 @@ function onload(indexpage,flag,param) {
 }
 
 
-function renderTime(date){
-var oldtime=new Date(date).getTime();
- var time=new Date(oldtime).format("yyyy-MM-dd");
- return time;
+function render(time) {
+	var d = new Date(time);
+	var times=d.getFullYear() + '-' + (d.getMonth() + 1) + '-';
+	var day=d.getDate();
+	if (parseInt(day)<10){
+		day='0'+day;
+	}
+	times+=day;
+	return times;
 }
 
 //下拉框选中事件
@@ -170,27 +175,14 @@ function find(flag){
 	if(flag==1){
 		//获取第一个框的值
 		param=$(".find_name1").val();
-		if (param==""){
-			onload(page,flag,null);
-		}else {
-			onload(page,flag,param);
-		}
-
+		onload(page,flag,param);
 	};
 	if(flag==2){
 		param=$(".find_name2").val();
-		if (param==""){
-			onload(page,flag,null);
-		}else {
-			onload(page,flag,param);
-		}
+		onload(page,flag,param);
 	};
 	if(flag==3){
 		param=$(".find_name3").val();
-		if (param==""){
-			onload(page,flag,null);
-		}else {
-			onload(page,flag,param);
-		}
+		onload(page,flag,param);
 	};	 
 }

@@ -10,6 +10,15 @@ public class UserLoad {
     private  String depart;
     private String param;
     private Integer flag;
+    private  Integer userstatus;
+
+    public Integer getUserstatus() {
+        return userstatus;
+    }
+
+    public void setUserstatus(Integer userstatus) {
+        this.userstatus = userstatus;
+    }
 
     public String getParam() {
         return param;

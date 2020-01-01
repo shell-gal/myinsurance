@@ -46,7 +46,7 @@
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img ">
+                <img th:src="@{images/img.jpg}" alt="..." class="img-circle profile_img ">
               </div>
               <div class="profile_info">
                 <span>欢迎,</span>
@@ -65,19 +65,19 @@
                  <shiro:hasPermission name="保单管理">
                 	 <li><a><i class="fa fa-edit"></i> 保单管理 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="../insurance_manage/Insurance_querying.html" target="aa">保单查询</a></li>
-                      <li><a href="../insurance_manage/User_insure.html" target="aa">添加保单</a></li>
-                     <li><a href="../DispatchManagement_Zhy/Policy-holder.html" target="aa">投保人查询</a></li>
+                      <li><a href="insurance/Insurancequerying" target="aa">保单查询</a></li>
+                      <li><a href="insurance/Userinsure" target="aa">添加保单</a></li>
+                     <li><a href="insurance/Policyholder" target="aa">投保人查询</a></li>
                     </ul>
                   </li>
              	</shiro:hasPermission>
              	   <shiro:hasPermission name="案件管理">
                   <li><a><i class="fa fa-home"></i> 接案管理 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                     <li><a href="../report_wb/report_query.html" target="aa">用户报案</a></li>
-                     <li><a href="../report_wb/report_myquery.html" target="aa">我处理的案件</a></li>
-                     <li><a href="../report_wb/report_allquery.html" target="aa">所有案件信息</a></li>
-                     <li><a href="../DispatchManagement_Zhy/Dispatch.html" target="aa">调度管理</a></li>
+                     <li><a href="report/reportquery" target="aa">用户报案</a></li>
+                     <li><a href="report/reportmyquery" target="aa">我处理的案件</a></li>
+                     <li><a href="report/reportallquery" target="aa">所有案件信息</a></li>
+                     <li><a href="DispatchManagement/Dispatch" target="aa">调度管理</a></li>
                     
                     </ul>
                   </li>
@@ -86,11 +86,7 @@
                   <li><a><i class="fa fa-home"></i> 勘察管理 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="../prospect_lyt/prospect.html" target="aa">未查勘案件</a></li>
-											<!--
-                                            	作者：offline
-                                            	时间：2017-11-23
-                                            	描述：
-                                            -->
+
                       <li><a href="../prospect_lyt/prospected.html" target="aa">已查勘案件</a></li>
                        <shiro:hasPermission name="公司管理">
                        <li><a href="../prospect_lyt/prospectAll.html" target="aa">所有已查勘案件</a></li>
@@ -103,7 +99,9 @@
                   <li><a><i class="fa fa-home"></i> 定损核损 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                      <shiro:hasPermission name="定损管理">
+
                     <li><a href="../DispatchManagement_Zhy/Dispatch.jsp" target="aa">调度管理</a></li>
+
                     <li><a href="../prospect_lyt/loss_carinfo.jsp" target="aa">车损管理</a></li>
 					<li><a href="../prospect_lyt/loss_resinfo.jsp" target="aa">物损管理</a></li>
 					<li><a href="../prospect_lyt/loss_peopleinfo.jsp" target="aa">人伤管理</a></li>
@@ -155,8 +153,8 @@
                   <li><a><i class="fa fa-desktop"></i> 系统设置 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                      <shiro:hasPermission name="公司管理">
-                      <li><a href="../prospect_lyt/quanxian.jsp" target="aa">角色权限</a></li>
-                      <li><a href="../prospect_lyt/jurisdiction.jsp" target="aa">权限管理</a></li>
+                      <li><a href="rightmanager/loadroleright" target="aa">角色权限</a></li>
+                      <li><a href="Jurisdiction/loadJurisdiction" target="aa">权限管理</a></li>
                      </shiro:hasPermission>
                     	<li><a href="update" target="aa">修改密码</a></li>
                     </ul>
@@ -179,7 +177,7 @@
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a>
               <!-- href="http://localhost:8080/users/loginOut.do" -->
-              <a data-toggle="tooltip" data-placement="top" href="login.jsp"  title="退出登录" id="login_out">
+              <a data-toggle="tooltip" data-placement="top" href="loginout"  title="退出登录" id="login_out">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>
@@ -188,101 +186,101 @@
         </div>
 
         <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
-            <nav>
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
+        <!--<div class="top_nav">-->
+          <!--<div class="nav_menu">-->
+            <!--<nav>-->
+              <!--<div class="nav toggle">-->
+                <!--<a id="menu_toggle"><i class="fa fa-bars"></i></a>-->
+              <!--</div>-->
 
-              <ul class="nav navbar-nav navbar-right">
-                <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="images/img.jpg" alt="">信息管理
-                    <span class=" fa fa-angle-down"></span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;"> 会议信息</a></li>
-                    <li>
-                      <a href="javascript:;">
-                        <span class="badge bg-red pull-right">50%</span>
-                        <span>信息</span>
-                      </a>
-                    </li>
-                    <li><a href="javascript:;">帮助</a></li>
-                    <li><a href="login.jsp"><i class="fa fa-sign-out pull-right"></i> 退出登录 </a></li>
-                  </ul>
-                </li>
+              <!--<ul class="nav navbar-nav navbar-right">-->
+                <!--<li class="">-->
+                  <!--<a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">-->
+                    <!--<img src="images/img.jpg" alt="">信息管理-->
+                    <!--<span class=" fa fa-angle-down"></span>-->
+                  <!--</a>-->
+                  <!--<ul class="dropdown-menu dropdown-usermenu pull-right">-->
+                    <!--<li><a href="javascript:;"> 会议信息</a></li>-->
+                    <!--<li>-->
+                      <!--<a href="javascript:;">-->
+                        <!--<span class="badge bg-red pull-right">50%</span>-->
+                        <!--<span>信息</span>-->
+                      <!--</a>-->
+                    <!--</li>-->
+                    <!--<li><a href="javascript:;">帮助</a></li>-->
+                    <!--<li><a href="loginout"><i class="fa fa-sign-out pull-right"></i> 退出登录 </a></li>-->
+                  <!--</ul>-->
+                <!--</li>-->
 
-                <li role="presentation" class="dropdown">
-                  <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                    <i class="fa fa-envelope-o"></i>
-                    <span class="badge bg-green">6</span>
-                  </a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <a>
-                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
-                        <span>
-                          <span>John Smith</span>
-                          <span class="time">3 mins ago</span>
-                        </span>
-                        <span class="message">
-                          Film festivals used to be do-or-die moments for movie makers. They were where...
-                        </span>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="text-center">
-                        <a>
-                          <strong>See All Alerts</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-        <!-- /top navigation -->
+                <!--<li role="presentation" class="dropdown">-->
+                  <!--<a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">-->
+                    <!--<i class="fa fa-envelope-o"></i>-->
+                    <!--<span class="badge bg-green">6</span>-->
+                  <!--</a>-->
+                  <!--<ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">-->
+                    <!--<li>-->
+                      <!--<a>-->
+                        <!--<span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>-->
+                        <!--<span>-->
+                          <!--<span>John Smith</span>-->
+                          <!--<span class="time">3 mins ago</span>-->
+                        <!--</span>-->
+                        <!--<span class="message">-->
+                          <!--Film festivals used to be do-or-die moments for movie makers. They were where...-->
+                        <!--</span>-->
+                      <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                      <!--<a>-->
+                        <!--<span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>-->
+                        <!--<span>-->
+                          <!--<span>John Smith</span>-->
+                          <!--<span class="time">3 mins ago</span>-->
+                        <!--</span>-->
+                        <!--<span class="message">-->
+                          <!--Film festivals used to be do-or-die moments for movie makers. They were where...-->
+                        <!--</span>-->
+                      <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                      <!--<a>-->
+                        <!--<span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>-->
+                        <!--<span>-->
+                          <!--<span>John Smith</span>-->
+                          <!--<span class="time">3 mins ago</span>-->
+                        <!--</span>-->
+                        <!--<span class="message">-->
+                          <!--Film festivals used to be do-or-die moments for movie makers. They were where...-->
+                        <!--</span>-->
+                      <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                      <!--<a>-->
+                        <!--<span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>-->
+                        <!--<span>-->
+                          <!--<span>John Smith</span>-->
+                          <!--<span class="time">3 mins ago</span>-->
+                        <!--</span>-->
+                        <!--<span class="message">-->
+                          <!--Film festivals used to be do-or-die moments for movie makers. They were where...-->
+                        <!--</span>-->
+                      <!--</a>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                      <!--<div class="text-center">-->
+                        <!--<a>-->
+                          <!--<strong>See All Alerts</strong>-->
+                          <!--<i class="fa fa-angle-right"></i>-->
+                        <!--</a>-->
+                      <!--</div>-->
+                    <!--</li>-->
+                  <!--</ul>-->
+                <!--</li>-->
+              <!--</ul>-->
+            <!--</nav>-->
+          <!--</div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash; /top navigation &ndash;&gt;-->
         
         
         
@@ -339,12 +337,6 @@
 
     <!-- Custom Theme Scripts -->
     <script th:src="@{build/js/custom.min.js}"></script>
-    <!--
- 	<script src="../../js/jquery-1.8.3.js}"></script>
- 	
- 	 -->
- 	 
 
-		
   </body>
 </html>
