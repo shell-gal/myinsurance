@@ -28,7 +28,7 @@ public class DispatchServiceImpls implements DispatchService {
 //    查询案件
     @Override
     public PageInfo loadCasebyStatus(Map<String, Object> map) {
-        PageHelper.startPage((Integer) map.get("indexpage"),10);
+        PageHelper.startPage(Integer.valueOf(map.get("indexpage").toString()) ,10);
         List<Case> case_state = caseMapper.selectCaseByEx(map);
         PageInfo p=new PageInfo(case_state);
         if (CollectionUtils.isEmpty(case_state)){
@@ -56,10 +56,36 @@ public class DispatchServiceImpls implements DispatchService {
         map.put("chakanid",s[0]);
 
 //
+
         Case c=new Case();
         c.setCaseId((Integer.valueOf(map.get("reported_number").toString())) );
-        c.setKancaId(Integer.valueOf( map.get("chakanid").toString()));
-        c.setCaseStatus("勘察中");
+
+        String rolename = map.get("rolename").toString();
+        if (rolename=="接案员"){
+            c.setKancaId(Integer.valueOf( map.get("chakanid").toString()));
+            c.setCaseStatus("勘察中");
+        }
+        if (rolename=="定损经理"){
+            c.setDingsunId(Integer.valueOf( map.get("chakanid").toString()));
+            c.setCaseStatus("定损中");
+        }
+        if (rolename=="核损经理"){
+            c.setHesunId(Integer.valueOf( map.get("chakanid").toString()));
+            c.setCaseStatus("核损中");
+        }
+        if (rolename=="理算经理"){
+            c.setLisuanId(Integer.valueOf( map.get("chakanid").toString()));
+            c.setCaseStatus("理算中");
+        }
+        if (rolename=="核赔经理"){
+            c.setHepeiId(Integer.valueOf( map.get("chakanid").toString()));
+            c.setCaseStatus("核赔中");
+        }
+        if (rolename=="理赔经理"){
+            c.setLipeiId(Integer.valueOf( map.get("chakanid").toString()));
+            c.setCaseStatus("理赔中");
+        }
+
         int i = caseMapper.updateByPrimaryKeySelective(c);
         if (i>0){
             return true;

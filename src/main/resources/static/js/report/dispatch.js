@@ -7,8 +7,8 @@ var rname;
 
 $(function() {
 	var rolename=$("#rolename").val();
-
 	if (rolename=='接案员'){
+		alert("-----------111111111")
 		case_status="已报案";
 		rname="勘察员";
 	}
@@ -134,7 +134,7 @@ function queryEmpoyee(){
 
 function paiqian(){
 	$("#paiqian").click(function(){
-		var data={"chakan":$("#diaoduyuan").val(),"reported_number":$("#id").val()};
+		var data={"rolename":rname,"chakan":$("#diaoduyuan").val(),"reported_number":$("#id").val()};
 		$.ajax({
 			url:"http://localhost:8080/myinsurance/DispatchManagement/diaodu",
 			type:"post",
