@@ -24,10 +24,20 @@ public class CaseVo implements Serializable {
     private String dangerAddress;
     //出险原因
     private String dangerCause;
+    //路段方向
+    private String roadDirection;
     //事故类型
     private String dangerType;
     //案件状态
     private String caseStatus;
+
+    public String getRoadDirection() {
+        return roadDirection;
+    }
+
+    public void setRoadDirection(String roadDirection) {
+        this.roadDirection = roadDirection;
+    }
 
     public String getCarNumber() {
         return carNumber;
@@ -103,20 +113,5 @@ public class CaseVo implements Serializable {
 
     public void setCaseStatus(String caseStatus) {
         this.caseStatus = caseStatus;
-    }
-
-    @Override
-    public String toString() {
-        return "CaseVo{" +
-                "caseId=" + caseId +
-                ", reporterName='" + reporterName + '\'' +
-                ", carNumber='" + carNumber + '\'' +
-                ", reporterPhone='" + reporterPhone + '\'' +
-                ", dangerDate=" + dangerDate +
-                ", dangerAddress='" + dangerAddress + '\'' +
-                ", dangerCause='" + dangerCause + '\'' +
-                ", dangerType='" + dangerType + '\'' +
-                ", caseStatus='" + caseStatus + '\'' +
-                '}';
     }
 }

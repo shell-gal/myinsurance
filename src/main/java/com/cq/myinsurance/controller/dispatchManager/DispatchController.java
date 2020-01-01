@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +23,8 @@ public class DispatchController {
 
 //
     @RequestMapping("/Dispatch")
-    public String Dispatch(){
+    public String Dispatch(String rolename, HttpServletRequest request){
+        request.setAttribute("rolename",rolename);
         return "pages/dispatchmentmanager/Dispatch";
     }
 
@@ -38,8 +40,8 @@ public class DispatchController {
 //    获取勘察人员
     @RequestMapping("/getEmployeeOfType")
     @ResponseBody
-    public List<User> getEmployeeOfType(){
-        List<User> userList = dispatchService.loadKanca();
+    public List<User> getEmployeeOfType(String rolename){
+        List<User> userList = dispatchService.loadKanca(rolename);
         System.out.println(userList);
         return userList;
     }
@@ -49,7 +51,6 @@ public class DispatchController {
     @ResponseBody
     public String diaodu(@RequestBody Map<String,Object> map){
         System.out.println(map.get("chakan"));
-
         boolean b = dispatchService.diaodu(map);
         if (b){
             return "true";

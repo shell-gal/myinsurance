@@ -40,8 +40,8 @@ public class DispatchServiceImpls implements DispatchService {
 
 //    查询勘察人员
     @Override
-    public List<User> loadKanca() {
-        List<User> users = authorizationMapper.selectUserByrolename();
+    public List<User> loadKanca(String rolename) {
+        List<User> users = authorizationMapper.selectUserByrolename(rolename);
         if (CollectionUtils.isEmpty(users)){
             return null;
         }

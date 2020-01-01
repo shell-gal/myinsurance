@@ -36,9 +36,10 @@ public class SettlementController {
      * @param request
      * @return
      */
-    @PostMapping("caseInfo")
+    @RequestMapping("caseInfo")
     @ResponseBody
     public PageInfo<CaseVo> adjustment(HttpServletRequest request){
+
         String pageNumStr = request.getParameter("pageNum");
         String search = request.getParameter("search");
         String status = request.getParameter("status");
@@ -52,8 +53,6 @@ public class SettlementController {
         }
 
         PageInfo<CaseVo> casePage = adjustmentService.getCasePage(pageNum,10 ,status,search);
-
-//        System.out.println("casePage--"+casePage.getList());
 
         return casePage;
     }
@@ -83,5 +82,32 @@ public class SettlementController {
     @GetMapping("caseQuery")
     public String caseQuery(){
         return "/pages/welcome/case_query";
+    }
+
+    /**
+     * 调度管理
+     * @return
+     */
+    @GetMapping("Dispatch")
+    public String dispatch(){
+        return "/pages/dispatchmentmanager/Dispatch";
+    }
+
+    /**
+     * 理算详情
+     * @return
+     */
+    @GetMapping("lisuanInfo")
+    public String lisuanInfo(){
+        return "/pages/adjustmentmanager/lisuan_info";
+    }
+
+    /**
+     * 核赔详情
+     * @return
+     */
+    @GetMapping("heuanInfo")
+    public String heuan_info(){
+        return "/pages/nuclearmanager/heuan_info";
     }
 }

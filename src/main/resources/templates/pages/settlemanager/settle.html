@@ -25,7 +25,6 @@
     				#prospect_table th{text-align: center;}
     	</style>
     	<script type="text/javascript" th:src="@{/js/compensate/jquery-1.11.1.js}"></script>
-    		<script th:src="@{/js/compensate/settle.js}"></script>
   </head>
 
   <body style="background: #F7F7F7;">
@@ -41,10 +40,10 @@
                                          报案编号：<input type="text" id="peospectID"/>
             </div>
             <div class="col-md-4" id="add_employees">
-        					<button type="button" class="btn btn-primary btn-small" id="reset_but" onclick="init3();">
+        					<button type="button" class="btn btn-primary btn-small" id="reset_but">
 										 重置条件
 									</button>
-									<button type="button" class="btn btn-primary btn-small" id="select_but" onclick="init2();">
+									<button type="button" class="btn btn-primary btn-small" id="select_but">
 											查询
 									</button>
 						</div>
@@ -81,46 +80,47 @@
 		</ul>
     </div>
 
-    <!-- jQuery -->
-    <script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
-    <!-- Bootstrap -->
-    <script th:src="@{/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
-    <!-- FastClick -->
-    <script th:src="@{/vendors/fastclick/lib/fastclick.js}"></script>
-    <!-- NProgress -->
-    <script th:src="@{/vendors/nprogress/nprogress.js}"></script>
-    <!-- Chart.js -->
-    <script th:src="@{/vendors/Chart.js/dist/Chart.min.js}"></script>
-    <!-- gauge.js -->
-    <script th:src="@{/vendors/gauge.js/dist/gauge.min.js}"></script>
-    <!-- bootstrap-progressbar -->
-    <script th:src="@{/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
-    <!-- iCheck -->
-    <script th:src="@{/vendors/iCheck/icheck.min.js}"></script>
-    <!-- Skycons -->
-    <script th:src="@{/vendors/skycons/skycons.js}"></script>
-    <!-- Flot -->
-    <script th:src="@{/vendors/Flot/jquery.flot.js}"></script>
-    <script th:src="@{/vendors/Flot/jquery.flot.pie.js}"></script>
-    <script th:src="@{/vendors/Flot/jquery.flot.time.js}"></script>
-    <script th:src="@{/vendors/Flot/jquery.flot.stack.js}"></script>
-    <script th:src="@{/vendors/Flot/jquery.flot.resize.js}"></script>
-    <!-- Flot plugins -->
-    <script th:src="@{/vendors/flot.orderbars/js/jquery.flot.orderBars.js}"></script>
-    <script th:src="@{/vendors/flot-spline/js/jquery.flot.spline.min.js}"></script>
-    <script th:src="@{/vendors/flot.curvedlines/curvedLines.js}"></script>
-    <!-- DateJS -->
-    <script th:src="@{/vendors/DateJS/build/date.js}"></script>
-    <!-- JQVMap -->
-    <script th:src="@{/vendors/jqvmap/dist/jquery.vmap.js}"></script>
-    <script th:src="@{/vendors/jqvmap/dist/maps/jquery.vmap.world.js}"></script>
-    <script th:src="@{/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js}"></script>
-    <!-- bootstrap-daterangepicker -->
-    <script th:src="@{/vendors/moment/min/moment.min.js}"></script>
-    <script th:src="@{/vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
+        <!-- jQuery -->
+        <script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
+        <!-- Bootstrap -->
+        <script th:src="@{/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+        <!-- FastClick -->
+        <script th:src="@{/vendors/fastclick/lib/fastclick.js}"></script>
+        <!-- NProgress -->
+        <script th:src="@{/vendors/nprogress/nprogress.js}"></script>
+        <!-- Chart.js -->
+        <script th:src="@{/vendors/Chart.js/dist/Chart.min.js}"></script>
+        <!-- gauge.js -->
+        <script th:src="@{/vendors/gauge.js/dist/gauge.min.js}"></script>
+        <!-- bootstrap-progressbar -->
+        <script th:src="@{/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
+        <!-- iCheck -->
+        <script th:src="@{/vendors/iCheck/icheck.min.js}"></script>
+        <!-- Skycons -->
+        <script th:src="@{/vendors/skycons/skycons.js}"></script>
+        <!-- Flot -->
+        <script th:src="@{/vendors/Flot/jquery.flot.js}"></script>
+        <script th:src="@{/vendors/Flot/jquery.flot.pie.js}"></script>
+        <script th:src="@{/vendors/Flot/jquery.flot.time.js}"></script>
+        <script th:src="@{/vendors/Flot/jquery.flot.stack.js}"></script>
+        <script th:src="@{/vendors/Flot/jquery.flot.resize.js}"></script>
+        <!-- Flot plugins -->
+        <script th:src="@{/vendors/flot.orderbars/js/jquery.flot.orderBars.js}"></script>
+        <script th:src="@{/vendors/flot-spline/js/jquery.flot.spline.min.js}"></script>
+        <script th:src="@{/vendors/flot.curvedlines/curvedLines.js}"></script>
+        <!-- DateJS -->
+        <script th:src="@{/vendors/DateJS/build/date.js}"></script>
+        <!-- JQVMap -->
+        <script th:src="@{/vendors/jqvmap/dist/jquery.vmap.js}"></script>
+        <script th:src="@{/vendors/jqvmap/dist/maps/jquery.vmap.world.js}"></script>
+        <script th:src="@{/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js}"></script>
+        <!-- bootstrap-daterangepicker -->
+        <script th:src="@{/vendors/moment/min/moment.min.js}"></script>
+        <script th:src="@{/vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
 
-    <!-- Custom Theme Scripts -->
-    <script th:src="@{/build/js/custom.min.js}"></script>
-    <script th:src="@{/js/prospect.js}"></script>
+        <!-- Custom Theme Scripts -->
+        <script th:src="@{/build/js/custom.min.js}"></script>
+        <script th:src="@{/js/prospect.js}"></script>
+        <script th:src="@{/js/compensate/settle.js}"></script>
   </body>
 </html>
