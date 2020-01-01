@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ProspectServiceImpl implements ProspectService {
@@ -81,6 +82,17 @@ public class ProspectServiceImpl implements ProspectService {
             return i;
         }
         return 0;
+    }
+
+    @Override
+    public PageInfo selectAllProspect(Integer caseId,Integer indexpage) {
+        if (indexpage == null){
+            indexpage = 1;
+        }
+        PageHelper.startPage(indexpage,2);
+        List<Prospect> prospectList = prospectMapper.selectAllProspect(caseId);
+        PageInfo<Prospect> pageInfo = new PageInfo<>(prospectList);
+        return pageInfo;
     }
 
 
