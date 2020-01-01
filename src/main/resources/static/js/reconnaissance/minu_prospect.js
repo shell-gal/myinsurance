@@ -25,8 +25,7 @@ function queryAllReported() {
 		type : "get",
 		//传输的数据
 		data : {
-			"reported_number" : $("#parmeId").val(),
-			"page":"1",
+			"caseId" : $("#parmeId").val(),
 		},
 		//发送数据类型
 		contentType : "application/json;charset=utf-8",

@@ -20,13 +20,12 @@ function queryAllReported() {
 	//ajax
 	$.ajax({
 		//地址http://localhost:8080/prospect/queryAllReported.do
-		url : "http://localhost:8080/prospect/queryAllReported.do",
+		url : "http://localhost:8080/myinsurance/prospect/selectAchieveCaseMessage.do",
 		//请求类型
 		type : "get",
 		//传输数据
 		data : {
-			"reported_number" : $("#parmeId2").val(),
-			"page":"1",
+			"caseId" : $("#parmeId2").val(),
 		},
 		//发送数据类型
 		contentType : "application/json;charset=utf-8",
@@ -37,16 +36,17 @@ function queryAllReported() {
 			//定义属性拼接节点
 			var outHtml = "";
 			//each
-			$.each(data.singerData.list, function(i, r) {
+			$.each(data.list, function(i, r) {
 				//拼接
 				outHtml += "<tr class='pand'>" 
-						+ "<td>" + r['reported_number']
-						+ "</td>" + "<td>" + r['informants'] + "</td>" 
-						+ "<td>" + r['informants_tel'] + "</td>" + "<td>"
-						+ r['reported_time'] + "</td>" 
-						+ "<td>" + r['province'] + r['city'] + r['road'] + "</td>" 
-						+ "<td>" + r['danger_cause'] + "</td>" 
-						+ "<td>" + r['case_state'] + "</td>" + "</tr>";
+						+ "<td>" + r.aCase.caseId + "</td>"
+						+ "<td>" + r.aCase.reporterName + "</td>"
+						+ "<td>" + r.aCase.reporterPhone + "</td>"
+						+ "<td>" + r.aCase.dangerDate + "</td>"
+						+ "<td>" + r.aCase.dangerAddressProvince + r.aCase.dangerAddressCity + r.aCase.roadDirection + "</td>"
+						+ "<td>" + r.aCase.dangerCause + "</td>"
+						+ "<td>" + r.aCase.caseStatus + "</td>"
+						+ "</tr>";
 			});
 			//添加到one里面
 			$("#one").append(outHtml);
@@ -54,7 +54,7 @@ function queryAllReported() {
 		//请求失败
 		error : function() {
 			//提示
-			alert("系统错误")
+			alert("系统错误");
 		}
 	});
 }
@@ -66,36 +66,37 @@ function queryProspectRep() {
 	//ajax
 	$.ajax({
 		//地址http://localhost:8080/prospectRep/queryProspectRep.do
-		url : "http://localhost:8080/prospectRep/queryProspectRep.do",
+		url : "http://localhost:8080/myinsurance/prospect/selectProspectMessage.do",
 		//请求类型
 		type : "get",
 		//传输数据
 		data : {
-			"reported_number" : $("#parmeId2").val()
+			"caseId" : $("#parmeId2").val()
 		},
 		//发送数据类型
 		contentType : "application/json;charset=utf-8",
 		//接收数据类型
 		dataType : "json",
 		//请求成功
-		success : function(data) {
+		success : function(data){
+			console.log(data);
 			//为节点赋值
-			$("#prospect").val(data.singerData.prospect_number)
-			$("#prospect_number").html(data.singerData.prospect_number);
-			$("#informants").html(data.singerData.reported_info.informants);
-			$("#reported_time").html(data.singerData.reported_info.reported_time);
-			$("#prospect_time").html(data.singerData.prospect_time);
-			$("#prospect_address").html(data.singerData.prospect_address);
-			$("#accident_type").html(data.singerData.accident_type);
-			$("#duty").html(data.singerData.duty);
-			$("#danger_cause").html(data.singerData.reported_info.danger_cause);
-			$("#driver_name").html(data.singerData.driver_name);
-			$("#driver_tel").html(data.singerData.driver_tel);
-			$("#driving_licence").html(data.singerData.driving_licence);
-			$("#driving_license").html(data.singerData.driving_license);
-			$("#prospect_pass").html(data.singerData.prospect_pass);
-			$("#loss_info").html(data.singerData.loss_info);
-			$("#police").val(data.singerData.police_duty);
+			$("#prospect").val(data.prospectId);
+			$("#prospect_number").html(data.prospectId);
+			$("#informants").html(data.aCase.reporterName);
+			$("#reported_time").html(data.aCase.dangerDate);
+			$("#prospect_time").html(data.prospectDate);
+			$("#prospect_address").html(data.prospectAddress);
+			$("#accident_type").html(data.accidentType);
+			$("#duty").html(data.duty);
+			$("#danger_cause").html(data.aCase.dangerCause);
+			$("#driver_name").html(data.driverName);
+			$("#driver_tel").html(data.driverPhone);
+			$("#driving_licence").html(data.driveingLicense);
+			$("#driving_license").html(data.driverLicense);
+			$("#prospect_pass").html(data.dangerPass);
+			$("#loss_info").html(data.lossInfo);
+			$("#police").val(data.policeDuty);
 		},
 		//请求失败
 		error : function() {
@@ -121,7 +122,7 @@ function query_img(){
 		type : "get",
 		//传输数据
 		data : {
-			"prospect_number":$("#prospect").val()
+			"prospectId":$("#prospect").val()
 		},
 		//发送数据类型
 		contentType : "application/json;charset=utf-8",
@@ -142,7 +143,7 @@ function query_img(){
 		//请求失败
 		error : function() {
 			//提示
-			alert("系统错误")
+			alert("系统错误");
 		}
 	});
 }

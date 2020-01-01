@@ -3,6 +3,8 @@ package com.cq.myinsurance.pojo;
 public class Img {
     private Integer imgId;
 
+    private Integer prospectId;
+
     private String imgName;
 
     public Integer getImgId() {
@@ -11,6 +13,14 @@ public class Img {
 
     public void setImgId(Integer imgId) {
         this.imgId = imgId;
+    }
+
+    public Integer getProspectId() {
+        return prospectId;
+    }
+
+    public void setProspectId(Integer prospectId) {
+        this.prospectId = prospectId;
     }
 
     public String getImgName() {
