@@ -64,7 +64,7 @@
   <!--查询未勘察的案件  -->
   <select id="selectUnAchieveProspect" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select * from case_info
-    where (case_status = '勘察中' or case_status = '已报案')
+    where case_status = '勘察中'
     and kanca_id = #{kancaId,jdbcType=INTEGER}
   </select>
 
@@ -108,6 +108,7 @@
       #{driverLicense,jdbcType=VARCHAR}, #{driveingLicense,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
       )
   </insert>
+
   <insert id="insertSelective" parameterType="com.cq.myinsurance.pojo.Prospect">
     insert into prospect_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -205,6 +206,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.cq.myinsurance.pojo.Prospect">
     update prospect_info
     <set>

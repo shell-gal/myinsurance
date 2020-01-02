@@ -1,7 +1,3 @@
-/**
- * 添加页面
- * @author 李洋涛
- */
 $(function(){
 	//调用查勘信息方法
 	queryAllReported();
@@ -62,26 +58,27 @@ function addProspect(){
 		//调用修改案件信息方法
 		updReported()
 		//ajax
+		var data={
+			"prospectDate":$("#prospect_time").val(),
+			"accidentType":$("#accident_type").val(),
+			"duty":$('input[name="duty"]:checked').val(),
+			"prospectAddress":$("#prospect_address").val(),
+			"dangerPass":$("#prospect_pass").val(),
+			"lossInfo":$("#loss_info").val(),
+			"policeDuty":$("#police_duty").val(),
+			"driverName":$("#driver_name").val(),
+			"driverPhone":$("#driver_tel").val(),
+			"driverLicense":$("#driving_licence").val(),
+			"driveingLicense":$("#driving_licence").val(),
+			"caseId":$("#parmeId").val(),
+		};
 		$.ajax({	
 					//访问路径http://localhost:8080/prospect/addProspect.do
 	  				url:"http://localhost:8080/myinsurance/prospect/addProspectMessage.do",
 	  				//请求类型
-	  				type:"get",
+	  				type:"post",
 	  				//传输数据
-	  				data:{
-	  					"prospect_time":$("#prospectDate").val(),
-	  					"accident_type":$("#accidentType").val(),
-	  					"duty":$('input[name="duty"]:checked').val(),
-	  					"prospect_address":$("#prospectAddress").val(),
-	  					"prospect_pass":$("#dangerPass").val(),
-	  					"loss_info":$("#lossInfo").val(),
-	  					"police_duty":$("#policeDuty").val(),
-	  					"driver_name":$("#driverName").val(),
-	  					"driver_tel":$("#driverPhone").val(),
-	  					"driving_licence":$("#driverLicense").val(),
-	  				    "driving_license":$("#driveingLicense").val(),
-	  				    "caseId":$("#parmeId").val(),
-	  				},
+	  				data:JSON.stringify(data),
 	  				//发送数据类型
 	  				contentType:"application/json;charset=utf-8",
 	  				//接收数据类型
