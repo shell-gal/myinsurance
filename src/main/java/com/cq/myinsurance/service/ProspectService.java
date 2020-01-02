@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 public interface ProspectService {
 
@@ -49,5 +50,13 @@ public interface ProspectService {
      */
     int addProspect(Prospect prospect,HttpSession session);
 
+    /**
+     * 修改勘察信息
+     * @param prospect
+     * @param session
+     * @return
+     */
     int updateProspect(Prospect prospect,HttpSession session);
+
+    PageInfo<Prospect> selectAllProspect(Integer caseId,Integer indexpage);
 }

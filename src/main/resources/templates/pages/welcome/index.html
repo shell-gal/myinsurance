@@ -83,7 +83,7 @@
                      <li><a href="report/reportquery" target="aa">用户报案</a></li>
                      <li><a href="report/reportmyquery" target="aa">我处理的案件</a></li>
                      <li><a href="report/reportallquery" target="aa">所有案件信息</a></li>
-                     <li><a href="DispatchManagement/Dispatch" target="aa">调度管理</a></li>
+                     <li><a href="DispatchManagement/Dispatch?rolename='接案员'" target="aa">调度管理</a></li>
                     
                     </ul>
                   </li>
@@ -97,7 +97,7 @@
                       <li><a href="prospect/getProspect" target="aa">未查勘案件</a></li>
                       <li><a href="prospect/getProspected" target="aa">已查勘案件</a></li>
                        <shiro:hasPermission name="公司管理">
-                       <li><a href="../prospect_lyt/prospectAll.html" target="aa">所有已查勘案件</a></li>
+                       <li><a href="prospect/selectAllProspect.do" target="aa">所有已查勘案件</a></li>
                       </shiro:hasPermission>
                     </ul>
                   </li>
@@ -115,8 +115,11 @@
 					<!--<li><a href="../prospect_lyt/loss_peopleinfo.jsp" target="aa">人伤管理</a></li>-->
 					<!--<li><a href="../prospect_lyt/loss_info.jsp" target="aa">我的定损案件</a></li>-->
 <!--=======-->
+
+                    <shiro:hasRole name="定损经理">
                     <li><a th:href="@{/prospect_lyt/Dispatch}" target="aa">调度管理</a></li>
-                    <li><a th:href="@{/prospect_lyt/loss_carinfo}" target="aa">车损管理</a></li>
+                    </shiro:hasRole>
+                         <li><a th:href="@{/prospect_lyt/loss_carinfo}" target="aa">车损管理</a></li>
 					<li><a th:href="@{/prospect_lyt/loss_resinfo}" target="aa">物损管理</a></li>
 					<li><a th:href="@{/prospect_lyt/loss_peopleinfo}" target="aa">人伤管理</a></li>
 					<li><a th:href="@{/prospect_lyt/loss_info}" target="aa">我的定损案件</a></li>
@@ -125,8 +128,10 @@
 											<!--<li><a href="../prospect_lyt/loss_assessment.jsp" target="aa">未通过核损信息</a></li>
 											-->
 					 <shiro:hasPermission name="核损管理">
+                         <shiro:hasRole name="核损经理">
                      <li><a th:href="@{/prospect_lyt/Dispatch2}" target="aa">调度管理</a></li>
-					<li><a th:href="@{/prospect_lyt/hesun_info}" target="aa">核损审核</a></li>
+                         </shiro:hasRole>
+                             <li><a th:href="@{/prospect_lyt/hesun_info}" target="aa">核损审核</a></li>
                     </shiro:hasPermission>
                     </ul>
                   </li>
@@ -137,19 +142,25 @@
                   <li><a><i class="fa fa-home"></i> 理算核赔 <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                     	 <shiro:hasPermission name="理算管理">
-                         <li><a href="../DispatchManagement_Zhy/Dispatch.html" target="aa">调度管理</a></li>
-                    	 <li><a href="../adjustment_lyl/adjustment.html" target="aa">理算处理</a></li>
+                             <shiro:hasRole name="理算经理">
+                         <li><a href="../DispatchManagement_Zhy/Dispatch.jsp" target="aa">调度管理</a></li>
+                                 </shiro:hasRole>
+                    	 <li><a href="http://localhost:8080/myinsurance/lisuan/adjustment" target="aa">理算处理</a></li>
                     	 </shiro:hasPermission>
                     	  <shiro:hasPermission name="核赔管理">
-                          <li><a href="../DispatchManagement_Zhy/Dispatch.html" target="aa">调度管理</a></li>
-                    	 <li><a href="../Nuclear_cq/Nuclear.html" target="aa">核赔处理</a></li>
+                              <shiro:hasRole name="核赔经理">
+                          <li><a href="../DispatchManagement_Zhy/Dispatch.jsp" target="aa">调度管理</a></li>
+                              </shiro:hasRole>
+                                  <li><a href="http://localhost:8080/myinsurance/lisuan/nuclear" target="aa">核赔处理</a></li>
                     	 </shiro:hasPermission>
-                    	  <shiro:hasPermission name="理赔管理">
-                          <li><a href="../DispatchManagement_Zhy/Dispatch.html" target="aa">调度管理</a></li>
-                    	 <li><a href="../settle_lh/settle.html" target="aa">理赔处理</a></li>
-                    	 </shiro:hasPermission>
-                    	 <li><a href="../welcome/case_query.html" target="aa">结案查询</a></li>
 
+                    	  <shiro:hasPermission name="理赔管理">
+                              <shiro:hasRole name="理赔经理">
+                          <li><a href="../DispatchManagement_Zhy/Dispatch.jsp" target="aa">调度管理</a></li>
+                              </shiro:hasRole>
+                                  <li><a href="http://localhost:8080/myinsurance/lisuan/settle" target="aa">理赔处理</a></li>
+                    	 </shiro:hasPermission>
+                    	 <li><a href="http://localhost:8080/myinsurance/lisuan/caseQuery" target="aa">结案查询</a></li>
                     </ul>
                   </li>
                  

@@ -13,13 +13,13 @@
     </resultMap>
 
     <!--查询角色是勘察员的用户id以及用户名-->
-    <select id="selectUserByrolename" resultMap="BaseMap">
+    <select id="selectUserByrolename" parameterType="java.lang.String" resultMap="BaseMap">
         select user_id,user_name from user_info
         where user_id in (
         select user_id from user_role_info
         where role_id =
         (
-        select role_id from role_info where role_name='勘察员'
+        select role_id from role_info where role_name=#{rolename,jdbcType=VARCHAR}
         )
         )
     </select>

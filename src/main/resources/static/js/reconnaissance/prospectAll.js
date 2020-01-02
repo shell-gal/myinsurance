@@ -62,14 +62,13 @@ function queryAchieveMissage(page) {
 	//ajax
 	$.ajax({
 		//地址http://localhost:8080/prospect/queryAchieveMissage.do
-		url : "http://localhost:8080/prospect/queryAchieveMissage.do",
+		url : "http://localhost:8080/myinsurance/prospect/selectAllProspect.do",
 		//请求类型
 		type : "get",
 		//传输数据
 		data : {
-			"case_state" : "定损中",
-			"page" : page,
-			"reported_number":$("#peospectID").val()
+			"indexpage" : page,
+			"caseId":$("#peospectID").val()
 		},
 		//发送数据类型
 		contentType : "application/json;charset=utf-8",
@@ -78,27 +77,28 @@ function queryAchieveMissage(page) {
 		//请求成功
 		success : function(data) {
 			//当前页赋值
-			pageNum = data.singerData.pageNum;
+			pageNum = data.pageNum;
 			//总页数赋值
-			pages = data.singerData.pages;
+			pages = data.pages;
 			//定义属性拼接
 			var outHtml = "";
 			//each
-			$.each(data.singerData.list, function(i, p) {
+			$.each(data.list, function(i, p) {
+				console.log(data);
 				//拼接
 				outHtml += "<tr class='tr'>" 
-						+ "<th>" + p['reported_info']['reported_number'] + "</th>" 
-						+ "<th>" + p['reported_info']['informants'] + "</th>" + "<th>"
-						+ p['reported_info']['informants_tel'] + "</th>"
-						+ "<th>" + p['user_info']['user_name'] + "</th>"
-						+ "<th>" + p['prospect_time'] + "</th>" + "<th>"
-						+ p['prospect_address'] + "</th>" + "<th>"
-						+ p['reported_info']['danger_cause'] + "</th>" + "<th>"
-						+ p['reported_info']['case_state'] + "</th>" + "<th>"
-						+ "<a href='minu_prospect.jsp?number="
-						+ p['reported_info']['reported_number']+"'>详情</a> "
-						+ "   <shiro:hasPermission name='总经理'><a href='upd_prospect.jsp?upnumber="
-						+p['reported_info']['reported_number']+"'>修改</a>	</shiro:hasPermission></th>" + "</tr>"
+						+ "<th>" + p.aCase.caseId + "</th>"
+						+ "<th>" + p.aCase.reporterName + "</th>"
+						+ "<th>" + p.aCase.reporterPhone + "</th>"
+						+ "<th>" + p.aCase.reporterName + "</th>"
+						+ "<th>" + p.prospectDate + "</th>"
+						+ "<th>" + p.prospectAddress + "</th>"
+						+ "<th>" + p.aCase.dangerCause + "</th>"
+						+ "<th>" + p.aCase.caseStatus + "</th>"
+						+ "<th>" + "<a href='http://localhost:8080/myinsurance/prospect/getProspectDetail?caseId="
+						+ p.aCase.caseId+"'>详情</a> "
+						+ "<shiro:hasPermission name='总经理'><a href='http://localhost:8080/myinsurance/prospect/addProspectMessage?caseId="
+						+p.aCase.caseId+"'>修改</a>	</shiro:hasPermission></th>" + "</tr>"
 			});
 			//将.tr清除
 			$(".tr").remove();

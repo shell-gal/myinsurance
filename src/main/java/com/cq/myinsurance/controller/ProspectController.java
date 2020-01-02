@@ -112,10 +112,39 @@ public class ProspectController{
         return i;
     }
 
+    /**
+     * 获取修改勘察页面数据
+     * @param prospect
+     * @param session
+     * @return
+     */
     @RequestMapping("/updateProspectMessage.do")
     @ResponseBody
     public int updateProspectMessage(Prospect prospect,HttpSession session){
         int i = prospectService.updateProspect(prospect, session);
         return i;
+    }
+
+    /**
+     * 跳转查询所有已勘察案件页面
+     * @return
+     */
+    @RequestMapping("/selectAllProspect")
+    public String selectAllProspect(){
+        return "pages/prospectmanager/prospectAll";
+    }
+
+    /**
+     * 获取查询所有已勘察数据
+     * @param caseId
+     * @param indexpage
+     * @return
+     */
+    @RequestMapping("/selectAllProspect.do")
+    @ResponseBody
+    public PageInfo<Prospect> selectAllProspect(Integer caseId,Integer indexpage){
+        PageInfo<Prospect> pageInfo = prospectService.selectAllProspect(caseId, indexpage);
+        System.out.println(pageInfo);
+        return pageInfo;
     }
 }

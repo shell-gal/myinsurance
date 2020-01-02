@@ -12,7 +12,7 @@ public interface DispatchService {
     PageInfo loadCasebyStatus(Map<String,Object> map);
 
 //    查询勘察人员
-    List<User> loadKanca();
+    List<User> loadKanca(String rolename);
 
 //    调度
     boolean diaodu(Map<String,Object> map);

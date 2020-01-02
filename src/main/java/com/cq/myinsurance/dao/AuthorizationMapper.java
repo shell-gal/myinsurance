@@ -13,7 +13,7 @@ public interface AuthorizationMapper {
 
     List<String> selectRightByuserid(Integer userid);
 
-    List<User> selectUserByrolename();
+    List<User> selectUserByrolename(String rolename);
 
     List<Right> selectRightByRoleid(Integer roleid);
     List<Right> selectunRightByRoleid(Integer roleid);
