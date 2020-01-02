@@ -1,5 +1,6 @@
 package com.cq.myinsurance.service;
 
+import com.cq.myinsurance.pojo.Case;
 import com.cq.myinsurance.pojo.vo.CaseVo;
 import com.github.pagehelper.PageInfo;
 
@@ -17,4 +18,11 @@ public interface AdjustmentService {
      * @return
      */
     PageInfo<CaseVo> getCasePage(int pageNum, int pageSize,String status,String search);
+
+    /**
+     * 修改案件状态
+     * @param mycase
+     * @return
+     */
+    Boolean changeCaseStatus(Case mycase);
 }

@@ -1,5 +1,6 @@
 package com.cq.myinsurance.controller.settlement;
 
+import com.cq.myinsurance.pojo.Case;
 import com.cq.myinsurance.pojo.vo.CaseVo;
 import com.cq.myinsurance.service.AdjustmentService;
 import com.github.pagehelper.PageInfo;
@@ -83,5 +84,19 @@ public class SettlementController {
     @GetMapping("caseQuery")
     public String caseQuery(){
         return "/pages/welcome/case_query";
+    }
+
+    @RequestMapping("changeCaseStatus")
+    public String changeCaseStatus(HttpServletRequest request){
+        String caseId = request.getParameter("caseId");
+        String caseStatus = request.getParameter("caseStatus");
+
+        if (caseId==null)  return "false";
+
+        Case mycase = new Case();
+        mycase.setCaseId(Integer.valueOf(caseId));
+        mycase.setCaseStatus(caseStatus);
+
+        return adjustmentService.changeCaseStatus(mycase).toString();
     }
 }
