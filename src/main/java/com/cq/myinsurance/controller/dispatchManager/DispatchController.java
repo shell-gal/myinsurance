@@ -32,6 +32,7 @@ public class DispatchController {
     @RequestMapping("/queryAllReported")
     @ResponseBody
     public PageInfo queryAllReported(@RequestBody Map<String,Object> map){
+        System.out.println(map.get("rolename").toString());
         PageInfo pageInfo = dispatchService.loadCasebyStatus(map);
         return pageInfo;
     }

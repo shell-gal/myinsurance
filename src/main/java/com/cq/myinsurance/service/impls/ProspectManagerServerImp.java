@@ -8,6 +8,7 @@ import com.cq.myinsurance.utils.APIRequest;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
@@ -53,10 +54,11 @@ public class ProspectManagerServerImp implements ProspectManagerServer {
 
     @Override
     public APIRequest ReoprtQuery(Long w, Integer page) {
+       User u= (User) SecurityUtils.getSubject().getPrincipal();
         APIRequest api=new APIRequest();
-        PageHelper.startPage(page,3);
+        PageHelper.startPage(page,5);
         List<Case> list=new ArrayList<Case>();
-        list= caseMapper.selectCasePage(w);
+        list= caseMapper.selectCasePage(w,u.getUserId());
         PageInfo<Case> pg=new PageInfo<Case>(list);
         if(list.size()!=0){
             api.setSingerData(pg);

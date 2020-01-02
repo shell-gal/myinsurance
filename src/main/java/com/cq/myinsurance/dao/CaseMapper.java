@@ -39,7 +39,7 @@ public interface CaseMapper   {
 
     List<Case> selectCaseByStatus(@Param("status") String status, @Param("search") String search);
 
-    List<Case>  selectCasePage(@Param("caseId") Long caseId);
+    List<Case>  selectCasePage(@Param("caseId") Long caseId,@Param("dingsun_id")Integer id);
 
     Integer selectCount();
 

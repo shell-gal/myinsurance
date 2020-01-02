@@ -2,38 +2,11 @@ var page=1;
 var pageNum = 1;
 var pages = 1;
 var r_number=$(".r_number").val();
-var case_status;
-var rname;
+var rolename;
 
 $(function() {
-	var rolename=$("#rolename").val();
-	if (rolename=='接案员'){
-		alert("-----------111111111")
-		case_status="已报案";
-		rname="勘察员";
-	}
-	if (rolename=='定损经理'){
-		case_status="定损中";
-		rname="定损员";
-	}
-	if (rolename=='核损经理'){
-		case_status="核损中";
-		rname="核损员";
-	}
-	if (rolename=='理算经理'){
-		case_status="理算中";
-		rname="理算员";
-	}
-	if (rolename=='核赔经理'){
-		case_status="核算中";
-		rname="核赔员";
-	}
-	if (rolename=='理赔经理'){
-		case_status="理赔中";
-		rname="理赔员";
-	}
-
-
+	rolename=$("#rolename").val();
+	alert(rolename);
 	queryEmpoyee();
 	queryReported(page,r_number);
 	paiqian();
@@ -64,7 +37,7 @@ $(function() {
 
 //查询未查勘案件信息
 function queryReported(page,r_number) {
-	var data={"case_state":case_status,"indexpage":page,"reported_number":r_number};
+	var data={"rolename":rolename,"indexpage":page,"reported_number":r_number};
 	$.ajax({
 		url:"http://localhost:8080/myinsurance/DispatchManagement/queryAllReported",
 		type:"post",
@@ -72,7 +45,6 @@ function queryReported(page,r_number) {
 		contentType:"application/json;charset=utf-8",
 		dataType:"json",
 		success:function(data) {
-			console.log(data);
 			pageNum=data.pageNum;
 			pages = data.pages;
 			var outHtml="";
@@ -117,7 +89,7 @@ function queryEmpoyee(){
 			type:"post",
 			// contentType:"application/json;charset=utf-8",
 			dataType:"json",
-			data:{"rolename":rname},
+			data:{"rolename":rolename},
 			success:function(data){
 				console.log(data);
 				var rolename=document.getElementById("diaoduyuan");
@@ -134,7 +106,7 @@ function queryEmpoyee(){
 
 function paiqian(){
 	$("#paiqian").click(function(){
-		var data={"rolename":rname,"chakan":$("#diaoduyuan").val(),"reported_number":$("#id").val()};
+		var data={"rolename":rolename,"chakan":$("#diaoduyuan").val(),"reported_number":$("#id").val()};
 		$.ajax({
 			url:"http://localhost:8080/myinsurance/DispatchManagement/diaodu",
 			type:"post",

@@ -33,6 +33,7 @@ public class MyRealm extends AuthorizingRealm {
         List<String> roles = userService.loadRoleByid(user.getUserId());
         List<String> rights = userService.loadRightByid(user.getUserId());
         System.out.println(roles);
+        System.out.println(rights);
         info.addStringPermissions(rights);
         info.addRoles(roles);
         return info;

@@ -143,7 +143,7 @@ function queryProspectRep() {
 		//请求失败
 		error : function() {
 			//提示
-			alert("系统错误");
+			// alert("系统错误");
 		},
 		//执行结束
 		async : false,

@@ -49,9 +49,12 @@
     select
     <include refid="Base_Column_List" />
     from case_info
-    <if test="caseId != null and caseId !=''">
-      where case_id = #{caseId}
-    </if>
+    <where>
+      case_status='定损中'  and  dingsun_id=#{dingsun_id}
+      <if test="caseId != null and caseId !=''">
+      and  case_id = #{caseId}
+      </if>
+    </where>
   </select>
 
 
@@ -63,11 +66,37 @@
       <if test="case_state!=null and case_state!=''">
         case_status=#{case_state}
       </if>
+
       <if test="reported_number!=null and reported_number!=''">
-         case_id=#{reported_number}
+      and    case_id=#{reported_number}
+      </if>
+
+      <if test="kancaid!=null">
+        and   kanca_id is null
+      </if>
+
+      <if test="dingsunid!=null">
+        and  dingsun_id is null
+      </if>
+
+      <if test="hesunid!=null">
+        and hesun_id is null
+      </if>
+
+      <if test="lisuanid!=null">
+        and lisuan_id is null
+     </if>
+
+      <if test="hepeiid!=null">
+        and hepei_id is null
+      </if>
+
+      <if test="lipeiid!=null">
+        and lipei_id is null
       </if>
     </where>
   </select>
+
 
   <select id="selectByWarantyid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
       select case_id,reporter_name,danger_date,danger_address_province,danger_address_city,detail_address,case_status
