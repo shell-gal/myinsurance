@@ -58,4 +58,9 @@ public class AdjustmentServiceImpl implements AdjustmentService {
         }
         return caseVos;
     }
+
+    @Override
+    public Boolean changeCaseStatus(Case mycase) {
+        return caseMapper.updateByPrimaryKeySelective(mycase)>0?true:false;
+    }
 }
