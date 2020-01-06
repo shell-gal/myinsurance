@@ -90,9 +90,10 @@ public class ProspectManagerServerImp implements ProspectManagerServer {
 
     @Override
     public APIRequest CompensateQuery(Long reported_number, Integer page) {
+        User u= (User) SecurityUtils.getSubject().getPrincipal();
         //初始化页面当前页与大小
         PageHelper.startPage(page, 5);
-        List<Map<String,String>> list=lossMapper.CompensateQuery(reported_number);
+        List<Map<String,String>> list=lossMapper.CompensateQuery(reported_number,u.getUserId());
 
         System.out.println(list.size());
         //创建api
@@ -149,7 +150,7 @@ public class ProspectManagerServerImp implements ProspectManagerServer {
         APIRequest apiRequest=new APIRequest();
         Case ca=new Case();
         ca.setCaseId(Integer.valueOf(reported_number.toString()));
-        ca.setCaseStatus("理算");
+        ca.setCaseStatus("核损中");
           if (caseMapper.updateByPrimaryKeySelective(ca)>0){
               apiRequest.setResult(true);
              return apiRequest;
@@ -164,7 +165,7 @@ public class ProspectManagerServerImp implements ProspectManagerServer {
         APIRequest apiRequest=new APIRequest();
         Case ca=new Case();
         ca.setCaseId(Integer.valueOf(reported_number.toString()));
-        ca.setCaseStatus("核算");
+        ca.setCaseStatus("理算中");
         if (caseMapper.updateByPrimaryKeySelective(ca)>0){
             apiRequest.setResult(true);
             return apiRequest;

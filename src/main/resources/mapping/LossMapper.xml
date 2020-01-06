@@ -62,7 +62,7 @@
     w.car_number
     FROM case_info r LEFT JOIN warranty_info w ON r.warranty_id=w.warranty_id
     <where>
-      r.case_status='理算'
+      r.case_status='核损中' and r.hesun_id=#{hesun_id}
       <if test="reported_number !=null and reported_number !=0">
         and r.case_id=#{reported_number}
       </if>

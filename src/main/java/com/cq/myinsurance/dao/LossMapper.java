@@ -19,5 +19,5 @@ public interface LossMapper {
 
     int updateByPrimaryKey(Loss record);
 
-    List<Map<String, String>> CompensateQuery(@Param("reported_number") Long reported_number);
+    List<Map<String, String>> CompensateQuery(@Param("reported_number") Long reported_number,@Param("hesun_id")Integer id);
 }
